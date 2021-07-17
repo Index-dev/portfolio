@@ -12,6 +12,6 @@
 
 ### 예시 사이트 정리
 
-ex) https://cdg-portfolio.com/,
-https://www.asan-chungjuyung.com/,
+ex) https://cdg-portfolio.com/,  
+https://www.asan-chungjuyung.com/,  
 http://syvoice.com/#01
