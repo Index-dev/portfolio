@@ -1,11 +1,10 @@
 import React from "react";
+import styled from "styled-components";
 
 function App() {
-  return (
-    <div>
-      <a href="_blank">Hello world</a>
-    </div>
-  );
+  return <Container>Hello world</Container>;
 }
 
 export default App;
+
+const Container = styled.div``;

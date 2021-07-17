@@ -4,6 +4,7 @@ import App from "App";
 
 describe("App", () => {
   test("check hello world", () => {
-    expect(true).toBe(true);
+    const { container } = render(<App />);
+    expect(container).toHaveTextContent("Hello world");
   });
 });
