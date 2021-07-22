@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 
-import GlobalStyle from "components/GlobalStyle2";
+import GlobalStyle from "components/globalStyle";
 import { basicTheme, reversedTheme } from "components/theme";
 
 function App() {
