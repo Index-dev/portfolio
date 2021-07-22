@@ -7,6 +7,8 @@ import { basicTheme, reversedTheme } from "components/theme";
 
 function App() {
   const [theme, setTheme] = useState<ThemeIState>(basicTheme);
+
+  console.log(theme);
   const toggleTheme = () => {
     if (theme === basicTheme) setTheme(reversedTheme);
     else setTheme(basicTheme);
@@ -15,11 +17,14 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Container>Hello world</Container>
+      <Container onClick={toggleTheme}>Hello world</Container>
     </ThemeProvider>
   );
 }
 
 export default App;
 
-const Container = styled.div``;
+const Container = styled.div`
+  width: 100vw;
+  height: 100vh;
+`;

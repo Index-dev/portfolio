@@ -10,10 +10,14 @@ const GlobalStyle = createGlobalStyle`
     }
 
     body {
-        background-color: ${(props: { theme: ThemeIState }) =>
-          props.theme.background};
+        max-width: 100vw;
+
+        background-color: ${({ theme }: { theme: ThemeIState }) =>
+          theme.background};
           
-        color: ${(props: { theme: ThemeIState }) => props.theme.primary};
+        color: ${({ theme }: { theme: ThemeIState }) => theme.primary};
+
+        transition: background-color 0.4s , color 0.4s;    
     }
 `;
 
