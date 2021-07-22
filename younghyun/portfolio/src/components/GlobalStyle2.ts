@@ -8,6 +8,13 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         box-sizing: border-box;
     }
+
+    body {
+        background-color: ${(props: { theme: ThemeIState }) =>
+          props.theme.background};
+          
+        color: ${(props: { theme: ThemeIState }) => props.theme.primary};
+    }
 `;
 
 export default GlobalStyle;
