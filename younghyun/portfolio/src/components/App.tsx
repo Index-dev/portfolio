@@ -4,6 +4,7 @@ import { ThemeProvider } from "styled-components";
 
 import GlobalStyle from "components/globalStyle";
 import { basicTheme, reversedTheme } from "components/theme";
+import Home from "home";
 
 function App() {
   const [theme, setTheme] = useState<ThemeIState>(basicTheme);
@@ -17,7 +18,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Container onClick={toggleTheme}>Hello world</Container>
+      <Home toggleTheme={toggleTheme} />
     </ThemeProvider>
   );
 }
