@@ -11,16 +11,17 @@ const StyledDiv1 = styled.div`
 const StyledDiv2 = styled.div`
     display: inline-block;
     padding: 32px 24px;
-    background-color: #fff;
     text-align: left;
 `;
 
 const StyledSpan1 = styled.span`
     display: block;
+    color: #fff;
 `;
 
 const StyledSpan2 = styled.span`
     display: block;
+    color: #fff;
 `;
 
 interface IWhyIt {
@@ -29,7 +30,7 @@ interface IWhyIt {
 
 const WhyIt: React.FC<IWhyIt> = ({ title }): JSX.Element => {
     return (
-        <Base title={title}>
+        <Base title={title} backgroundColor="#6A9194">
             <StyledDiv1>
                 <StyledDiv2>
                     <StyledSpan1>IT를 왜 시작하게 되었을까?</StyledSpan1>

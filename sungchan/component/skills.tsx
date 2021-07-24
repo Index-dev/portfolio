@@ -9,12 +9,12 @@ const StyledDiv1 = styled.div`
     padding: 0 22px;
 
     @media screen and (min-width: 570px) {
-        height: 960px;
+        height: 1080px;
         flex-wrap: wrap;
     }
 
     @media screen and (min-width: 840px) {
-        height: 640px;
+        height: 720px;
         flex-wrap: wrap;
     }
 `;
@@ -34,6 +34,14 @@ const StyledDiv4 = styled.div``;
 const StyledSpan1 = styled.span`
     font-weight: bold;
     font-size: 1.6em;
+    color: #fff;
+`;
+
+const StyledImg1 = styled.img`
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 `;
 
 interface ISkill {
@@ -42,14 +50,14 @@ interface ISkill {
 
 const Skills: React.FC<ISkill> = ({ title }): JSX.Element => {
     return (
-        <Base title={title}>
+        <Base title={title} backgroundColor="#b79e6a">
             <StyledDiv1>
                 <StyledDiv2>
                     <StyledDiv3>
                         <StyledSpan1>FE</StyledSpan1>
                     </StyledDiv3>
                     <StyledDiv4>
-                        <img src="/image/fe.PNG" />
+                        <StyledImg1 src="/image/fe.PNG" />
                     </StyledDiv4>
                 </StyledDiv2>
 
@@ -58,7 +66,7 @@ const Skills: React.FC<ISkill> = ({ title }): JSX.Element => {
                         <StyledSpan1>Devops</StyledSpan1>
                     </StyledDiv3>
                     <StyledDiv4>
-                        <img src="/image/devops.PNG" />
+                        <StyledImg1 src="/image/devops.PNG" />
                     </StyledDiv4>
                 </StyledDiv2>
 
@@ -67,7 +75,7 @@ const Skills: React.FC<ISkill> = ({ title }): JSX.Element => {
                         <StyledSpan1>Development</StyledSpan1>
                     </StyledDiv3>
                     <StyledDiv4>
-                        <img src="/image/development.PNG" />
+                        <StyledImg1 src="/image/development.PNG" />
                     </StyledDiv4>
                 </StyledDiv2>
 
@@ -76,7 +84,7 @@ const Skills: React.FC<ISkill> = ({ title }): JSX.Element => {
                         <StyledSpan1>BE</StyledSpan1>
                     </StyledDiv3>
                     <StyledDiv4>
-                        <img src="/image/be.PNG" />
+                        <StyledImg1 src="/image/be.PNG" />
                     </StyledDiv4>
                 </StyledDiv2>
             </StyledDiv1>

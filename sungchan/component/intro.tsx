@@ -35,9 +35,9 @@ const StyledDiv4 = styled.div`
     border-top-right-radius: 10px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    border: 1px solid black;
     padding: 12px;
     margin: 43px 27px;
+    background-color: #fff;
 `;
 
 const StyledDiv5 = styled.div`
@@ -55,12 +55,14 @@ const StyledDiv6 = styled.div`
 `;
 
 const StyledSpan1 = styled.span`
-    font-size: 1.8em;
+    font-size: 1.5em;
 `;
 
 const StyledSpan2 = styled.span`
     font-size: 1.5em;
-    border-bottom: 2px solid black;
+    font-weight: bold;
+    border-bottom: 2px solid #c2655a;
+    color: #c2655a;
 `;
 
 interface IIntro {
@@ -88,7 +90,7 @@ const Intro: React.FC<IIntro> = ({ innerWidth, title }): JSX.Element => {
     ];
 
     return (
-        <Base title={title}>
+        <Base title={title} backgroundColor={'#A5BAA8'}>
             <StyeldDiv2>
                 <StyeldDiv3 innerWidth={innerWidth}>
                     {boxArray1.map((box) => {

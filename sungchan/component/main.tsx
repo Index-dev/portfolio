@@ -1,7 +1,12 @@
 import * as React from 'react';
-import Base from './base';
 import styled, { keyframes } from 'styled-components';
 import { maxWidth } from '../style/style';
+
+const StyledSection1 = styled.section`
+    background-image: url('/image/mainImage.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+`;
 
 const StyledDiv1 = styled.div`
     display: flex;
@@ -44,7 +49,7 @@ const StyledDiv4 = styled.div`
     width: 152px;
     height: 152px;
     border-radius: 50%;
-    background-color: #fad232;
+    background-color: #caf0be;
     margin: 16px 32px;
 `;
 
@@ -53,11 +58,25 @@ const StyledDiv5 = styled.div`
     justify-content: center;
 `;
 
+const StyledDiv6 = styled.div`
+    max-width: ${maxWidth}px;
+    margin: 0 auto;
+    padding: 0 15px;
+
+    @media screen and (min-width: ${maxWidth + 50}px) {
+        margin-bottom: 84px;
+    }
+`;
+
 const StyledTitle = styled.span`
     font-weight: bold;
-    font-size: 4.8em;
+    font-size: 3.6em;
     color: #fff;
     text-align: center;
+
+    @media screen and (min-width: 480px) {
+        font-size: 4.8em;
+    }
 `;
 
 const StyledSubTitle = styled.span`
@@ -65,10 +84,14 @@ const StyledSubTitle = styled.span`
     color: #fff;
 `;
 
-const StyledH3_1 = styled.h3``;
+const StyledH3_1 = styled.h3`
+    font-size: 1.4em;
+    color: #658c59;
+`;
 
 const StyledSpan1 = styled.span`
     font-weight: bold;
+    color: #3a5233;
 `;
 
 interface IMain {
@@ -81,32 +104,34 @@ const Main: React.FC<IMain> = ({ innerWidth, titleArray }): JSX.Element => {
         const titleSection = document.getElementById(title);
 
         if (titleSection) {
-            titleSection.scrollIntoView({ behavior: 'smooth' });
+            window.scrollBy({ top: titleSection.getBoundingClientRect().top, behavior: 'smooth' });
         }
     };
 
     return (
-        <Base isMain={true}>
-            <StyledDiv5>
-                <StyledDiv2 innerWidth={innerWidth}>
-                    {titleArray.map((title) => {
-                        return (
-                            <StyledDiv3 key={title} onClick={() => onClickDiv3(title)}>
-                                <StyledDiv4>
-                                    <StyledH3_1>{title}</StyledH3_1>
-                                    <StyledSpan1>Go →</StyledSpan1>
-                                </StyledDiv4>
-                            </StyledDiv3>
-                        );
-                    })}
-                </StyledDiv2>
+        <StyledSection1>
+            <StyledDiv6>
+                <StyledDiv5>
+                    <StyledDiv2 innerWidth={innerWidth}>
+                        {titleArray.map((title) => {
+                            return (
+                                <StyledDiv3 key={title} onClick={() => onClickDiv3(title)}>
+                                    <StyledDiv4>
+                                        <StyledH3_1>{title}</StyledH3_1>
+                                        <StyledSpan1>Go →</StyledSpan1>
+                                    </StyledDiv4>
+                                </StyledDiv3>
+                            );
+                        })}
+                    </StyledDiv2>
 
-                <StyledDiv1>
-                    <StyledTitle>김성찬의 Portfolio</StyledTitle>
-                    <StyledSubTitle>Since 2021</StyledSubTitle>
-                </StyledDiv1>
-            </StyledDiv5>
-        </Base>
+                    <StyledDiv1>
+                        <StyledTitle>김성찬의 Portfolio</StyledTitle>
+                        <StyledSubTitle>Since 2021</StyledSubTitle>
+                    </StyledDiv1>
+                </StyledDiv5>
+            </StyledDiv6>
+        </StyledSection1>
     );
 };
 
