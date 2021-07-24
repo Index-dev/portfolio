@@ -2,11 +2,16 @@ import React, { useEffect, useRef } from "react";
 import styled, { keyframes } from "styled-components";
 
 function Loading(props: propsIState) {
+  const { setLoading } = props;
   const containerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (containerRef.current !== null) {
+      let count = 0;
       containerRef.current.addEventListener("animationend", () => {
-        console.log("animation end");
+        count++;
+        if (count >= 23) {
+          setLoading(false);
+        }
       });
     }
   });
@@ -154,7 +159,7 @@ function Loading(props: propsIState) {
 export default Loading;
 
 interface propsIState {
-  isLoading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Container = styled.div`
@@ -178,24 +183,22 @@ const zoomIn = keyframes`
         transform: translate3d(-50%, -50%, 0) scale(2500%);
     }
 `;
+
+const fill = keyframes`
+0% {
+      fill: transparent;
+    }
+    100% {
+      fill: white;
+    }
+`;
 const SVG = styled.svg`
   position: absolute;
   top: 50%;
   left: 50%;
 
   transform: translate3d(-50%, -50%, 0) rotate(-8deg);
-  animation: ${zoomIn} 2s 4.6s ease forwards, fill 0.5s 4.2s ease forwards;
-
-  @keyframes zoom-in {
-  }
-  @keyframes fill {
-    0% {
-      fill: transparent;
-    }
-    100% {
-      fill: white;
-    }
-  }
+  animation: ${zoomIn} 2s 4.6s ease forwards, ${fill} 0.5s 4.2s ease forwards;
 `;
 
 const LineAnimation = keyframes`

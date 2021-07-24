@@ -5,7 +5,13 @@ const HomeContainer = (props: propsIState) => {
   const { toggleTheme } = props;
   const [isLoading, setLoading] = useState<boolean>(true);
 
-  return <Presenter isLoading={isLoading} toggleTheme={toggleTheme} />;
+  return (
+    <Presenter
+      isLoading={isLoading}
+      setLoading={setLoading}
+      toggleTheme={toggleTheme}
+    />
+  );
 };
 
 export default HomeContainer;
