@@ -5,36 +5,41 @@ import Intro from '../component/intro';
 import WhyIt from '../component/whyIt';
 import Skills from '../component/skills';
 import Career from '../component/career';
-
-const StyledDiv1 = styled.div``;
+import Init from '../component/init';
+import indexStore from '../modules/indexStore';
+import { useObserver } from 'mobx-react';
 
 const Index = (): JSX.Element => {
-    const [innerWidth, setInnerWidth] = React.useState<number>(0);
-
-    const titleArray = ['Intro', 'Why It', 'Skills', 'Career', 'Projects', 'More'];
+    const { initStore, baseStore } = indexStore();
 
     React.useEffect(() => {
-        const changeInnerWidth = () => {
-            setInnerWidth(window.innerWidth);
-        };
-
-        setInnerWidth(window.innerWidth);
-        window.addEventListener('resize', changeInnerWidth);
+        window.addEventListener('resize', onChangeResize);
+        onChangeResize();
 
         return () => {
-            window.removeEventListener('resize', changeInnerWidth);
+            window.removeEventListener('resize', onChangeResize);
         };
     }, []);
 
-    return (
+    // onChange
+    const onChangeResize = () => {
+        baseStore.setInnerWidth(window.innerWidth);
+        baseStore.setInnerHeight(window.innerHeight);
+    };
+
+    return useObserver(() => (
         <>
-            <StyledDiv1>
-                <Main innerWidth={innerWidth} titleArray={titleArray} />
-                <Intro innerWidth={innerWidth} title={titleArray[0]} />
-                <WhyIt title={titleArray[1]} />
-                <Skills title={titleArray[2]} />
-                <Career title={titleArray[3]} />
-            </StyledDiv1>
+            {initStore.isEnd ? (
+                <>
+                    <Main />
+                    <Intro />
+                    <WhyIt />
+                    <Skills />
+                    <Career />
+                </>
+            ) : (
+                <Init />
+            )}
 
             <style global jsx>
                 {`
@@ -53,10 +58,12 @@ const Index = (): JSX.Element => {
                     p {
                         font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;
                     }
+
+                    @import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
                 `}
             </style>
         </>
-    );
+    ));
 };
 
 export default Index;

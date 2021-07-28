@@ -2,7 +2,8 @@ import * as React from 'react';
 import Base from './base';
 import styled from 'styled-components';
 
-const StyledDiv1 = styled.div`
+const MainSection = styled.section`
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,75 +20,70 @@ const StyledDiv1 = styled.div`
     }
 `;
 
-const StyledDiv2 = styled.div`
+const BoxCotainer = styled.div`
     width: 240px;
     text-align: center;
     margin-bottom: 54px;
 `;
 
-const StyledDiv3 = styled.div`
+const TitleDiv = styled.div`
     padding: 8px 0;
 `;
 
-const StyledDiv4 = styled.div``;
+const ImageDiv = styled.div`
+    background-color: #fff;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 8px;
+    box-shadow: 2px 4px 4px #c8c8c8 inset, -2px -4px 4px #c8c8c8 inset;
+`;
 
-const StyledSpan1 = styled.span`
+const BoxTitle = styled.span`
     font-weight: bold;
     font-size: 1.6em;
     color: #fff;
 `;
 
-const StyledImg1 = styled.img`
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-`;
+const BoxImage = styled.img``;
 
-interface ISkill {
-    title: string;
-}
+const Skills = (): JSX.Element => {
+    const skillsArray = [
+        {
+            title: 'FE',
+            src: '/image/fe.PNG',
+        },
+        {
+            title: 'Devops',
+            src: '/image/devops.PNG',
+        },
+        {
+            title: 'Development',
+            src: '/image/development.PNG',
+        },
+        {
+            title: 'BE',
+            src: '/image/be.PNG',
+        },
+    ];
 
-const Skills: React.FC<ISkill> = ({ title }): JSX.Element => {
     return (
-        <Base title={title} backgroundColor="#b79e6a">
-            <StyledDiv1>
-                <StyledDiv2>
-                    <StyledDiv3>
-                        <StyledSpan1>FE</StyledSpan1>
-                    </StyledDiv3>
-                    <StyledDiv4>
-                        <StyledImg1 src="/image/fe.PNG" />
-                    </StyledDiv4>
-                </StyledDiv2>
-
-                <StyledDiv2>
-                    <StyledDiv3>
-                        <StyledSpan1>Devops</StyledSpan1>
-                    </StyledDiv3>
-                    <StyledDiv4>
-                        <StyledImg1 src="/image/devops.PNG" />
-                    </StyledDiv4>
-                </StyledDiv2>
-
-                <StyledDiv2>
-                    <StyledDiv3>
-                        <StyledSpan1>Development</StyledSpan1>
-                    </StyledDiv3>
-                    <StyledDiv4>
-                        <StyledImg1 src="/image/development.PNG" />
-                    </StyledDiv4>
-                </StyledDiv2>
-
-                <StyledDiv2>
-                    <StyledDiv3>
-                        <StyledSpan1>BE</StyledSpan1>
-                    </StyledDiv3>
-                    <StyledDiv4>
-                        <StyledImg1 src="/image/be.PNG" />
-                    </StyledDiv4>
-                </StyledDiv2>
-            </StyledDiv1>
+        <Base containerNo={3}>
+            <MainSection>
+                {skillsArray.map((skill) => {
+                    return (
+                        <BoxCotainer key={skill.title}>
+                            <TitleDiv>
+                                <BoxTitle>{skill.title}</BoxTitle>
+                            </TitleDiv>
+                            <ImageDiv>
+                                <BoxImage src={skill.src} />
+                            </ImageDiv>
+                        </BoxCotainer>
+                    );
+                })}
+            </MainSection>
         </Base>
     );
 };

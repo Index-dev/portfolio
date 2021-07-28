@@ -33,13 +33,9 @@ const StyledSpan1 = styled.span`
     color: #fff;
 `;
 
-interface ICareer {
-    title: string;
-}
-
-const Career: React.FC<ICareer> = ({ title }): JSX.Element => {
+const Career = (): JSX.Element => {
     return (
-        <Base title={title} backgroundColor="#c68377">
+        <Base containerNo={4}>
             <StyledDiv1>
                 <StyledDiv2>
                     <StyledDiv3>
