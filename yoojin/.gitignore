@@ -1,5 +1,14 @@
+#dist
+/dist
+
 # node module
 /node_modules
 
 # asset
 /src/asset
+
+# misc
+.env.local
+.env.development.local
+*.log
+yarn.lock
