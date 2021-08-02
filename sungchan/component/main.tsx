@@ -233,12 +233,12 @@ const Main = (): JSX.Element => {
     const { baseStore } = indexStore();
 
     // onClick
-    const onClickMenuDiv = (title: string) => {
-        const titleContianer = document.getElementById(title);
-
-        if (titleContianer) {
-            window.scrollBy({ top: titleContianer.getBoundingClientRect().top, behavior: 'smooth' });
-        }
+    const onClickMenuDiv = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) => {
+        e.stopPropagation();
+        window.scrollBy({
+            top: baseStore.getAccumulateComponentHeight(index) - baseStore.scrollY,
+            behavior: 'smooth',
+        });
     };
 
     return useObserver(() => (
@@ -248,7 +248,7 @@ const Main = (): JSX.Element => {
                     {baseStore.titleArray.map((menu, index) => {
                         if (index !== 0) {
                             return (
-                                <MenuDiv key={menu} onClick={() => onClickMenuDiv(menu)}>
+                                <MenuDiv key={menu} onClick={(e) => onClickMenuDiv(e, index)}>
                                     <MenuSubDiv>
                                         <h2>{menu}</h2>
                                         <span>Go →</span>

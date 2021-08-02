@@ -213,7 +213,7 @@
 
 import { useObserver } from 'mobx-react';
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import indexStore from '../modules/indexStore';
 import { maxWidth } from '../style/style';
 
@@ -270,9 +270,37 @@ const ComponentSection = styled.div`
 
 const MainTitle = styled.span`
     font-weight: 600;
-    font-size: calc(52px + 0.8vw);
+    font-size: calc(48px + 0.9vw);
     text-shadow: 3.5px 3.5px #fff;
     font-family: 'Bungee', cursive;
+`;
+
+const myKeyframes = keyframes`
+    50% {
+        transform: rotate(0deg);
+        left: 0;
+    }
+
+    100% {
+        top: -100vh;
+        left: 0;
+        transform: rotate(0deg);
+    }
+`;
+
+const TestDiv = styled.div`
+    background-color: #fff;
+    width: calc(100vw - (100vw - 100%));
+    height: 100vh;
+    position: absolute;
+    top: calc(100vh - 250px);
+    left: calc(100vw - (100vw - 100%) - 450px);
+    transform: rotate(-60deg);
+    z-index: 200;
+
+    animation-name: ${myKeyframes};
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
 `;
 
 interface IBase {
@@ -289,9 +317,10 @@ const Base: React.FC<IBase> = ({ children, containerNo }): JSX.Element => {
 
     // ref
     const mainContainerRef = React.useRef<HTMLDivElement>();
+    const subContainerRef = React.useRef<HTMLDivElement>();
 
     // variable
-    const backgroundColorArray = ['#757270', '#A5BAA8', '#6A9194', '#b79e6a', '#c68377'];
+    const backgroundColorArray = ['#757270', '#A5BAA8', '#6A9194', '#b79e6a', '#c68377', '#fff'];
 
     React.useEffect(() => {
         window.addEventListener('scroll', onChangeScroll);
@@ -309,13 +338,14 @@ const Base: React.FC<IBase> = ({ children, containerNo }): JSX.Element => {
     React.useEffect(() => {
         if (mainContainerRef.current) {
             mainContainerRef.current.setAttribute('id', baseStore.titleArray[containerNo]);
+            baseStore.setComponentHeight(containerNo, subContainerRef.current.clientHeight);
         }
     }, []);
 
     // onChange
     const onChangeScroll = () => {
         if (mainContainerRef.current) {
-            if (mainContainerRef.current.getBoundingClientRect().top > 0) {
+            if (mainContainerRef.current.getBoundingClientRect().top >= 1) {
                 setIsReach(false);
             } else {
                 setIsReach(true);
@@ -325,7 +355,7 @@ const Base: React.FC<IBase> = ({ children, containerNo }): JSX.Element => {
 
     const onChangeResize = () => {
         if (mainContainerRef.current) {
-            if (mainContainerRef.current.getBoundingClientRect().top > 0) {
+            if (mainContainerRef.current.getBoundingClientRect().top >= 1) {
                 setIsReach(false);
             } else {
                 setIsReach(true);
@@ -335,9 +365,10 @@ const Base: React.FC<IBase> = ({ children, containerNo }): JSX.Element => {
 
     // onClick
     const onClickMainContainer = () => {
-        if (mainContainerRef.current) {
-            window.scrollBy({ top: mainContainerRef.current.getBoundingClientRect().top, behavior: 'smooth' });
-        }
+        window.scrollBy({
+            top: baseStore.getAccumulateComponentHeight(containerNo) - baseStore.scrollY,
+            behavior: 'smooth',
+        });
     };
 
     return useObserver(() => (
@@ -347,7 +378,7 @@ const Base: React.FC<IBase> = ({ children, containerNo }): JSX.Element => {
             zIndex={100 - containerNo}
             onClick={onClickMainContainer}
         >
-            <SubContainer isReach={isReach}>
+            <SubContainer ref={subContainerRef} isReach={isReach}>
                 <ComponentContainer>
                     {containerNo === 0 ? (
                         ''

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import styled from 'styled-components';
 import Main from '../component/main';
 import Intro from '../component/intro';
 import WhyIt from '../component/whyIt';
@@ -8,23 +7,30 @@ import Career from '../component/career';
 import Init from '../component/init';
 import indexStore from '../modules/indexStore';
 import { useObserver } from 'mobx-react';
+import Projects from '../component/projects';
 
 const Index = (): JSX.Element => {
     const { initStore, baseStore } = indexStore();
 
     React.useEffect(() => {
         window.addEventListener('resize', onChangeResize);
+        window.addEventListener('scroll', onChangeScroll);
         onChangeResize();
+        onChangeScroll();
 
         return () => {
             window.removeEventListener('resize', onChangeResize);
+            window.removeEventListener('scroll', onChangeScroll);
         };
     }, []);
 
     // onChange
     const onChangeResize = () => {
         baseStore.setInnerWidth(window.innerWidth);
-        baseStore.setInnerHeight(window.innerHeight);
+    };
+
+    const onChangeScroll = () => {
+        baseStore.setScrollY(window.scrollY);
     };
 
     return useObserver(() => (
@@ -36,6 +42,7 @@ const Index = (): JSX.Element => {
                     <WhyIt />
                     <Skills />
                     <Career />
+                    <Projects />
                 </>
             ) : (
                 <Init />
@@ -62,6 +69,11 @@ const Index = (): JSX.Element => {
                     @import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
                 `}
             </style>
+            <link
+                type="text/css"
+                rel="stylesheet"
+                href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+            />
         </>
     ));
 };

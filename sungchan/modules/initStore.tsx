@@ -2,7 +2,7 @@ import { observable } from 'mobx';
 
 const InitStore = observable({
     // state
-    isEnd: false,
+    isEnd: true,
 
     setIsEnd(isEnd: boolean) {
         this.isEnd = isEnd;
