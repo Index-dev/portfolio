@@ -182,7 +182,7 @@ const fill = keyframes`
         fill: transparent;
       }
       100% {
-        fill: white;
+        fill: #F2CC3A;
       }
   `;
 
@@ -195,7 +195,7 @@ const SVG = styled.svg`
   position: absolute;
   top: 50%;
   left: 50%;
-  
+
   transform: translate3d(-50%, -50%, 0) rotate(-8deg);
   animation: ${zoomIn} 2s 4.6s ease forwards, ${fill} 0.5s 4.2s ease forwards;
   `;
@@ -207,6 +207,9 @@ const LineAnimation = keyframes`
   `;
 
 const Path = styled.path`
+  
+  stroke: #F2CC3A;
+
   animation: ${LineAnimation} 2s ease forwards;
   &:nth-child(1) {
     stroke-dasharray: 475.2000427246094;

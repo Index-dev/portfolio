@@ -1,19 +1,30 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 
 import Loading from "components/loading";
 
 const HomePresenter = (props: propsIState) => {
   const { toggleTheme, isLoading, setLoading } = props;
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (containerRef.current && isLoading) {
+      containerRef.current.style.overflow = 'hidden';
+    } else if (containerRef.current) {
+      containerRef.current.style.overflow = 'none';
+    }
+  }, [isLoading])
+
   return (
-    <>
+    <Container ref={containerRef}>
       {isLoading ? <Loading setLoading={setLoading} />
         :
-        <Container >
+        <>
           <div onClick={toggleTheme}>loading end</div>
-        </Container>
+          <EmptyStuff />
+        </>
       }
-    </>
+    </Container>
   );
 };
 
@@ -30,4 +41,9 @@ const Container = styled.div`
   min-height: 100vh;
 
   position: relative;
+`;
+
+const EmptyStuff = styled.div`
+  width: 100vw;
+  height: 200vh;
 `;
