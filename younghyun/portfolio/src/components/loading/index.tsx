@@ -14,7 +14,7 @@ function Loading(props: propsIState) {
         }
       });
     }
-  });
+  }, []);
 
   return (
     <Container ref={containerRef}>
@@ -177,12 +177,12 @@ const zoomIn = keyframes`
       }
   `;
 
-const fill = keyframes`
+const fill = ({ theme }: { theme: ThemeIState }) => keyframes`
   0% {
         fill: transparent;
       }
       100% {
-        fill: #F2CC3A;
+        fill: ${theme.primary};
       }
   `;
 
@@ -208,7 +208,7 @@ const LineAnimation = keyframes`
 
 const Path = styled.path`
   
-  stroke: #F2CC3A;
+  stroke: ${({ theme }: { theme: ThemeIState }) => theme.primary};
 
   animation: ${LineAnimation} 2s ease forwards;
   &:nth-child(1) {
