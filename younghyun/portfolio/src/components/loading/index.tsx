@@ -152,7 +152,7 @@ function Loading(props: propsIState) {
           mask="url(#path-1-outside-1)"
         />
       </SVG>
-    </Container>
+    </Container >
   );
 }
 
@@ -162,44 +162,43 @@ interface propsIState {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-
-  position: relative;
-`;
-
 const zoomIn = keyframes`
-    50% {
+      50% {
         transform: translate3d(-50%, -50%, 0) scale(120%);
-    }
-    56% {
-        transform: translate3d(-50%, -50%, 0) scale(120%);
-    }
-    62% {
-        transform: translate3d(-50%, -50%, 0) scale(110%);
-    }
-    100% {
-        transform: translate3d(-50%, -50%, 0) scale(2500%);
-    }
-`;
+      }
+      56% {
+          transform: translate3d(-50%, -50%, 0) scale(120%);
+      }
+      62% {
+          transform: translate3d(-50%, -50%, 0) scale(110%);
+      }
+      100% {
+          transform: translate3d(-50%, -50%, 0) scale(2500%);
+      }
+  `;
 
 const fill = keyframes`
-0% {
-      fill: transparent;
-    }
-    100% {
-      fill: white;
-    }
-`;
+  0% {
+        fill: transparent;
+      }
+      100% {
+        fill: white;
+      }
+  `;
+
+const Container = styled.div`
+  max-width: 100vw;
+  height: 100vh;
+  `;
+
 const SVG = styled.svg`
   position: absolute;
   top: 50%;
   left: 50%;
-
+  
   transform: translate3d(-50%, -50%, 0) rotate(-8deg);
   animation: ${zoomIn} 2s 4.6s ease forwards, ${fill} 0.5s 4.2s ease forwards;
-`;
+  `;
 
 const LineAnimation = keyframes`
     100% {

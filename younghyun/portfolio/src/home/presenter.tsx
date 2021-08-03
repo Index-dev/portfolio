@@ -6,10 +6,14 @@ import Loading from "components/loading";
 const HomePresenter = (props: propsIState) => {
   const { toggleTheme, isLoading, setLoading } = props;
   return (
-    <Container>
-      {props.isLoading && <Loading setLoading={setLoading} />}
-      <div onClick={toggleTheme}>loading end</div>
-    </Container>
+    <>
+      {isLoading ? <Loading setLoading={setLoading} />
+        :
+        <Container >
+          <div onClick={toggleTheme}>loading end</div>
+        </Container>
+      }
+    </>
   );
 };
 
@@ -25,5 +29,5 @@ const Container = styled.div`
   width: 100vw;
   min-height: 100vh;
 
-  overflow: hidden;
+  position: relative;
 `;
