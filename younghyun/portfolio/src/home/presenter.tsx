@@ -9,6 +9,14 @@ const HomePresenter = (props: propsIState) => {
   const secContRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (contRef.current && isLoading) {
+      contRef.current.style.overflow = 'hidden';
+    } else if (contRef.current) {
+      contRef.current.style.overflow = 'none';
+    }
+  }, [isLoading])
+
+  useEffect(() => {
     setTimeout(() => {
       if (secContRef.current) {
         if (secContRef.current.children) {
@@ -18,14 +26,8 @@ const HomePresenter = (props: propsIState) => {
           })
         }
       }
-    }, 1000)
-    if (contRef.current && isLoading) {
-      contRef.current.style.overflow = 'hidden';
-    } else if (contRef.current) {
-      contRef.current.style.overflow = 'none';
-    }
-  }, [isLoading])
-
+    }, 2000)
+  })
 
   return (
     <Container ref={contRef}>

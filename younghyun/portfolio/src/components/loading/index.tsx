@@ -14,7 +14,7 @@ function Loading(props: propsIState) {
         }
       });
     }
-  }, []);
+  });
 
   return (
     <Container ref={containerRef}>
