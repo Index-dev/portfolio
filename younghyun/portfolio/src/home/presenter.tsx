@@ -17,13 +17,18 @@ const HomePresenter = (props: propsIState) => {
 
   return (
     <Container ref={containerRef}>
-      {isLoading ? <Loading setLoading={setLoading} />
-        :
-        <>
-          <div onClick={toggleTheme}>loading end</div>
-          <EmptyStuff />
-        </>
-      }
+      {/* {isLoading ? <Loading setLoading={setLoading} />
+        : */}
+      <SectionContainer className="SectionContainer">
+        {/* <div onClick={toggleTheme}>loading end</div> */}
+        <EmptyStuff className="EmptyStuff" />
+        <EmptyStuff className="EmptyStuff" />
+        <EmptyStuff className="EmptyStuff" />
+        <EmptyStuff className="EmptyStuff" />
+        <EmptyStuff className="EmptyStuff" />
+        <EmptyStuff className="EmptyStuff" />
+      </SectionContainer>
+      {/* } */}
     </Container>
   );
 };
@@ -43,7 +48,28 @@ const Container = styled.div`
   position: relative;
 `;
 
-const EmptyStuff = styled.div`
+const SectionContainer = styled.div`
+
+  height: 80vh;
+  
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  
+  @supports (scroll-snap-type: y proximity) {
+    scroll-snap-type: y proximity; 
+  }
+  
+  overflow-y: auto;
+`;
+
+const EmptyStuff = styled.section`
   width: 100vw;
-  height: 200vh;
+  height: 100%;
+
+  flex: none;
+  @supports (scroll-snap-align: center) {
+    scroll-snap-align: center;
+  }
+  border: 1px solid red;
 `;
