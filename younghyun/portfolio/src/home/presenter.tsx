@@ -5,31 +5,43 @@ import Loading from "components/loading";
 
 const HomePresenter = (props: propsIState) => {
   const { toggleTheme, isLoading, setLoading } = props;
-  const containerRef = useRef<HTMLDivElement>(null)
+  const contRef = useRef<HTMLDivElement>(null);
+  const secContRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (containerRef.current && isLoading) {
-      containerRef.current.style.overflow = 'hidden';
-    } else if (containerRef.current) {
-      containerRef.current.style.overflow = 'none';
+    setTimeout(() => {
+      if (secContRef.current) {
+        if (secContRef.current.children) {
+          secContRef.current.children[1].scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          })
+        }
+      }
+    }, 1000)
+    if (contRef.current && isLoading) {
+      contRef.current.style.overflow = 'hidden';
+    } else if (contRef.current) {
+      contRef.current.style.overflow = 'none';
     }
   }, [isLoading])
 
+
   return (
-    <Container ref={containerRef}>
-      {/* {isLoading ? <Loading setLoading={setLoading} />
-        : */}
-      <SectionContainer className="SectionContainer">
-        {/* <div onClick={toggleTheme}>loading end</div> */}
-        <EmptyStuff className="EmptyStuff" />
-        <EmptyStuff className="EmptyStuff" />
-        <EmptyStuff className="EmptyStuff" />
-        <EmptyStuff className="EmptyStuff" />
-        <EmptyStuff className="EmptyStuff" />
-        <EmptyStuff className="EmptyStuff" />
-      </SectionContainer>
-      {/* } */}
-    </Container>
+    <Container ref={contRef}>
+      {isLoading ? <Loading setLoading={setLoading} />
+        :
+        <SectionContainer ref={secContRef} >
+          <Head onClick={toggleTheme}>loading end</Head>
+          <EmptyStuff />
+          <EmptyStuff />
+          <EmptyStuff />
+          <EmptyStuff />
+          <EmptyStuff />
+          <EmptyStuff />
+        </SectionContainer>
+      }
+    </Container >
   );
 };
 
@@ -48,9 +60,19 @@ const Container = styled.div`
   position: relative;
 `;
 
+const Head = styled.div`
+  height: 5vh;
+
+  flex: none;
+
+  @supports (scroll-snap-align: center) {
+    scroll-snap-align: center;
+  }
+`;
+
 const SectionContainer = styled.div`
 
-  height: 80vh;
+  height: 100vh;
   
   display: flex;
   flex-direction: column;
@@ -72,4 +94,5 @@ const EmptyStuff = styled.section`
     scroll-snap-align: center;
   }
   border: 1px solid red;
+  outline-offset: -1px;
 `;
