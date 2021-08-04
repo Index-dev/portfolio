@@ -197,7 +197,7 @@ const SVG = styled.svg`
   left: 50%;
 
   transform: translate3d(-50%, -50%, 0) rotate(-8deg);
-  animation: ${zoomIn} 2s 4.6s ease forwards, ${fill} 0.5s 4.2s ease forwards;
+  animation: ${zoomIn} 1.5s 2.6s ease forwards, ${fill} 0.5s 2.4s ease forwards;
   `;
 
 const LineAnimation = keyframes`
@@ -210,7 +210,7 @@ const Path = styled.path`
   
   stroke: ${({ theme }: { theme: ThemeIState }) => theme.primary};
 
-  animation: ${LineAnimation} 2s ease forwards;
+  animation: ${LineAnimation} 1s ease forwards;
   &:nth-child(1) {
     stroke-dasharray: 475.2000427246094;
     stroke-dashoffset: 475.2000427246094;
@@ -219,101 +219,101 @@ const Path = styled.path`
   &:nth-child(2) {
     stroke-dasharray: 441.931884765625;
     stroke-dashoffset: 441.931884765625;
-    animation-delay: 0.3s;
+    animation-delay: 0.2s;
   }
   &:nth-child(3) {
     stroke-dasharray: 655.3239135742188;
     stroke-dashoffset: 655.3239135742188;
-    animation-delay: 0.6s;
+    animation-delay: 0.4s;
   }
   &:nth-child(4) {
     stroke-dasharray: 415.801513671875;
     stroke-dashoffset: 415.801513671875;
-    animation-delay: 0.9s;
+    animation-delay: 0.6s;
   }
   &:nth-child(5) {
     stroke-dasharray: 295.03668212890625;
     stroke-dashoffset: 295.03668212890625;
-    animation-delay: 1.2s;
+    animation-delay: 0.8s;
   }
   &:nth-child(6) {
     stroke-dasharray: 335.1162414550781;
     stroke-dashoffset: 335.1162414550781;
-    animation-delay: 1.4s;
+    animation-delay: 0.9s;
   }
   &:nth-child(7) {
     stroke-dasharray: 373.6043395996094;
     stroke-dashoffset: 373.6043395996094;
-    animation-delay: 1.6s;
+    animation-delay: 1s;
   }
   &:nth-child(8) {
     stroke-dasharray: 422.2711486816406;
     stroke-dashoffset: 422.2711486816406;
-    animation-delay: 1.8s;
+    animation-delay: 1.1s;
   }
   &:nth-child(9) {
     stroke-dasharray: 441.7317199707031;
     stroke-dashoffset: 441.7317199707031;
-    animation-delay: 2s;
+    animation-delay: 1.2s;
   }
   &:nth-child(10) {
     stroke-dasharray: 347.76336669921875;
     stroke-dashoffset: 347.76336669921875;
-    animation-delay: 2.1s;
+    animation-delay: 1.3s;
   }
   &:nth-child(11) {
     stroke-dasharray: 141.40626525878906;
     stroke-dashoffset: 141.40626525878906;
-    animation-delay: 2.2s;
+    animation-delay: 1.35s;
   }
   &:nth-child(12) {
     stroke-dasharray: 419.3233947753906;
     stroke-dashoffset: 419.3233947753906;
-    animation-delay: 2.3s;
+    animation-delay: 1.4s;
   }
   &:nth-child(13) {
     stroke-dasharray: 500.01519775390625;
     stroke-dashoffset: 500.01519775390625;
-    animation-delay: 0.6s;
+    animation-delay: 0.2s;
   }
   &:nth-child(14) {
     stroke-dasharray: 347.7632141113281;
     stroke-dashoffset: 347.7632141113281;
-    animation-delay: 0.9s;
+    animation-delay: 0.4s;
   }
   &:nth-child(15) {
     stroke-dasharray: 295.0367126464844;
     stroke-dashoffset: 295.0367126464844;
-    animation-delay: 1.2s;
+    animation-delay: 0.6s;
   }
   &:nth-child(16) {
     stroke-dasharray: 324.7047424316406;
     stroke-dashoffset: 324.7047424316406;
-    animation-delay: 1.4s;
+    animation-delay: 0.8s;
   }
   &:nth-child(17) {
     stroke-dasharray: 340.5496826171875;
     stroke-dashoffset: 340.5496826171875;
-    animation-delay: 1.6s;
+    animation-delay: 0.9s;
   }
   &:nth-child(18) {
     stroke-dasharray: 347.76336669921875;
     stroke-dashoffset: 347.76336669921875;
-    animation-delay: 1.8s;
+    animation-delay: 1s;
   }
   &:nth-child(19) {
     stroke-dasharray: 277.0560302734375;
     stroke-dashoffset: 277.0560302734375;
-    animation-delay: 2s;
+    animation-delay: 1.1s;
   }
   &:nth-child(20) {
     stroke-dasharray: 335.11669921875;
     stroke-dashoffset: 335.11669921875;
-    animation-delay: 2.1s;
+    animation-delay: 1.2s;
   }
   &:nth-child(21) {
     stroke-dasharray: 347.76336669921875;
     stroke-dashoffset: 347.76336669921875;
-    animation-delay: 2.2s;
+    animation-delay: 1.3s;
   }
 `;

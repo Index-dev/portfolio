@@ -68,7 +68,6 @@ const Container = styled.div<{ disappearMenu: boolean }>`
             animation: ${appear} 0.3s linear forwards;
         `
     }
-
-
-z - index: 99;
+    
+    z-index: 99;
 `;
