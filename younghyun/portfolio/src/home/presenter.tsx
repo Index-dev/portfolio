@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 import Loading from "components/loading";
 import Nav from 'components/nav'
@@ -20,16 +20,14 @@ const HomePresenter = (props: propsIState) => {
   useEffect(() => {
     setTimeout(() => {
       if (secContRef.current) {
-        if (window.pageYOffset === 0) {
-          if (secContRef.current.children) {
-            secContRef.current.children[1].scrollIntoView({
-              behavior: 'smooth',
-              block: 'start'
-            })
-          }
+        if (secContRef.current.children) {
+          secContRef.current.children[2].scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          })
         }
       }
-    }, 2000)
+    }, 100)
   })
 
   return (
@@ -59,11 +57,23 @@ interface propsIState {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+const appear = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
 const Container = styled.div`
   width: 100vw;
   min-height: 100vh;
 
   position: relative;
+  opacity: 0;
+
+  animation: ${appear} 0.7s linear forwards;
 `;
 
 const Head = styled.div`
