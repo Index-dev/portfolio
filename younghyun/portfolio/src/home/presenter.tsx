@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 
 import Loading from "components/loading";
+import Nav from 'components/nav'
 
 const HomePresenter = (props: propsIState) => {
   const { toggleTheme, isLoading, setLoading } = props;
@@ -34,6 +35,7 @@ const HomePresenter = (props: propsIState) => {
       {isLoading ? <Loading setLoading={setLoading} />
         :
         <SectionContainer ref={secContRef} >
+          <Nav />
           <Head onClick={toggleTheme}>loading end</Head>
           <EmptyStuff />
           <EmptyStuff />
@@ -73,9 +75,8 @@ const Head = styled.div`
 `;
 
 const SectionContainer = styled.div`
-
   height: 100vh;
-  
+
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -83,8 +84,6 @@ const SectionContainer = styled.div`
   @supports (scroll-snap-type: y proximity) {
     scroll-snap-type: y proximity; 
   }
-  
-  overflow-y: auto;
 `;
 
 const EmptyStuff = styled.section`

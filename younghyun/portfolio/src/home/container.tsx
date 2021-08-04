@@ -3,7 +3,7 @@ import Presenter from "home/presenter";
 
 const HomeContainer = (props: propsIState) => {
   const { toggleTheme } = props;
-  const [isLoading, setLoading] = useState<boolean>(true);
+  const [isLoading, setLoading] = useState<boolean>(false);
 
   return (
     <Presenter
