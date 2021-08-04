@@ -90,6 +90,8 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    cursor: pointer;
 `;
 
 const SVG = styled.svg`
@@ -99,8 +101,6 @@ const SVG = styled.svg`
     fill: ${({ theme }: { theme: ThemeIState }) => theme.primary};
 
     transition: all 0.4s linear;
-
-    cursor: pointer;
 
     &:hover {
         transform: rotateX(180deg);
