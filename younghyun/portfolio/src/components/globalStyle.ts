@@ -13,11 +13,17 @@ const GlobalStyle = createGlobalStyle`
         max-width: 100vw;
 
         background-color: ${({ theme }: { theme: ThemeIState }) =>
-          theme.background};
+        theme.background};
           
         color: ${({ theme }: { theme: ThemeIState }) => theme.primary};
 
         transition: background-color 0.4s , color 0.4s;    
+
+        scroll-behavior: smooth;
+
+        &::-webkit-scrollbar {
+            width: 10px;
+        }
     }
 `;
 
