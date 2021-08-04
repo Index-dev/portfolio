@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 
-function Navigation() {
+function Navigation(props: propsIState) {
+    const { toggleNav } = props
     const navRef = useRef<HTMLDivElement>(null);
     const topPathRef = useRef<SVGPathElement>(null);
     const middlePathRef = useRef<SVGPathElement>(null);
@@ -58,7 +59,7 @@ function Navigation() {
     }, []);
 
     return (
-        <Container ref={navRef}>
+        <Container ref={navRef} onClick={toggleNav}>
             <SVG viewBox="0 0 45 40" xmlns="http://www.w3.org/2000/svg">
                 <Path d="M0 2.5H44.5" ref={topPathRef} />
                 <Path
@@ -73,6 +74,10 @@ function Navigation() {
 }
 
 export default Navigation;
+
+interface propsIState {
+    toggleNav: () => void;
+}
 
 const Container = styled.div`
     min-width: 40px;

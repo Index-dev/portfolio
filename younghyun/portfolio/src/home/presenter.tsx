@@ -1,11 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled, { keyframes } from "styled-components";
 
+import Menu from "components/nav/menu";
 import Loading from "components/loading";
 import Nav from 'components/nav'
 
 const HomePresenter = (props: propsIState) => {
   const { toggleTheme, isLoading, setLoading } = props;
+  const [showMenu, setShowMenu] = useState<boolean>(false)
   const contRef = useRef<HTMLDivElement>(null);
   const secContRef = useRef<HTMLDivElement>(null);
 
@@ -30,12 +32,22 @@ const HomePresenter = (props: propsIState) => {
     }, 100)
   })
 
+  function toggleNav() {
+    if (showMenu) {
+      setTimeout(() => {
+        setShowMenu(!showMenu)
+      }, 300)
+    } else {
+      setShowMenu(!showMenu)
+    }
+  }
   return (
     <Container ref={contRef}>
+      {showMenu && <Menu toggleNav={toggleNav} />}
       {isLoading ? <Loading setLoading={setLoading} />
         :
         <SectionContainer ref={secContRef} >
-          <Nav />
+          <Nav toggleNav={toggleNav} />
           <Head onClick={toggleTheme}>loading end</Head>
           <EmptyStuff />
           <EmptyStuff />
@@ -111,7 +123,7 @@ const SectionContainer = styled.div`
     border-bottom-right-radius: 10px;
   }
 
-  ::-webkit-scrollbar-track {
+  &::-webkit-scrollbar-track {
     background-color: ${({ theme }: { theme: ThemeIState }) => theme.background}; 
   }
 
