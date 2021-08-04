@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 function Navigation() {
     const navRef = useRef<HTMLDivElement>(null);
-    const svgRef = useRef<SVGSVGElement>(null);
     const topPathRef = useRef<SVGPathElement>(null);
     const middlePathRef = useRef<SVGPathElement>(null);
     const bottomPathRef = useRef<SVGPathElement>(null);
@@ -25,28 +24,30 @@ function Navigation() {
     });
 
     useEffect(() => {
-        if (svgRef.current) {
-            svgRef.current.addEventListener("mouseover", () => {
+        if (navRef.current) {
+            navRef.current.addEventListener("mouseover", () => {
                 if (topPathRef.current) {
                     topPathRef.current.style.opacity = "0.9";
                     topPathRef.current.style.strokeWidth = "6";
                 }
                 if (middlePathRef.current) {
                     middlePathRef.current.style.strokeDasharray =
-                        "0 12 20.5 12";
+                        "0 17 10.5 17";
+                    middlePathRef.current.style.strokeWidth = "4";
                 }
                 if (bottomPathRef.current) {
                     bottomPathRef.current.style.opacity = "0.9";
                     bottomPathRef.current.style.strokeWidth = "6";
                 }
             });
-            svgRef.current.addEventListener("mouseout", () => {
+            navRef.current.addEventListener("mouseout", () => {
                 if (topPathRef.current) {
                     topPathRef.current.style.opacity = "0.7";
                     topPathRef.current.style.strokeWidth = "5";
                 }
                 if (middlePathRef.current) {
                     middlePathRef.current.style.strokeDasharray = "0 0 44.5 0";
+                    middlePathRef.current.style.strokeWidth = "5";
                 }
                 if (bottomPathRef.current) {
                     bottomPathRef.current.style.opacity = "0.7";
@@ -58,11 +59,7 @@ function Navigation() {
 
     return (
         <Container ref={navRef}>
-            <SVG
-                viewBox="0 0 45 40"
-                xmlns="http://www.w3.org/2000/svg"
-                ref={svgRef}
-            >
+            <SVG viewBox="0 0 45 40" xmlns="http://www.w3.org/2000/svg">
                 <Path d="M0 2.5H44.5" ref={topPathRef} />
                 <Path
                     d="M0 19.5H44.5"
@@ -101,7 +98,13 @@ const SVG = styled.svg`
 
     fill: ${({ theme }: { theme: ThemeIState }) => theme.primary};
 
+    transition: all 0.4s linear;
+
     cursor: pointer;
+
+    &:hover {
+        transform: rotateX(180deg);
+    }
 `;
 
 const Path = styled.path`
