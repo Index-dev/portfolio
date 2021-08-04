@@ -1,10 +1,11 @@
-import React, { useRef } from 'react';
-import styled, { keyframes } from 'styled-components';
+import React from 'react';
+import styled, { css, keyframes } from 'styled-components';
 
 function Menu(props: propsIState) {
-    const { toggleMenu } = props
+    const { disappearMenu, toggleMenu } = props
+
     return (
-        <Container>
+        <Container disappearMenu={disappearMenu}>
             <span onClick={toggleMenu}>
                 hi
             </span>
@@ -14,6 +15,7 @@ function Menu(props: propsIState) {
 export default Menu;
 
 interface propsIState {
+    disappearMenu: boolean;
     toggleMenu: () => void;
 }
 
@@ -27,9 +29,21 @@ const appear = keyframes`
     100% {
         transform: translate3d(0%, 0, 0);
     }
-    `;
+`;
 
-const Container = styled.div`
+const disappear = keyframes`
+    0%{ 
+        transform: translate3d(0%, 0, 0);
+    }
+    90% {
+        transform: translate3d(80%, 0, 0);
+    }
+    100% {
+        transform: translate3d(100%, 0, 0);
+    }
+`;
+
+const Container = styled.div<{ disappearMenu: boolean }>`
     width: 100%;
     height: 100%;
     
@@ -44,8 +58,17 @@ const Container = styled.div`
     background-color: ${({ theme }: { theme: ThemeIState }) => theme.primary};
     color: ${({ theme }: { theme: ThemeIState }) => theme.fourth};
     
-    transform: translate3d(-100%, 0, 0);
-    animation: ${appear} 0.3s linear forwards;
+    ${(props) => props.disappearMenu ?
+        css`
+            transform: translate3d(0%, 0, 0);
+            animation: ${disappear} 0.3s linear forwards;
+        ` :
+        css`
+            transform: translate3d(-100%, 0, 0);
+            animation: ${appear} 0.3s linear forwards;
+        `
+    }
 
-    z-index: 99;
+
+z - index: 99;
 `;

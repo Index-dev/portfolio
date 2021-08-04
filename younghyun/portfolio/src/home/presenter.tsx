@@ -6,7 +6,7 @@ import Loading from "components/loading";
 import Nav from 'components/nav'
 
 const HomePresenter = (props: propsIState) => {
-  const { toggleTheme, isLoading, setLoading, showMenu, toggleMenu } = props;
+  const { toggleTheme, isLoading, setLoading, showMenu, disappearMenu, toggleMenu } = props;
 
   const contRef = useRef<HTMLDivElement>(null);
   const secContRef = useRef<HTMLDivElement>(null);
@@ -35,7 +35,7 @@ const HomePresenter = (props: propsIState) => {
 
   return (
     <Container ref={contRef}>
-      {showMenu && <Menu toggleMenu={toggleMenu} />}
+      {showMenu && <Menu disappearMenu={disappearMenu} toggleMenu={toggleMenu} />}
       {isLoading ? <Loading setLoading={setLoading} />
         :
         <SectionContainer ref={secContRef} >
@@ -60,6 +60,7 @@ interface propsIState {
   isLoading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   showMenu: boolean;
+  disappearMenu: boolean;
   toggleMenu: () => void;
 }
 
