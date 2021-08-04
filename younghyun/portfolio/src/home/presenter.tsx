@@ -20,11 +20,13 @@ const HomePresenter = (props: propsIState) => {
   useEffect(() => {
     setTimeout(() => {
       if (secContRef.current) {
-        if (secContRef.current.children) {
-          secContRef.current.children[1].scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          })
+        if (window.pageYOffset === 0) {
+          if (secContRef.current.children) {
+            secContRef.current.children[1].scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            })
+          }
         }
       }
     }, 2000)
@@ -84,11 +86,31 @@ const SectionContainer = styled.div`
   @supports (scroll-snap-type: y proximity) {
     scroll-snap-type: y proximity; 
   }
+
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar{
+    width: 5px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }: { theme: ThemeIState }) => theme.primary}; 
+    background-clip: padding-box;
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: ${({ theme }: { theme: ThemeIState }) => theme.background}; 
+  }
+
+
 `;
 
 const EmptyStuff = styled.section`
-  width: 100vw;
-  height: 100%;
+  width: 99vw;
+  height: 100vh;
 
   flex: none;
   @supports (scroll-snap-align: center) {
