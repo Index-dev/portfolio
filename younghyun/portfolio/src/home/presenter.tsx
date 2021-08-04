@@ -6,8 +6,8 @@ import Loading from "components/loading";
 import Nav from 'components/nav'
 
 const HomePresenter = (props: propsIState) => {
-  const { toggleTheme, isLoading, setLoading } = props;
-  const [showMenu, setShowMenu] = useState<boolean>(false)
+  const { toggleTheme, isLoading, setLoading, showMenu, toggleMenu } = props;
+
   const contRef = useRef<HTMLDivElement>(null);
   const secContRef = useRef<HTMLDivElement>(null);
 
@@ -32,22 +32,14 @@ const HomePresenter = (props: propsIState) => {
     }, 100)
   })
 
-  function toggleNav() {
-    if (showMenu) {
-      setTimeout(() => {
-        setShowMenu(!showMenu)
-      }, 300)
-    } else {
-      setShowMenu(!showMenu)
-    }
-  }
+
   return (
     <Container ref={contRef}>
-      {showMenu && <Menu toggleNav={toggleNav} />}
+      {showMenu && <Menu toggleMenu={toggleMenu} />}
       {isLoading ? <Loading setLoading={setLoading} />
         :
         <SectionContainer ref={secContRef} >
-          <Nav toggleNav={toggleNav} />
+          <Nav toggleMenu={toggleMenu} />
           <Head onClick={toggleTheme}>loading end</Head>
           <EmptyStuff />
           <EmptyStuff />
@@ -67,6 +59,8 @@ interface propsIState {
   toggleTheme: () => void;
   isLoading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  showMenu: boolean;
+  toggleMenu: () => void;
 }
 
 const appear = keyframes`

@@ -2,10 +2,10 @@ import React, { useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 function Menu(props: propsIState) {
-    const { toggleNav } = props
+    const { toggleMenu } = props
     return (
         <Container>
-            <span onClick={toggleNav}>
+            <span onClick={toggleMenu}>
                 hi
             </span>
         </Container>
@@ -14,9 +14,12 @@ function Menu(props: propsIState) {
 export default Menu;
 
 interface propsIState {
-    toggleNav: () => void;
+    toggleMenu: () => void;
 }
 
+const appear = keyframes`
+    
+`;
 
 const Container = styled.div`
     width: 100%;
