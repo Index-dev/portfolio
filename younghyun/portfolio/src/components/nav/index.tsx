@@ -102,8 +102,8 @@ const Path = styled.path`
   stroke-width: 4;
 
   opacity: 0.5;
-  transition: transform 0.1s linear, opacity 0.1s linear,
-    stroke-dashoffset 0.2s linear;
+  transition: transform 0.1s linear, opacity 0.1s linear;
+  transition: stroke-dashoffset 0.2s linear;
 
   stroke-dasharray: 44.5;
   stroke-dashoffset: 0;
