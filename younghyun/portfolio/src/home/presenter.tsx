@@ -29,6 +29,15 @@ const HomePresenter = (props: propsIState) => {
 
   useEffect(() => {
     if (secContRef.current) {
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (secContRef.current) {
+            console.log("sec", secContRef.current.scrollTop);
+          }
+        },
+        true
+      );
       if (secContRef.current.children) {
         secContRef.current.children[2].scrollIntoView({
           block: "start",
