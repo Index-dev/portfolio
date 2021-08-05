@@ -1,14 +1,10 @@
-import React, { useEffect, forwardRef, useRef } from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 
-const Navigation = forwardRef<HTMLDivElement, propsIState>((props, ref) => {
-  const { toggleMenu } = props;
-  const navRef = ref as React.RefObject<HTMLDivElement>;
-  const topPathRef = useRef<SVGPathElement>(null);
-  const middlePathRef = useRef<SVGPathElement>(null);
-  const bottomPathRef = useRef<SVGPathElement>(null);
-
-  useEffect(() => {
+function Navigation(props: propsIState) {
+  const { toggleMenu, navRefs } = props;
+  const { navRef, topPathRef, middlePathRef, bottomPathRef } = navRefs;
+  useMemo(() => {
     if (navRef.current) {
       navRef.current.addEventListener("mouseover", () => {
         if (topPathRef.current) {
@@ -16,8 +12,8 @@ const Navigation = forwardRef<HTMLDivElement, propsIState>((props, ref) => {
           topPathRef.current.style.strokeWidth = "6";
         }
         if (middlePathRef.current) {
-          middlePathRef.current.style.strokeDasharray = "0 17 10.5 17";
-          middlePathRef.current.style.strokeWidth = "4";
+          middlePathRef.current.style.opacity = "0.9";
+          middlePathRef.current.style.strokeWidth = "6";
         }
         if (bottomPathRef.current) {
           bottomPathRef.current.style.opacity = "0.9";
@@ -26,40 +22,44 @@ const Navigation = forwardRef<HTMLDivElement, propsIState>((props, ref) => {
       });
       navRef.current.addEventListener("mouseout", () => {
         if (topPathRef.current) {
-          topPathRef.current.style.opacity = "0.7";
-          topPathRef.current.style.strokeWidth = "5";
+          topPathRef.current.style.opacity = "0.5";
+          topPathRef.current.style.strokeWidth = "4";
         }
         if (middlePathRef.current) {
-          middlePathRef.current.style.strokeDasharray = "0 0 44.5 0";
-          middlePathRef.current.style.strokeWidth = "5";
+          middlePathRef.current.style.opacity = "0.5";
+          middlePathRef.current.style.strokeWidth = "4";
         }
         if (bottomPathRef.current) {
-          bottomPathRef.current.style.opacity = "0.7";
-          bottomPathRef.current.style.strokeWidth = "5";
+          bottomPathRef.current.style.opacity = "0.5";
+          bottomPathRef.current.style.strokeWidth = "4";
         }
       });
     }
-  }, [navRef]);
+  }, [navRef, topPathRef, middlePathRef, bottomPathRef]);
 
   return (
-    <Container ref={ref} onClick={toggleMenu}>
+    <Container ref={navRefs.navRef} onClick={toggleMenu}>
       <SVG viewBox="0 0 45 40" xmlns="http://www.w3.org/2000/svg">
-        <Path d="M0 2.5H44.5" ref={topPathRef} />
-        <Path
-          d="M0 19.5H44.5"
-          ref={middlePathRef}
-          strokeDasharray="0 0 44.5 0"
-        />
-        <Path d="M0 37.5H44.5" ref={bottomPathRef} />
+        <Path d="M0 2.5H44.5" ref={navRefs.topPathRef} />
+        <Path d="M0 19.5H44.5" ref={navRefs.middlePathRef} />
+        <Path d="M0 37.5H44.5" ref={navRefs.bottomPathRef} />
       </SVG>
     </Container>
   );
-});
+}
 
 export default Navigation;
 
 interface propsIState {
   toggleMenu: () => void;
+  navRefs: navRefsIState;
+}
+
+interface navRefsIState {
+  navRef: React.RefObject<HTMLDivElement>;
+  topPathRef: React.RefObject<SVGPathElement>;
+  middlePathRef: React.RefObject<SVGPathElement>;
+  bottomPathRef: React.RefObject<SVGPathElement>;
 }
 
 const Container = styled.div`
@@ -90,19 +90,23 @@ const SVG = styled.svg`
 
   fill: ${({ theme }: { theme: ThemeIState }) => theme.primary};
 
-  transition: all 0.4s linear;
+  transition: all 0.2s linear;
 
   &:hover {
-    transform: rotateX(180deg);
+    transform: rotate(-18deg);
   }
 `;
 
 const Path = styled.path`
   stroke: ${({ theme }: { theme: ThemeIState }) => theme.primary};
-  stroke-width: 5;
+  stroke-width: 4;
 
-  opacity: 0.7;
-  transition: all 0.2s linear;
+  opacity: 0.5;
+  transition: transform 0.1s linear, opacity 0.1s linear,
+    stroke-dashoffset 0.2s linear;
+
+  stroke-dasharray: 44.5;
+  stroke-dashoffset: 0;
 
   transform: translate3d(0, 10, 0);
 `;
