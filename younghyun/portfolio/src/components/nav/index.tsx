@@ -1,32 +1,12 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, forwardRef, useRef } from "react";
 import styled from "styled-components";
 
-function Navigation(props: propsIState) {
+const Navigation = forwardRef<HTMLDivElement, propsIState>((props, ref) => {
   const { toggleMenu } = props;
-  const navRef = useRef<HTMLDivElement>(null);
+  const navRef = ref as React.RefObject<HTMLDivElement>;
   const topPathRef = useRef<SVGPathElement>(null);
   const middlePathRef = useRef<SVGPathElement>(null);
   const bottomPathRef = useRef<SVGPathElement>(null);
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScrollEvent, true);
-  });
-
-  function handleScrollEvent() {
-    if (navRef.current) {
-      const stickyPoint = window.innerHeight * 0.03;
-      const absolutePoint = window.innerHeight * 0.08;
-      if (stickyPoint <= window.pageYOffset) {
-        console.log("fixed");
-        navRef.current.style.position = "fixed";
-        navRef.current.style.top = "3vh";
-      } else if (absolutePoint >= window.pageYOffset) {
-        console.log("absolute");
-        navRef.current.style.position = "absolute";
-        navRef.current.style.top = "8vh";
-      }
-    }
-  }
 
   useEffect(() => {
     if (navRef.current) {
@@ -59,10 +39,10 @@ function Navigation(props: propsIState) {
         }
       });
     }
-  }, []);
+  }, [navRef]);
 
   return (
-    <Container ref={navRef} onClick={toggleMenu}>
+    <Container ref={ref} onClick={toggleMenu}>
       <SVG viewBox="0 0 45 40" xmlns="http://www.w3.org/2000/svg">
         <Path d="M0 2.5H44.5" ref={topPathRef} />
         <Path
@@ -74,7 +54,7 @@ function Navigation(props: propsIState) {
       </SVG>
     </Container>
   );
-}
+});
 
 export default Navigation;
 
@@ -91,13 +71,15 @@ const Container = styled.div`
   height: 5vw;
   max-height: 50px;
 
-  position: absolute;
-  top: 8vh;
+  position: relative;
+  top: 13vh;
   right: 5vw;
 
   display: flex;
   justify-content: center;
   align-items: center;
+
+  transition: right 0.1s linear;
 
   cursor: pointer;
 `;

@@ -18,6 +18,7 @@ const HomePresenter = (props: propsIState) => {
 
   const contRef = useRef<HTMLDivElement>(null);
   const secContRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (contRef.current && isLoading) {
@@ -33,7 +34,19 @@ const HomePresenter = (props: propsIState) => {
         "scroll",
         () => {
           if (secContRef.current) {
-            console.log("sec", secContRef.current.scrollTop);
+            if (navRef.current) {
+              const absolutePoint = window.innerHeight * 0.1285;
+              const fixedPoint = window.innerHeight * 0.03;
+              if (absolutePoint > secContRef.current.scrollTop + fixedPoint) {
+                navRef.current.style.position = "absolute";
+                navRef.current.style.top = "13vh";
+                navRef.current.style.right = "10vw";
+              } else {
+                navRef.current.style.position = "fixed";
+                navRef.current.style.top = "3vh";
+                navRef.current.style.right = "5vw";
+              }
+            }
           }
         },
         true
@@ -55,7 +68,7 @@ const HomePresenter = (props: propsIState) => {
         <Loading setLoading={setLoading} />
       ) : (
         <SectionContainer ref={secContRef}>
-          <Nav toggleMenu={toggleMenu} />
+          <Nav toggleMenu={toggleMenu} ref={navRef} />
           <Header toggleTheme={toggleTheme} />
           <EmptyStuff />
           <EmptyStuff />
@@ -97,7 +110,10 @@ const appear = keyframes`
 `;
 
 const SectionContainer = styled.div`
+  width: 100%;
   height: 100vh;
+
+  position: relative;
 
   display: flex;
   flex-direction: column;
@@ -132,13 +148,13 @@ const SectionContainer = styled.div`
 `;
 
 const EmptyStuff = styled.section`
-  width: 99vw;
+  width: 100vw;
   height: 100vh;
 
   flex: none;
   @supports (scroll-snap-align: center) {
     scroll-snap-align: center;
   }
-  border: 1px solid red;
+  /* border: 1px solid red; */
   outline-offset: -1px;
 `;
