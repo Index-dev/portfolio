@@ -152,7 +152,7 @@ function Loading(props: propsIState) {
           mask="url(#path-1-outside-1)"
         />
       </SVG>
-    </Container >
+    </Container>
   );
 }
 
@@ -189,16 +189,17 @@ const fill = ({ theme }: { theme: ThemeIState }) => keyframes`
 const Container = styled.div`
   max-width: 100vw;
   height: 100vh;
-  `;
+`;
 
 const SVG = styled.svg`
+  width: 85%;
   position: absolute;
   top: 50%;
   left: 50%;
 
   transform: translate3d(-50%, -50%, 0) rotate(-8deg);
   animation: ${zoomIn} 1.5s 2.6s ease forwards, ${fill} 0.5s 2.4s ease forwards;
-  `;
+`;
 
 const LineAnimation = keyframes`
     100% {
@@ -207,7 +208,6 @@ const LineAnimation = keyframes`
   `;
 
 const Path = styled.path`
-  
   stroke: ${({ theme }: { theme: ThemeIState }) => theme.primary};
 
   animation: ${LineAnimation} 1s ease forwards;
