@@ -173,7 +173,7 @@ const zoomIn = keyframes`
           transform: translate3d(-50%, -50%, 0) scale(110%);
       }
       100% {
-          transform: translate3d(-50%, -50%, 0) scale(2500%);
+          transform: translate3d(-50%, -50%, 0) scale(3000%);
       }
   `;
 
