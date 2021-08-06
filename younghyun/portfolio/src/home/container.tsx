@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
+import { basicTheme, reversedTheme } from "components/theme";
 import Presenter from "home/presenter";
 
 const HomeContainer = (props: propsIState) => {
-  const { toggleTheme } = props;
+  const { theme, setTheme } = props;
   const [isLoading, setLoading] = useState<boolean>(true);
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const [disappearMenu, setDisappearMenu] = useState<boolean>(false);
@@ -17,6 +18,30 @@ const HomeContainer = (props: propsIState) => {
     bottomPathRef: useRef<SVGPathElement>(null),
   };
   const { navRef, topPathRef, middlePathRef, bottomPathRef } = navRefs;
+
+  const toggleTheme = () => {
+    if (theme === basicTheme) {
+      if (secContRef.current && secContRef.current.children) {
+        secContRef.current.children[2].scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+      setTimeout(() => {
+        setTheme(reversedTheme);
+      }, 200);
+    } else {
+      if (secContRef.current && secContRef.current.children) {
+        secContRef.current.children[2].scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+      setTimeout(() => {
+        setTheme(basicTheme);
+      }, 200);
+    }
+  };
 
   function toggleMenu() {
     if (showMenu) {
@@ -132,5 +157,6 @@ const HomeContainer = (props: propsIState) => {
 export default HomeContainer;
 
 interface propsIState {
-  toggleTheme: () => void;
+  theme: ThemeIState;
+  setTheme: React.Dispatch<React.SetStateAction<ThemeIState>>;
 }
