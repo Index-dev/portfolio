@@ -19,13 +19,6 @@ const HomePresenter = (props: propsIState) => {
   const contRef = useRef<HTMLDivElement>(null);
   const secContRef = useRef<HTMLDivElement>(null);
 
-  const navRefs = {
-    navRef: useRef<HTMLDivElement>(null),
-    topPathRef: useRef<SVGPathElement>(null),
-    middlePathRef: useRef<SVGPathElement>(null),
-    bottomPathRef: useRef<SVGPathElement>(null),
-  };
-
   useEffect(() => {
     if (contRef.current && isLoading) {
       contRef.current.style.overflow = "hidden";
@@ -33,55 +26,6 @@ const HomePresenter = (props: propsIState) => {
       contRef.current.style.overflow = "none";
     }
   }, [isLoading]);
-
-  useEffect(() => {
-    if (secContRef.current) {
-      window.addEventListener(
-        "scroll",
-        () => {
-          if (secContRef.current) {
-            if (navRefs.navRef.current) {
-              const absolutePoint = window.innerHeight * 0.1285;
-              const fixedPoint = window.innerHeight * 0.03;
-              if (absolutePoint > secContRef.current.scrollTop + fixedPoint) {
-                navRefs.navRef.current.style.position = "absolute";
-                navRefs.navRef.current.style.top = "13vh";
-                navRefs.navRef.current.style.right = "5vw";
-                if (navRefs.topPathRef.current) {
-                  navRefs.topPathRef.current.style.strokeDashoffset = "44.5";
-                }
-                if (navRefs.middlePathRef.current) {
-                  navRefs.middlePathRef.current.style.strokeDashoffset = "44.5";
-                }
-                if (navRefs.bottomPathRef.current) {
-                  navRefs.bottomPathRef.current.style.strokeDashoffset = "44.5";
-                }
-              } else {
-                navRefs.navRef.current.style.position = "fixed";
-                navRefs.navRef.current.style.top = "3vh";
-                navRefs.navRef.current.style.right = "5vw";
-                if (navRefs.topPathRef.current) {
-                  navRefs.topPathRef.current.style.strokeDashoffset = "0";
-                }
-                if (navRefs.middlePathRef.current) {
-                  navRefs.middlePathRef.current.style.strokeDashoffset = "0";
-                }
-                if (navRefs.bottomPathRef.current) {
-                  navRefs.bottomPathRef.current.style.strokeDashoffset = "0";
-                }
-              }
-            }
-          }
-        },
-        true
-      );
-      if (secContRef.current.children) {
-        secContRef.current.children[2].scrollIntoView({
-          block: "start",
-        });
-      }
-    }
-  });
 
   return (
     <Container ref={contRef}>
@@ -92,7 +36,7 @@ const HomePresenter = (props: propsIState) => {
         <Loading setLoading={setLoading} />
       ) : (
         <SectionContainer ref={secContRef}>
-          <Nav toggleMenu={toggleMenu} navRefs={navRefs} />
+          <Nav toggleMenu={toggleMenu} secContRef={secContRef} />
           <Header toggleTheme={toggleTheme} />
           <EmptyStuff />
           <EmptyStuff />
