@@ -1,43 +1,43 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import styled, { keyframes } from "styled-components";
 
 import Menu from "components/nav/menu";
 import Loading from "components/loading";
-import Nav from 'components/nav'
+import Nav from "components/nav";
+import Header from "components/header";
 
 const HomePresenter = (props: propsIState) => {
-  const { toggleTheme, isLoading, setLoading, showMenu, disappearMenu, toggleMenu } = props;
+  const {
+    toggleTheme,
+    isLoading,
+    setLoading,
+    showMenu,
+    disappearMenu,
+    toggleMenu,
+  } = props;
 
   const contRef = useRef<HTMLDivElement>(null);
   const secContRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (contRef.current && isLoading) {
-      contRef.current.style.overflow = 'hidden';
+      contRef.current.style.overflow = "hidden";
     } else if (contRef.current) {
-      contRef.current.style.overflow = 'none';
+      contRef.current.style.overflow = "none";
     }
-  }, [isLoading])
-
-  useEffect(() => {
-    if (secContRef.current) {
-      if (secContRef.current.children) {
-        secContRef.current.children[2].scrollIntoView({
-          block: 'start'
-        })
-      }
-    }
-  })
-
+  }, [isLoading]);
 
   return (
     <Container ref={contRef}>
-      {showMenu && <Menu disappearMenu={disappearMenu} toggleMenu={toggleMenu} />}
-      {isLoading ? <Loading setLoading={setLoading} />
-        :
-        <SectionContainer ref={secContRef} >
-          <Nav toggleMenu={toggleMenu} />
-          <Head onClick={toggleTheme}>loading end</Head>
+      {showMenu && (
+        <Menu disappearMenu={disappearMenu} toggleMenu={toggleMenu} />
+      )}
+      {isLoading ? (
+        <Loading setLoading={setLoading} />
+      ) : (
+        <SectionContainer ref={secContRef}>
+          <Nav toggleMenu={toggleMenu} secContRef={secContRef} />
+          <Header toggleTheme={toggleTheme} />
           <EmptyStuff />
           <EmptyStuff />
           <EmptyStuff />
@@ -45,8 +45,8 @@ const HomePresenter = (props: propsIState) => {
           <EmptyStuff />
           <EmptyStuff />
         </SectionContainer>
-      }
-    </Container >
+      )}
+    </Container>
   );
 };
 
@@ -68,16 +68,6 @@ const Container = styled.div`
   position: relative;
 `;
 
-const Head = styled.div`
-  height: 5vh;
-  
-  flex: none;
-  
-  @supports (scroll-snap-align: center) {
-    scroll-snap-align: center;
-  }
-  `;
-
 const appear = keyframes`
   0% {
     opacity: 0;
@@ -88,16 +78,19 @@ const appear = keyframes`
 `;
 
 const SectionContainer = styled.div`
+  width: 100%;
   height: 100vh;
-  
+
+  position: relative;
+
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  
+
   @supports (scroll-snap-type: y proximity) {
-    scroll-snap-type: y proximity; 
+    scroll-snap-type: y proximity;
   }
-  
+
   overflow-x: hidden;
   overflow-y: scroll;
 
@@ -105,30 +98,31 @@ const SectionContainer = styled.div`
 
   animation: ${appear} 0.2s 0.1s linear forwards;
 
-  &::-webkit-scrollbar{
+  &::-webkit-scrollbar {
     width: 5px;
   }
-  
+
   &::-webkit-scrollbar-thumb {
-    background-color: ${({ theme }: { theme: ThemeIState }) => theme.primary}; 
+    background-color: ${({ theme }: { theme: ThemeIState }) => theme.primary};
     background-clip: padding-box;
     border-top-left-radius: 10px;
     border-bottom-right-radius: 10px;
   }
-  
+
   &::-webkit-scrollbar-track {
-    background-color: ${({ theme }: { theme: ThemeIState }) => theme.background}; 
+    background-color: ${({ theme }: { theme: ThemeIState }) =>
+      theme.background};
   }
-  `;
+`;
 
 const EmptyStuff = styled.section`
-  width: 99vw;
+  width: 100vw;
   height: 100vh;
-  
+
   flex: none;
   @supports (scroll-snap-align: center) {
     scroll-snap-align: center;
   }
-  border: 1px solid red;
+  /* border: 1px solid red; */
   outline-offset: -1px;
-  `;
+`;
