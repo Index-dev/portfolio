@@ -6,6 +6,8 @@ import Loading from "components/loading";
 import Nav from "components/nav";
 import Header from "components/header";
 
+import First from "components/sections/first";
+
 const HomePresenter = (props: propsIState) => {
   const {
     toggleTheme,
@@ -30,7 +32,7 @@ const HomePresenter = (props: propsIState) => {
         <SectionContainer ref={secContRef}>
           <Nav toggleMenu={toggleMenu} navRefs={navRefs} />
           <Header toggleTheme={toggleTheme} />
-          <EmptyStuff />
+          <First />
           <EmptyStuff />
           <EmptyStuff />
           <EmptyStuff />
@@ -118,7 +120,4 @@ const EmptyStuff = styled.section`
   @supports (scroll-snap-align: center) {
     scroll-snap-align: center;
   }
-
-  border: 1px solid ${({ theme }: { theme: ThemeIState }) => theme.secondary};
-  outline-offset: -1px;
 `;
