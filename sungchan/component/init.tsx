@@ -1,7 +1,7 @@
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import indexStore from '../modules/indexStore';
-import { useObserver } from 'mobx-react';
+import { setIsEndAction } from '../modules/actions';
 
 const Container = styled.div`
     position: fixed;
@@ -46,8 +46,7 @@ const TitleCursor = styled.span`
 `;
 
 const Init = (): JSX.Element => {
-    // mobx
-    const { initStore } = indexStore();
+    const dispatch = useDispatch();
 
     // ref
     const containerRef = React.useRef<HTMLDivElement>();
@@ -149,7 +148,7 @@ const Init = (): JSX.Element => {
         setTypingCursorAction(typingCursor4, stringObjs[5].start, stringObjs[7].start);
 
         setTimeout(() => {
-            initStore.setIsEnd(true);
+            dispatch(setIsEndAction(true));
         }, stringObjs[7].start + time * 5);
     }, []);
 
@@ -202,7 +201,7 @@ const Init = (): JSX.Element => {
         }
     };
 
-    return useObserver(() => (
+    return (
         <Container ref={containerRef}>
             <MainSection>
                 <TitleDiv>
@@ -237,7 +236,7 @@ const Init = (): JSX.Element => {
                 </TitleDiv>
             </MainSection>
         </Container>
-    ));
+    );
 };
 
 export default Init;

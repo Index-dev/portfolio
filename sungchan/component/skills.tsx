@@ -2,12 +2,33 @@ import * as React from 'react';
 import Base from './base';
 import styled from 'styled-components';
 
-const MainSection = styled.section`
+const SkillsContainer = styled.div`
+    padding: 20px;
+`;
+
+const TitleContainer = styled.div`
+    position: relative;
+    margin: 24px 0 52px 0;
+`;
+
+const TitleMainDiv = styled.div`
+    border-top: 1px solid rgba(0, 0, 0, 0.4);
+    padding: 12px 0;
+`;
+
+const TitleSubDiv = styled.div`
+    position: absolute;
+    background-color: #b79e6a;
+    top: -12px;
+    left: 12px;
+    padding: 0 4px;
+`;
+
+const ContentsContainer = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 22px;
 
     @media screen and (min-width: 570px) {
         height: 1080px;
@@ -20,7 +41,7 @@ const MainSection = styled.section`
     }
 `;
 
-const BoxCotainer = styled.div`
+const SkillSection = styled.section`
     width: 240px;
     text-align: center;
     margin-bottom: 54px;
@@ -40,15 +61,30 @@ const ImageDiv = styled.div`
     box-shadow: 2px 4px 4px #c8c8c8 inset, -2px -4px 4px #c8c8c8 inset;
 `;
 
-const BoxTitle = styled.span`
+const MainTitle = styled.span`
+    font-weight: 600;
+    font-size: min(calc(1.2em + 0.5vw), 1.8em);
+`;
+
+const SubTitle = styled.span`
+    font-weight: 600;
+    font-size: min(calc(0.9em + 0.5vw), 1.1em);
+    color: rgba(0, 0, 0, 0.4);
+`;
+
+const SkillTitle = styled.span`
     font-weight: bold;
-    font-size: 1.6em;
+    font-size: min(1.4em + 0.4vw, 1.6em);
     color: #fff;
 `;
 
-const BoxImage = styled.img``;
+const SkillImage = styled.img``;
 
-const Skills = (): JSX.Element => {
+interface ISkills {
+    componentNo: number;
+}
+
+const Skills: React.FC<ISkills> = ({ componentNo }): JSX.Element => {
     const skillsArray = [
         {
             title: 'FE',
@@ -69,21 +105,39 @@ const Skills = (): JSX.Element => {
     ];
 
     return (
-        <Base containerNo={3}>
-            <MainSection>
-                {skillsArray.map((skill) => {
-                    return (
-                        <BoxCotainer key={skill.title}>
-                            <TitleDiv>
-                                <BoxTitle>{skill.title}</BoxTitle>
-                            </TitleDiv>
-                            <ImageDiv>
-                                <BoxImage src={skill.src} />
-                            </ImageDiv>
-                        </BoxCotainer>
-                    );
-                })}
-            </MainSection>
+        <Base componentNo={componentNo}>
+            <SkillsContainer>
+                <TitleContainer>
+                    <TitleSubDiv>
+                        <SubTitle>제목</SubTitle>
+                    </TitleSubDiv>
+                    <TitleMainDiv>
+                        <MainTitle>기술스택이 뭐가 있지..?</MainTitle>
+                    </TitleMainDiv>
+                </TitleContainer>
+
+                <TitleContainer>
+                    <TitleSubDiv>
+                        <SubTitle>내용</SubTitle>
+                    </TitleSubDiv>
+                    <TitleMainDiv>
+                        <ContentsContainer>
+                            {skillsArray.map((skill) => {
+                                return (
+                                    <SkillSection key={skill.title}>
+                                        <TitleDiv>
+                                            <SkillTitle>{skill.title}</SkillTitle>
+                                        </TitleDiv>
+                                        <ImageDiv>
+                                            <SkillImage src={skill.src} />
+                                        </ImageDiv>
+                                    </SkillSection>
+                                );
+                            })}
+                        </ContentsContainer>
+                    </TitleMainDiv>
+                </TitleContainer>
+            </SkillsContainer>
         </Base>
     );
 };

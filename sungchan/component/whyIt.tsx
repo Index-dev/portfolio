@@ -57,11 +57,33 @@ import * as React from 'react';
 import Base from './base';
 import styled, { keyframes } from 'styled-components';
 
-const CommonSection = styled.section`
+const WhyItContainer = styled.div`
+    padding: 20px;
+`;
+
+const TitleContainer = styled.div`
+    position: relative;
+    margin: 24px 0 52px 0;
+`;
+
+const TitleMainDiv = styled.div`
+    border-top: 1px solid rgba(0, 0, 0, 0.4);
+    padding: 12px 0;
+`;
+
+const TitleSubDiv = styled.div`
+    position: absolute;
+    background-color: #6a9194;
+    top: -12px;
+    left: 12px;
+    padding: 0 4px;
+`;
+
+const QAContaier = styled.div`
     width: 100%;
     text-align: center;
 
-    @media screen and (min-width: 710px) {
+    @media screen and (min-width: 860px) {
         display: flex;
         justify-content: center;
     }
@@ -69,12 +91,10 @@ const CommonSection = styled.section`
 
 const QuestionSection = styled.section`
     padding: 0 20px 0 20px;
-    display: inline-block;
 `;
 
 const AnswerSection = styled.section`
     padding: 0 20px 0 20px;
-    display: inline-block;
 `;
 
 const questionNumberKeyframe = keyframes`
@@ -101,6 +121,7 @@ const QuestionDiv = styled.div`
     border-bottom-right-radius: 10px;
     text-align: left;
     box-shadow: 2px 4px 4px #c8c8c8 inset, -2px -4px 4px #c8c8c8 inset;
+    cursor: pointer;
 
     &:hover {
         & > div > span:first-child {
@@ -117,6 +138,7 @@ const QuestionSubDiv = styled.div`
 `;
 
 const AnswerDiv = styled.div`
+    min-height: calc(248px + 30vh);
     background-color: #fff;
     padding: 20px;
     margin: 24px 0;
@@ -124,9 +146,25 @@ const AnswerDiv = styled.div`
     border-top-right-radius: 10px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    min-width: calc(224px + 15vw);
-    min-height: calc(224px + 15vh);
     box-shadow: 2px 4px 4px #c8c8c8 inset, -2px -4px 4px #c8c8c8 inset;
+
+    @media screen and (min-width: 860px) {
+        display: flex;
+        justify-content: center;
+
+        width: min(calc(16em + 12vw), 26em);
+    }
+`;
+
+const MainTitle = styled.span`
+    font-weight: 600;
+    font-size: min(calc(1.2em + 0.5vw), 1.8em);
+`;
+
+const SubTitle = styled.span`
+    font-weight: 600;
+    font-size: min(calc(0.9em + 0.5vw), 1.1em);
+    color: rgba(0, 0, 0, 0.4);
 `;
 
 interface IQuestionTitle {
@@ -135,7 +173,7 @@ interface IQuestionTitle {
 
 const QuestionTitle = styled.span`
     font-weight: 600;
-    font-size: calc(18px + 0.2vw);
+    font-size: min(calc(18px + 0.2vw), 1.4em);
     color: ${(props: IQuestionTitle) => props.color};
 `;
 
@@ -150,7 +188,7 @@ interface IQuestionNumber {
 const QuestionNumber = styled.span`
     display: inline-block;
     font-weight: 600;
-    font-size: calc(24px + 0.6vw);
+    font-size: min(calc(24px + 0.6vw), 2em);
     color: #f15e5e;
     transform: rotate(-10deg);
     margin-right: 12px;
@@ -160,7 +198,11 @@ const QuestionNumber = styled.span`
     animation-iteration-count: infinite;
 `;
 
-const WhyIt = (): JSX.Element => {
+interface IWhyIt {
+    componentNo: number;
+}
+
+const WhyIt: React.FC<IWhyIt> = ({ componentNo }): JSX.Element => {
     // state
     const [questionIndex, setQuestionIndex] = React.useState<number>(-1);
     const [typingTimer, setTypingTimer] = React.useState<NodeJS.Timer>();
@@ -223,35 +265,51 @@ const WhyIt = (): JSX.Element => {
     };
 
     return (
-        <Base containerNo={2}>
-            <CommonSection>
-                <QuestionSection>
-                    {qnaArray.map((qna, index) => {
-                        return (
-                            <QuestionDiv
-                                key={qna.answer}
-                                onClick={(e) => {
-                                    onClickQuestion(index);
-                                    e.stopPropagation();
-                                }}
-                            >
-                                <QuestionSubDiv>
-                                    <QuestionNumber isClick={questionIndex === index}>Q{index + 1}. </QuestionNumber>
-                                    <QuestionTitle color={questionColor[index]}>{qna.question}</QuestionTitle>
-                                </QuestionSubDiv>
-                            </QuestionDiv>
-                        );
-                    })}
-                </QuestionSection>
+        <Base componentNo={componentNo}>
+            <WhyItContainer>
+                <TitleContainer>
+                    <TitleSubDiv>
+                        <SubTitle>제목</SubTitle>
+                    </TitleSubDiv>
+                    <TitleMainDiv>
+                        <MainTitle>왜 개발자가 되려고 했더라..?</MainTitle>
+                    </TitleMainDiv>
+                </TitleContainer>
 
-                <AnswerSection>
-                    <AnswerDiv ref={answerDivRef}>
-                        <AnswerTitle ref={answerTitleRef}>
-                            {questionIndex >= 0 ? '' : '궁금하신 질문을 선택해주세요.'}
-                        </AnswerTitle>
-                    </AnswerDiv>
-                </AnswerSection>
-            </CommonSection>
+                <TitleContainer>
+                    <TitleSubDiv>
+                        <SubTitle>내용</SubTitle>
+                    </TitleSubDiv>
+                    <TitleMainDiv>
+                        <QAContaier>
+                            <QuestionSection>
+                                {qnaArray.map((qna, index) => {
+                                    return (
+                                        <QuestionDiv key={qna.answer} onClick={(e) => onClickQuestion(index)}>
+                                            <QuestionSubDiv>
+                                                <QuestionNumber isClick={questionIndex === index}>
+                                                    Q{index + 1}.{' '}
+                                                </QuestionNumber>
+                                                <QuestionTitle color={questionColor[index]}>
+                                                    {qna.question}
+                                                </QuestionTitle>
+                                            </QuestionSubDiv>
+                                        </QuestionDiv>
+                                    );
+                                })}
+                            </QuestionSection>
+
+                            <AnswerSection>
+                                <AnswerDiv ref={answerDivRef}>
+                                    <AnswerTitle ref={answerTitleRef}>
+                                        {questionIndex >= 0 ? '' : '궁금하신 질문을 선택해주세요.'}
+                                    </AnswerTitle>
+                                </AnswerDiv>
+                            </AnswerSection>
+                        </QAContaier>
+                    </TitleMainDiv>
+                </TitleContainer>
+            </WhyItContainer>
         </Base>
     );
 };

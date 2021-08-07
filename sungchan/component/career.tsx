@@ -133,7 +133,11 @@ const PictureImage = styled.img`
     max-height: calc(100% - 28px);
 `;
 
-const Career = (): JSX.Element => {
+interface ICareer {
+    componentNo: number;
+}
+
+const Career: React.FC<ICareer> = ({ componentNo }): JSX.Element => {
     // state
     const [pictureImage, setPictureImage] = React.useState<string>('');
 
@@ -157,9 +161,9 @@ const Career = (): JSX.Element => {
         }
     };
 
-    return useObserver(() => (
+    return (
         <>
-            <Base containerNo={4}>
+            <Base componentNo={componentNo}>
                 <MainSection>
                     <MainDiv>
                         <ImageDiv>
@@ -223,7 +227,7 @@ const Career = (): JSX.Element => {
                 <PictureImage src={pictureImage} />
             </PictureContainer>
         </>
-    ));
+    );
 };
 
 export default Career;

@@ -2,9 +2,13 @@ import * as React from 'react';
 import styled from 'styled-components';
 import Base from './base';
 
-const Projects = (): JSX.Element => {
+interface IProjects {
+    componentNo: number;
+}
+
+const Projects: React.FC<IProjects> = ({ componentNo }): JSX.Element => {
     return (
-        <Base containerNo={5}>
+        <Base componentNo={componentNo}>
             <div>
                 <p>Projects page</p>
             </div>

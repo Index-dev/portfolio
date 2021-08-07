@@ -5,44 +5,48 @@ import WhyIt from '../component/whyIt';
 import Skills from '../component/skills';
 import Career from '../component/career';
 import Init from '../component/init';
-import indexStore from '../modules/indexStore';
-import { useObserver } from 'mobx-react';
 import Projects from '../component/projects';
+import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { indexState } from '../modules/indexReducer';
+import { maxWidth } from '../style/style';
+import { setCurrentComponentNoAction } from '../modules/actions';
+
+const IndexMainContainer = styled.div`
+    width: calc(100vw - (100vw - 100%));
+`;
+
+const IndexSubContainer = styled.div`
+    max-width: ${maxWidth}px;
+    margin: 0 auto;
+    transform: translateY(7vh);
+    position: relative;
+`;
+
+const ComponentContainer = styled.div`
+    perspective: 4000px;
+`;
 
 const Index = (): JSX.Element => {
-    const { initStore, baseStore } = indexStore();
+    // redux
+    const isEnd = useSelector((state: indexState) => state.initReducer.isEnd);
 
-    React.useEffect(() => {
-        window.addEventListener('resize', onChangeResize);
-        window.addEventListener('scroll', onChangeScroll);
-        onChangeResize();
-        onChangeScroll();
-
-        return () => {
-            window.removeEventListener('resize', onChangeResize);
-            window.removeEventListener('scroll', onChangeScroll);
-        };
-    }, []);
-
-    // onChange
-    const onChangeResize = () => {
-        baseStore.setInnerWidth(window.innerWidth);
-    };
-
-    const onChangeScroll = () => {
-        baseStore.setScrollY(window.scrollY);
-    };
-
-    return useObserver(() => (
+    return (
         <>
-            {initStore.isEnd ? (
+            {isEnd ? (
                 <>
-                    <Main />
-                    <Intro />
-                    <WhyIt />
-                    <Skills />
-                    <Career />
-                    <Projects />
+                    <IndexMainContainer>
+                        <IndexSubContainer>
+                            <ComponentContainer>
+                                <Main componentNo={0} />
+                                <Intro componentNo={1} />
+                                <WhyIt componentNo={2} />
+                                <Skills componentNo={3} />
+                                <Career componentNo={4} />
+                                <Projects componentNo={5} />
+                            </ComponentContainer>
+                        </IndexSubContainer>
+                    </IndexMainContainer>
                 </>
             ) : (
                 <Init />
@@ -53,6 +57,7 @@ const Index = (): JSX.Element => {
                     body {
                         margin: 0;
                         padding: 0;
+                        overflow: hidden;
                     }
 
                     h1,
@@ -74,8 +79,9 @@ const Index = (): JSX.Element => {
                 rel="stylesheet"
                 href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
             />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1" />
         </>
-    ));
+    );
 };
 
 export default Index;

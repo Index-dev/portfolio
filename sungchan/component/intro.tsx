@@ -150,156 +150,116 @@
 
 // export default Intro;
 
-import { useObserver } from 'mobx-react';
 import * as React from 'react';
 import styled from 'styled-components';
-import indexStore from '../modules/indexStore';
-import { maxWidth } from '../style/style';
 import Base from './base';
 
-const BoxSection = styled.section`
-    margin: 0 32px;
-    padding-bottom: 17px;
+const IntroContainer = styled.div`
+    height: calc(100% - 56px);
+    padding: 28px 22px;
 `;
 
-interface IBoxContainer {
-    direction?: string; // true면 우측, 그 외 좌측
-    innerWidth: number;
+interface IContentsSection {
+    height?: number;
 }
 
-const BoxContainer = styled.div`
-    overflow-wrap: anywhere;
-    ${(props: IBoxContainer) => {
-        if (props.innerWidth < maxWidth) {
-            return `
-                text-align: center;
-            `;
-        } else if (props.direction === 'true') {
-            return `
-                text-align: right;
-            `;
-        }
-    }}
+const ContentsSection = styled.section`
+    display: grid;
+    grid-template-columns: 3fr 7fr;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    padding-bottom: 8px;
+    margin-bottom: 22px;
+
+    height: ${(props: IContentsSection) => props.height}px;
 `;
 
-const BoxMainDiv = styled.div`
-    display: inline-block;
-    position: relative;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    padding: 18px;
-    margin: 43px 27px;
-    background-color: #fff;
-    box-shadow: 2px 4px 4px #c8c8c8 inset, -2px -4px 4px #c8c8c8 inset;
+const ContentsTitle = styled.span`
+    font-weight: 600;
+    font-size: min(calc(0.8em + 0.8vw), 1.1em);
+    color: rgba(0, 0, 0, 0.4);
 `;
 
-const BoxLeftDiv = styled.div`
-    position: absolute;
-    top: calc(-38px - 0.8vw);
-    left: calc(-38px - 0.8vw);
-    transform: rotate(-25deg);
+const ContentsDescription = styled.span`
+    font-weight: 600;
+    font-size: min(calc(1em + 1vw), 1.8em);
 `;
 
-const BoxRightDiv = styled.div`
-    position: absolute;
-    top: calc(-38px - 0.8vw);
-    right: calc(-38px - 0.8vw);
-    transform: rotate(25deg);
-`;
+interface IIntro {
+    componentNo: number;
+}
 
-const BoxDescription = styled.span`
-    font-size: calc(28px + 0.4vw);
-`;
+const Intro: React.FC<IIntro> = ({ componentNo }): JSX.Element => {
+    // state
+    const [addSections, setAddSections] = React.useState<number[]>([]);
 
-const BoxTitle = styled.span`
-    font-size: calc(23px + 0.4vw);
-    font-weight: bold;
-    border-bottom: 2px solid #c2655a;
-    color: #c2655a;
-`;
-
-const Intro = (): JSX.Element => {
-    // mobx
-    const { baseStore } = indexStore();
+    // ref
+    const introContainerRef = React.useRef<HTMLDivElement>();
+    const contentsSectionRef = React.useRef<HTMLDivElement>();
 
     // variable
-    const boxArray1 = [
+    const contentsArray = [
         { title: '이름', description: '김성찬' },
         { title: '생년월일', description: '94.12.09' },
-    ];
-    const boxArray2 = [
         { title: '이메일', description: 'tjdcksdl00@naver.com' },
         { title: '연락처', description: '010-3361-3633' },
-    ];
-    const boxArray3 = [
         { title: '학교', description: '한양대 ERICA' },
         { title: '주전공', description: '응용수학' },
         { title: '부전공', description: '컴퓨터공학' },
-    ];
-    const boxArray4 = [
         { title: '경력', description: '1년 3개월' },
         { title: '기술분야', description: 'FE/BE 웹 개발' },
     ];
 
-    return useObserver(() => (
-        <Base containerNo={1}>
-            <BoxSection>
-                <BoxContainer innerWidth={baseStore.innerWidth}>
-                    {boxArray1.map((box) => {
-                        return (
-                            <BoxMainDiv key={box.description}>
-                                <BoxDescription>{box.description}</BoxDescription>
-                                <BoxLeftDiv>
-                                    <BoxTitle>{box.title}</BoxTitle>
-                                </BoxLeftDiv>
-                            </BoxMainDiv>
-                        );
-                    })}
-                </BoxContainer>
+    // useEffect
+    React.useEffect(() => {
+        getAddSections();
+    }, []);
 
-                <BoxContainer innerWidth={baseStore.innerWidth} direction={'true'}>
-                    {boxArray2.map((box) => {
-                        return (
-                            <BoxMainDiv key={box.description}>
-                                <BoxDescription>{box.description}</BoxDescription>
-                                <BoxRightDiv>
-                                    <BoxTitle>{box.title}</BoxTitle>
-                                </BoxRightDiv>
-                            </BoxMainDiv>
-                        );
-                    })}
-                </BoxContainer>
+    // normal
+    // contents를 제외한 부가 너비 구하기
+    const getAddSections = () => {
+        const totalCount = introContainerRef.current.clientHeight / (contentsSectionRef.current.clientHeight + 30);
 
-                <BoxContainer innerWidth={baseStore.innerWidth}>
-                    {boxArray3.map((box) => {
-                        return (
-                            <BoxMainDiv key={box.description}>
-                                <BoxDescription>{box.description}</BoxDescription>
-                                <BoxLeftDiv>
-                                    <BoxTitle>{box.title}</BoxTitle>
-                                </BoxLeftDiv>
-                            </BoxMainDiv>
-                        );
-                    })}
-                </BoxContainer>
+        const addSections = [];
+        for (let i = 0; i < totalCount - contentsArray.length; i++) {
+            addSections.push(i);
+        }
 
-                <BoxContainer innerWidth={baseStore.innerWidth} direction={'true'}>
-                    {boxArray4.map((box) => {
+        setAddSections(addSections);
+    };
+
+    return (
+        <Base componentNo={componentNo}>
+            <IntroContainer ref={introContainerRef}>
+                {contentsArray.map((contents, index) => {
+                    if (index === 0) {
                         return (
-                            <BoxMainDiv key={box.description}>
-                                <BoxDescription>{box.description}</BoxDescription>
-                                <BoxRightDiv>
-                                    <BoxTitle>{box.title}</BoxTitle>
-                                </BoxRightDiv>
-                            </BoxMainDiv>
+                            <ContentsSection key={index} ref={contentsSectionRef}>
+                                <ContentsTitle>{contents.title}</ContentsTitle>
+                                <ContentsDescription>{contents.description}</ContentsDescription>
+                            </ContentsSection>
                         );
-                    })}
-                </BoxContainer>
-            </BoxSection>
+                    } else {
+                        return (
+                            <ContentsSection key={index}>
+                                <ContentsTitle>{contents.title}</ContentsTitle>
+                                <ContentsDescription>{contents.description}</ContentsDescription>
+                            </ContentsSection>
+                        );
+                    }
+                })}
+
+                {addSections.map((addSection) => {
+                    return (
+                        <ContentsSection key={addSection} height={contentsSectionRef.current.clientHeight - 8}>
+                            <ContentsTitle />
+                            <ContentsDescription />
+                        </ContentsSection>
+                    );
+                })}
+            </IntroContainer>
         </Base>
-    ));
+    );
 };
 
 export default Intro;

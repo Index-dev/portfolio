@@ -137,10 +137,8 @@
 
 // export default Main;
 
-import { useObserver } from 'mobx-react';
 import * as React from 'react';
 import styled, { keyframes } from 'styled-components';
-import indexStore from '../modules/indexStore';
 import { maxWidth } from '../style/style';
 import Base from './base';
 
@@ -188,13 +186,8 @@ const MenuSubDiv = styled.div`
     }
 `;
 
-interface IMenuSection {
-    innerWidth: number;
-}
-
 const MenuSection = styled.section`
     text-align: center;
-    display: ${(props: IMenuSection) => (props.innerWidth >= maxWidth ? 'block' : 'none')};
 `;
 
 const TitleSectionKeyFrame = keyframes`
@@ -228,44 +221,21 @@ const SubTitle = styled.span`
     font-size: calc(24px + 0.4vw);
 `;
 
-const Main = (): JSX.Element => {
-    // mobx
-    const { baseStore } = indexStore();
+interface IMain {
+    componentNo: number;
+}
 
-    // onClick
-    const onClickMenuDiv = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) => {
-        e.stopPropagation();
-        window.scrollBy({
-            top: baseStore.getAccumulateComponentHeight(index) - baseStore.scrollY,
-            behavior: 'smooth',
-        });
-    };
-
-    return useObserver(() => (
+const Main: React.FC<IMain> = ({ componentNo }): JSX.Element => {
+    return (
         <>
-            <Base containerNo={0}>
-                <MenuSection innerWidth={baseStore.innerWidth}>
-                    {baseStore.titleArray.map((menu, index) => {
-                        if (index !== 0) {
-                            return (
-                                <MenuDiv key={menu} onClick={(e) => onClickMenuDiv(e, index)}>
-                                    <MenuSubDiv>
-                                        <h2>{menu}</h2>
-                                        <span>Go →</span>
-                                    </MenuSubDiv>
-                                </MenuDiv>
-                            );
-                        }
-                    })}
-                </MenuSection>
-
+            <Base componentNo={componentNo}>
                 <TitleSection>
                     <MainTitle>김성찬의 Portfolio</MainTitle>
                     <SubTitle>Since 2021</SubTitle>
                 </TitleSection>
             </Base>
         </>
-    ));
+    );
 };
 
 export default Main;

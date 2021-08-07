@@ -13,12 +13,18 @@
   "license": "ISC",
   "dependencies": {
     "@types/react": "^17.0.14",
+    "@types/react-redux": "^7.1.18",
+    "@types/redux": "^3.6.0",
+    "@types/redux-devtools-extension": "^2.13.2",
     "@types/styled-components": "^5.1.11",
     "mobx": "^6.3.2",
     "mobx-react": "^7.2.0",
     "next": "^11.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-redux": "^7.2.4",
+    "redux": "^4.1.1",
+    "redux-devtools-extension": "^2.13.9",
     "styled-components": "^5.3.0",
     "typescript": "^4.3.5"
   },
