@@ -1,10 +1,12 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import styled, { keyframes } from "styled-components";
 
 import Menu from "components/nav/menu";
 import Loading from "components/loading";
 import Nav from "components/nav";
 import Header from "components/header";
+
+import First from "components/sections/first";
 
 const HomePresenter = (props: propsIState) => {
   const {
@@ -14,18 +16,10 @@ const HomePresenter = (props: propsIState) => {
     showMenu,
     disappearMenu,
     toggleMenu,
+    contRef,
+    secContRef,
+    navRefs,
   } = props;
-
-  const contRef = useRef<HTMLDivElement>(null);
-  const secContRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (contRef.current && isLoading) {
-      contRef.current.style.overflow = "hidden";
-    } else if (contRef.current) {
-      contRef.current.style.overflow = "none";
-    }
-  }, [isLoading]);
 
   return (
     <Container ref={contRef}>
@@ -36,9 +30,9 @@ const HomePresenter = (props: propsIState) => {
         <Loading setLoading={setLoading} />
       ) : (
         <SectionContainer ref={secContRef}>
-          <Nav toggleMenu={toggleMenu} secContRef={secContRef} />
+          <Nav toggleMenu={toggleMenu} navRefs={navRefs} />
           <Header toggleTheme={toggleTheme} />
-          <EmptyStuff />
+          <First />
           <EmptyStuff />
           <EmptyStuff />
           <EmptyStuff />
@@ -59,6 +53,9 @@ interface propsIState {
   showMenu: boolean;
   disappearMenu: boolean;
   toggleMenu: () => void;
+  contRef: React.RefObject<HTMLDivElement>;
+  secContRef: React.RefObject<HTMLDivElement>;
+  navRefs: navRefsIState;
 }
 
 const Container = styled.div`
@@ -116,13 +113,11 @@ const SectionContainer = styled.div`
 `;
 
 const EmptyStuff = styled.section`
-  width: 100vw;
+  width: 99vw;
   height: 100vh;
 
   flex: none;
   @supports (scroll-snap-align: center) {
     scroll-snap-align: center;
   }
-  /* border: 1px solid red; */
-  outline-offset: -1px;
 `;
