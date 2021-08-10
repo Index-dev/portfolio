@@ -5,12 +5,14 @@ import { setCurrentComponentNo, setIsPageChanging } from './actionType';
 export interface IbaseState {
     currentComponentNo: number;
     titleArray: string[];
+    backgroundColorArray: string[];
     isPageChanging: boolean;
 }
 
 const baseState: IbaseState = {
     currentComponentNo: 0,
     titleArray: ['Main', 'Intro', 'Why It', 'Skills', 'Career', 'Projects', 'More'],
+    backgroundColorArray: ['#757270', '#A5BAA8', '#6A9194', '#b79e6a', '#c68377', '#648ab9', '#fff'],
     isPageChanging: false,
 };
 

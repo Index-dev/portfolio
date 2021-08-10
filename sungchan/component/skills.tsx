@@ -1,6 +1,8 @@
 import * as React from 'react';
 import Base from './base';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { indexState } from '../modules/indexReducer';
 
 const SkillsContainer = styled.div`
     padding: 20px;
@@ -16,9 +18,13 @@ const TitleMainDiv = styled.div`
     padding: 12px 0;
 `;
 
+interface ITitleSubDiv {
+    backgroundColor: string;
+}
+
 const TitleSubDiv = styled.div`
     position: absolute;
-    background-color: #b79e6a;
+    background-color: ${(props: ITitleSubDiv) => props.backgroundColor};
     top: -12px;
     left: 12px;
     padding: 0 4px;
@@ -85,6 +91,10 @@ interface ISkills {
 }
 
 const Skills: React.FC<ISkills> = ({ componentNo }): JSX.Element => {
+    // redux
+    const backgroundColorArray = useSelector((state: indexState) => state.baseReducer.backgroundColorArray);
+
+    // variable
     const skillsArray = [
         {
             title: 'FE',
@@ -108,7 +118,7 @@ const Skills: React.FC<ISkills> = ({ componentNo }): JSX.Element => {
         <Base componentNo={componentNo}>
             <SkillsContainer>
                 <TitleContainer>
-                    <TitleSubDiv>
+                    <TitleSubDiv backgroundColor={backgroundColorArray[componentNo]}>
                         <SubTitle>제목</SubTitle>
                     </TitleSubDiv>
                     <TitleMainDiv>
@@ -117,7 +127,7 @@ const Skills: React.FC<ISkills> = ({ componentNo }): JSX.Element => {
                 </TitleContainer>
 
                 <TitleContainer>
-                    <TitleSubDiv>
+                    <TitleSubDiv backgroundColor={backgroundColorArray[componentNo]}>
                         <SubTitle>내용</SubTitle>
                     </TitleSubDiv>
                     <TitleMainDiv>

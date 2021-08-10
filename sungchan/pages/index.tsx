@@ -6,11 +6,11 @@ import Skills from '../component/skills';
 import Career from '../component/career';
 import Init from '../component/init';
 import Projects from '../component/projects';
+import More from '../component/more';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { indexState } from '../modules/indexReducer';
 import { maxWidth } from '../style/style';
-import { setCurrentComponentNoAction } from '../modules/actions';
 
 const IndexMainContainer = styled.div`
     width: calc(100vw - (100vw - 100%));
@@ -44,6 +44,7 @@ const Index = (): JSX.Element => {
                                 <Skills componentNo={3} />
                                 <Career componentNo={4} />
                                 <Projects componentNo={5} />
+                                <More componentNo={6} />
                             </ComponentContainer>
                         </IndexSubContainer>
                     </IndexMainContainer>

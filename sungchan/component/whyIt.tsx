@@ -56,6 +56,8 @@
 import * as React from 'react';
 import Base from './base';
 import styled, { keyframes } from 'styled-components';
+import { useSelector } from 'react-redux';
+import { indexState } from '../modules/indexReducer';
 
 const WhyItContainer = styled.div`
     padding: 20px;
@@ -71,9 +73,13 @@ const TitleMainDiv = styled.div`
     padding: 12px 0;
 `;
 
+interface ITitleSubDiv {
+    backgroundColor: string;
+}
+
 const TitleSubDiv = styled.div`
     position: absolute;
-    background-color: #6a9194;
+    background-color: ${(props: ITitleSubDiv) => props.backgroundColor};
     top: -12px;
     left: 12px;
     padding: 0 4px;
@@ -203,6 +209,9 @@ interface IWhyIt {
 }
 
 const WhyIt: React.FC<IWhyIt> = ({ componentNo }): JSX.Element => {
+    // redux
+    const backgroundColorArray = useSelector((state: indexState) => state.baseReducer.backgroundColorArray);
+
     // state
     const [questionIndex, setQuestionIndex] = React.useState<number>(-1);
     const [typingTimer, setTypingTimer] = React.useState<NodeJS.Timer>();
@@ -268,7 +277,7 @@ const WhyIt: React.FC<IWhyIt> = ({ componentNo }): JSX.Element => {
         <Base componentNo={componentNo}>
             <WhyItContainer>
                 <TitleContainer>
-                    <TitleSubDiv>
+                    <TitleSubDiv backgroundColor={backgroundColorArray[componentNo]}>
                         <SubTitle>제목</SubTitle>
                     </TitleSubDiv>
                     <TitleMainDiv>
@@ -277,7 +286,7 @@ const WhyIt: React.FC<IWhyIt> = ({ componentNo }): JSX.Element => {
                 </TitleContainer>
 
                 <TitleContainer>
-                    <TitleSubDiv>
+                    <TitleSubDiv backgroundColor={backgroundColorArray[componentNo]}>
                         <SubTitle>내용</SubTitle>
                     </TitleSubDiv>
                     <TitleMainDiv>

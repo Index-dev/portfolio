@@ -10,7 +10,7 @@ const store = createStore(indexReducer, composeWithDevTools());
 const App = ({ Component, pageProps }: AppProps): JSX.Element => {
     return (
         <Provider store={store}>
-            <Component {...pageProps} />;
+            <Component {...pageProps} />
         </Provider>
     );
 };
