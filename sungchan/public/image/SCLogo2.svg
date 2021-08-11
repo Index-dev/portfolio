@@ -4,12 +4,12 @@
     cy="304" 
     r="300" 
     fill="none" 
-    stroke-width="8"
+    stroke-width="16"
     stroke-dasharray="0 628" 
     stroke-linecap="round"
-    stroke="#AFAFAF"
+    stroke="#D1AC66"
     stroke-dashoffset="-925"
-    filter="drop-shadow(0px 4px 2px #AFAFAF)" />
+    filter="drop-shadow(0px 4px 2px #D1AC66)" />
 <g filter="url(#filter1_d)">
 <path d="M314 128H114V178H314V128Z" fill="#D6A86D"/>
 </g>

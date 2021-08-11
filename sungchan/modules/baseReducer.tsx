@@ -12,7 +12,7 @@ export interface IbaseState {
 const baseState: IbaseState = {
     currentComponentNo: 0,
     titleArray: ['Main', 'Intro', 'Why It', 'Skills', 'Career', 'Projects', 'More'],
-    backgroundColorArray: ['#757270', '#A5BAA8', '#6A9194', '#b79e6a', '#c68377', '#648ab9', '#fff'],
+    backgroundColorArray: ['#757270', '#A5BAA8', '#6A9194', '#b79e6a', '#c68377', '#648ab9', '#C4E3D2'],
     isPageChanging: false,
 };
 

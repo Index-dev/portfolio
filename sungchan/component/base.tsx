@@ -21,12 +21,13 @@ const BaseContainer = styled.div`
     transition-timing-function: ease-in;
     transform-origin: center top;
     top: 0;
-    box-shadow: 0px -1px 4px 4px #888;
+    box-shadow: 2px 0px 6px rgba(0, 0, 0, 0.1), -2px 0px 6px rgba(0, 0, 0, 0.1);
 `;
 
 const MainContainer = styled.div`
     transition-duration: ${transitionDuration}s;
-    height: 100%;
+    height: calc(100% - 52px);
+    margin-top: 52px;
 
     &::-webkit-scrollbar {
         display: none;
@@ -65,6 +66,39 @@ const PostItTextDiv = styled.div`
     width: 90px;
     height: 30px;
     background-color: #fbf8e5;
+`;
+
+const ChainContainer = styled.div`
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+`;
+
+const ChainSection = styled.section`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 32px;
+`;
+
+const ChainFrame = styled.div`
+    width: 10px;
+    height: 40px;
+    background-color: red;
+    z-index: 1;
+    border-radius: 0 0 12px 12px;
+`;
+
+const ChainCircle = styled.div`
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #fff;
+    transform: translateY(-14px);
 `;
 
 const Title = styled.span`
@@ -230,6 +264,53 @@ const Base: React.FC<IBase> = ({ children, componentNo }): JSX.Element => {
                         </PostItTextDiv>
                     </PostItSection>
                 </PostItContainer>
+
+                <ChainContainer>
+                    <ChainSection>
+                        <ChainFrame />
+                        <ChainCircle />
+                    </ChainSection>
+                    <ChainSection>
+                        <ChainFrame />
+                        <ChainCircle />
+                    </ChainSection>
+                    <ChainSection>
+                        <ChainFrame />
+                        <ChainCircle />
+                    </ChainSection>
+                    <ChainSection>
+                        <ChainFrame />
+                        <ChainCircle />
+                    </ChainSection>
+                    <ChainSection>
+                        <ChainFrame />
+                        <ChainCircle />
+                    </ChainSection>
+                    <ChainSection>
+                        <ChainFrame />
+                        <ChainCircle />
+                    </ChainSection>
+                    <ChainSection>
+                        <ChainFrame />
+                        <ChainCircle />
+                    </ChainSection>
+                    <ChainSection>
+                        <ChainFrame />
+                        <ChainCircle />
+                    </ChainSection>
+                    <ChainSection>
+                        <ChainFrame />
+                        <ChainCircle />
+                    </ChainSection>
+                    <ChainSection>
+                        <ChainFrame />
+                        <ChainCircle />
+                    </ChainSection>
+                    <ChainSection>
+                        <ChainFrame />
+                        <ChainCircle />
+                    </ChainSection>
+                </ChainContainer>
             </BaseContainer>
         </>
     );

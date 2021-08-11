@@ -139,56 +139,7 @@
 
 import * as React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { maxWidth } from '../style/style';
 import Base from './base';
-
-const MenuDivKeyFrame = keyframes`
-    0% {
-        transform: translateX(-300px) rotate(0);
-    }
-
-    90% {
-        transform: translateX(30px) rotate(750deg);
-    }
-
-    100% {
-        transform: translateX(0) rotate(720deg);
-    }
-`;
-
-const MenuDiv = styled.div`
-    display: inline-block;
-    cursor: pointer;
-
-    animation-name: ${MenuDivKeyFrame};
-    animation-duration: 3s;
-`;
-
-const MenuSubDivHoverKeyFrame = keyframes`
-    50% {
-        transform: translateY(-10px);
-    }
-`;
-
-const MenuSubDiv = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 152px;
-    height: 152px;
-    border-radius: 50%;
-    background-color: #caf0be;
-    margin: 16px 32px;
-
-    &:hover {
-        animation: 1.8s ${MenuSubDivHoverKeyFrame} infinite;
-    }
-`;
-
-const MenuSection = styled.section`
-    text-align: center;
-`;
 
 const TitleSectionKeyFrame = keyframes`
     0% {
