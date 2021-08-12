@@ -87,9 +87,16 @@ const ChainSection = styled.section`
 
 const ChainFrame = styled.div`
     width: 10px;
-    height: 40px;
-    background-color: red;
+    display: flex;
+    justify-content: space-between;
     z-index: 1;
+`;
+
+const Chain = styled.div`
+    width: 4px;
+    height: 40px;
+    background-color: #616161;
+    opacity: 0.7;
     border-radius: 0 0 12px 12px;
 `;
 
@@ -99,6 +106,7 @@ const ChainCircle = styled.div`
     border-radius: 50%;
     background-color: #fff;
     transform: translateY(-14px);
+    box-shadow: inset 1px 0 2px rgba(0, 0, 0, 0.4), inset -1px -2px 2px rgba(0, 0, 0, 0.4);
 `;
 
 const Title = styled.span`
@@ -124,6 +132,7 @@ const Base: React.FC<IBase> = ({ children, componentNo }): JSX.Element => {
     // state
     const [isTop, setIsTop] = React.useState<boolean>(false);
     const [isBottom, setIsBottom] = React.useState<boolean>(false);
+    const [chainArray, setChainArray] = React.useState<number[]>([]);
 
     // ref
     const baseContainerRef = React.useRef<HTMLDivElement>();
@@ -131,6 +140,15 @@ const Base: React.FC<IBase> = ({ children, componentNo }): JSX.Element => {
     const titleRef = React.useRef<HTMLSpanElement>();
 
     // useEffect
+    React.useEffect(() => {
+        window.addEventListener('resize', onResize);
+        onResize();
+
+        return () => {
+            window.removeEventListener('resize', onResize);
+        };
+    }, []);
+
     React.useEffect(() => {
         // 공통
         mainContainerRef.current.style.overflow = 'hidden';
@@ -249,6 +267,18 @@ const Base: React.FC<IBase> = ({ children, componentNo }): JSX.Element => {
         }
     };
 
+    // onResize
+    const onResize = () => {
+        const count = Math.floor(baseContainerRef.current.clientWidth / 84);
+        const chainArray: number[] = [];
+
+        for (let i = 0; i < count; i++) {
+            chainArray.push(i);
+        }
+
+        setChainArray(chainArray);
+    };
+
     return (
         <>
             <BaseContainer ref={baseContainerRef} backgroundColor={backgroundColorArray[componentNo]}>
@@ -266,50 +296,17 @@ const Base: React.FC<IBase> = ({ children, componentNo }): JSX.Element => {
                 </PostItContainer>
 
                 <ChainContainer>
-                    <ChainSection>
-                        <ChainFrame />
-                        <ChainCircle />
-                    </ChainSection>
-                    <ChainSection>
-                        <ChainFrame />
-                        <ChainCircle />
-                    </ChainSection>
-                    <ChainSection>
-                        <ChainFrame />
-                        <ChainCircle />
-                    </ChainSection>
-                    <ChainSection>
-                        <ChainFrame />
-                        <ChainCircle />
-                    </ChainSection>
-                    <ChainSection>
-                        <ChainFrame />
-                        <ChainCircle />
-                    </ChainSection>
-                    <ChainSection>
-                        <ChainFrame />
-                        <ChainCircle />
-                    </ChainSection>
-                    <ChainSection>
-                        <ChainFrame />
-                        <ChainCircle />
-                    </ChainSection>
-                    <ChainSection>
-                        <ChainFrame />
-                        <ChainCircle />
-                    </ChainSection>
-                    <ChainSection>
-                        <ChainFrame />
-                        <ChainCircle />
-                    </ChainSection>
-                    <ChainSection>
-                        <ChainFrame />
-                        <ChainCircle />
-                    </ChainSection>
-                    <ChainSection>
-                        <ChainFrame />
-                        <ChainCircle />
-                    </ChainSection>
+                    {chainArray.map((value) => {
+                        return (
+                            <ChainSection key={value}>
+                                <ChainFrame>
+                                    <Chain />
+                                    <Chain />
+                                </ChainFrame>
+                                <ChainCircle />
+                            </ChainSection>
+                        );
+                    })}
                 </ChainContainer>
             </BaseContainer>
         </>

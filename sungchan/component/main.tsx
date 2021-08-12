@@ -161,15 +161,64 @@ const TitleSection = styled.section`
     animation-duration: 3s;
 `;
 
+const ArrowDiv = styled.div`
+    display: inline-block;
+    background-color: red;
+    position: relative;
+    width: 500px;
+    height: 120px;
+    transform: translateX(100px) translateY(100px) rotate(-15deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0;
+
+    &: hover {
+        transition: 0.5s;
+        transform: translateX(130px) translateY(100px) rotate(-15deg);
+        opacity: 0;
+    }
+`;
+
+interface IArrowLeftDiv {
+    backgroundColor: string;
+}
+
+const ArrowLeftDiv = styled.div`
+    position: absolute;
+    top: ${(120 - 120 / Math.sqrt(2)) / 2}px;
+    left: -${60 - (120 - 120 / Math.sqrt(2)) / 2}px;
+    width: ${120 / Math.sqrt(2)}px;
+    height: ${120 / Math.sqrt(2)}px;
+    background-color: ${(props: IArrowLeftDiv) => props.backgroundColor};
+    transform: rotate(-45deg);
+`;
+
+interface IArrowRightDiv {
+    backgroundColor: string;
+}
+
+const ArrowRightDiv = styled.div`
+    position: absolute;
+    top: ${(120 - 120 / Math.sqrt(2)) / 2}px;
+    right: -${60 - (120 - 120 / Math.sqrt(2)) / 2}px;
+    width: ${120 / Math.sqrt(2)}px;
+    height: ${120 / Math.sqrt(2)}px;
+    background-color: ${(props: IArrowRightDiv) => props.backgroundColor};
+    transform: rotate(-45deg);
+`;
+
+interface IMainTitle {
+    marginLeft?: number;
+    marginRight?: number;
+}
+
 const MainTitle = styled.span`
     display: block;
     font-size: calc(54px + 1.5vw);
     font-weight: 600;
-`;
-
-const SubTitle = styled.span`
-    display: block;
-    font-size: calc(24px + 0.4vw);
+    margin-left: ${(props: IMainTitle) => props.marginLeft}px;
+    margin-right: ${(props: IMainTitle) => props.marginRight}px;
 `;
 
 interface IMain {
@@ -180,10 +229,17 @@ const Main: React.FC<IMain> = ({ componentNo }): JSX.Element => {
     return (
         <>
             <Base componentNo={componentNo}>
-                <TitleSection>
-                    <MainTitle>김성찬의 Portfolio</MainTitle>
-                    <SubTitle>Since 2021</SubTitle>
-                </TitleSection>
+                <ArrowDiv>
+                    <ArrowLeftDiv backgroundColor="#757270" />
+                    <ArrowRightDiv backgroundColor="red" />
+                    <MainTitle marginLeft={60}>김성찬의</MainTitle>
+                </ArrowDiv>
+
+                <ArrowDiv>
+                    <ArrowLeftDiv backgroundColor="red" />
+                    <ArrowRightDiv backgroundColor="#757270" />
+                    <MainTitle marginRight={60}>김성찬의</MainTitle>
+                </ArrowDiv>
             </Base>
         </>
     );

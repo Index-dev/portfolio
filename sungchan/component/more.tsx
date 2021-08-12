@@ -20,7 +20,7 @@ const UrlSection = styled.section`
 `;
 
 const FooterSection = styled.section`
-    margin: 24px 0;
+    margin: 48px 0;
     padding: 0 24px;
 `;
 
@@ -39,6 +39,18 @@ const UrlMainDiv = styled.div`
 `;
 
 const UrlSubDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+const FooterMainDiv = styled.div`
+    display: inline-block;
+    padding: 12px;
+    margin: 0 24px 24px 0;
+`;
+
+const FooterSubDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -106,9 +118,12 @@ const More: React.FC<IMore> = ({ componentNo }): JSX.Element => {
                 </UrlSection>
 
                 <FooterSection>
-                    <FooterText>https://kscportfolio.com</FooterText>
-                    <FooterText>Designed By 김성찬</FooterText>
-                    <LogoImage src="/image/SCLogo2.svg" />
+                    <FooterMainDiv>
+                        <FooterSubDiv>
+                            <FooterText>Designed By 김성찬</FooterText>
+                            <LogoImage src="/image/SCLogo2.svg" />
+                        </FooterSubDiv>
+                    </FooterMainDiv>
                 </FooterSection>
             </MoreContainer>
         </Base>

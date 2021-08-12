@@ -349,7 +349,7 @@ const Projects: React.FC<IProjects> = ({ componentNo }): JSX.Element => {
 
                 <ProjectsContainer>
                     <TitleSection>
-                        <CareerTitle>Grouby</CareerTitle>
+                        <CareerTitle color="#E6951A">Grouby</CareerTitle>
                     </TitleSection>
 
                     <ContentsSection>
@@ -434,7 +434,7 @@ const Projects: React.FC<IProjects> = ({ componentNo }): JSX.Element => {
 
                 <ProjectsContainer>
                     <TitleSection>
-                        <CareerTitle>Moyo</CareerTitle>
+                        <CareerTitle color="#4ac8d9">Moyo</CareerTitle>
                     </TitleSection>
 
                     <ContentsSection>

@@ -1,155 +1,3 @@
-// import * as React from 'react';
-// import Base from './base';
-// import styled from 'styled-components';
-// import { maxWidth } from '../style/style';
-
-// const StyeldDiv2 = styled.div`
-//     margin: 0 32px;
-//     padding-bottom: 17px;
-// `;
-
-// interface IStyledDiv3 {
-//     direction?: string; // true면 우측, 그 외 좌측
-//     innerWidth: number;
-// }
-
-// const StyeldDiv3 = styled.div`
-//     overflow-wrap: anywhere;
-//     ${(props: IStyledDiv3) => {
-//         if (props.innerWidth < maxWidth) {
-//             return `
-//                 text-align: center;
-//             `;
-//         } else if (props.direction === 'true') {
-//             return `
-//                 text-align: right;
-//             `;
-//         }
-//     }}
-// `;
-
-// const StyledDiv4 = styled.div`
-//     display: inline-block;
-//     position: relative;
-//     border-top-left-radius: 10px;
-//     border-top-right-radius: 10px;
-//     border-bottom-left-radius: 10px;
-//     border-bottom-right-radius: 10px;
-//     padding: 12px;
-//     margin: 43px 27px;
-//     background-color: #fff;
-// `;
-
-// const StyledDiv5 = styled.div`
-//     position: absolute;
-//     top: -41px;
-//     left: -41px;
-//     transform: rotate(-25deg);
-// `;
-
-// const StyledDiv6 = styled.div`
-//     position: absolute;
-//     top: -41px;
-//     right: -41px;
-//     transform: rotate(25deg);
-// `;
-
-// const StyledSpan1 = styled.span`
-//     font-size: 1.5em;
-// `;
-
-// const StyledSpan2 = styled.span`
-//     font-size: 1.5em;
-//     font-weight: bold;
-//     border-bottom: 2px solid #c2655a;
-//     color: #c2655a;
-// `;
-
-// interface IIntro {
-//     innerWidth: number;
-//     title: string;
-// }
-
-// const Intro: React.FC<IIntro> = ({ innerWidth, title }): JSX.Element => {
-//     const boxArray1 = [
-//         { title: '이름', description: '김성찬' },
-//         { title: '생년월일', description: '94.12.09' },
-//     ];
-//     const boxArray2 = [
-//         { title: '이메일', description: 'tjdcksdl00@naver.com' },
-//         { title: '연락처', description: '010-3361-3633' },
-//     ];
-//     const boxArray3 = [
-//         { title: '학교', description: '한양대 ERICA' },
-//         { title: '주전공', description: '응용수학' },
-//         { title: '부전공', description: '컴퓨터공학' },
-//     ];
-//     const boxArray4 = [
-//         { title: '경력', description: '1년 3개월' },
-//         { title: '기술분야', description: 'FE/BE 웹 개발' },
-//     ];
-
-//     return (
-//         <Base title={title} backgroundColor={'#A5BAA8'}>
-//             <StyeldDiv2>
-//                 <StyeldDiv3 innerWidth={innerWidth}>
-//                     {boxArray1.map((box) => {
-//                         return (
-//                             <StyledDiv4 key={box.description}>
-//                                 <StyledSpan1>{box.description}</StyledSpan1>
-//                                 <StyledDiv5>
-//                                     <StyledSpan2>{box.title}</StyledSpan2>
-//                                 </StyledDiv5>
-//                             </StyledDiv4>
-//                         );
-//                     })}
-//                 </StyeldDiv3>
-
-//                 <StyeldDiv3 innerWidth={innerWidth} direction={'true'}>
-//                     {boxArray2.map((box) => {
-//                         return (
-//                             <StyledDiv4 key={box.description}>
-//                                 <StyledSpan1>{box.description}</StyledSpan1>
-//                                 <StyledDiv6>
-//                                     <StyledSpan2>{box.title}</StyledSpan2>
-//                                 </StyledDiv6>
-//                             </StyledDiv4>
-//                         );
-//                     })}
-//                 </StyeldDiv3>
-
-//                 <StyeldDiv3 innerWidth={innerWidth}>
-//                     {boxArray3.map((box) => {
-//                         return (
-//                             <StyledDiv4 key={box.description}>
-//                                 <StyledSpan1>{box.description}</StyledSpan1>
-//                                 <StyledDiv5>
-//                                     <StyledSpan2>{box.title}</StyledSpan2>
-//                                 </StyledDiv5>
-//                             </StyledDiv4>
-//                         );
-//                     })}
-//                 </StyeldDiv3>
-
-//                 <StyeldDiv3 innerWidth={innerWidth} direction={'true'}>
-//                     {boxArray4.map((box) => {
-//                         return (
-//                             <StyledDiv4 key={box.description}>
-//                                 <StyledSpan1>{box.description}</StyledSpan1>
-//                                 <StyledDiv6>
-//                                     <StyledSpan2>{box.title}</StyledSpan2>
-//                                 </StyledDiv6>
-//                             </StyledDiv4>
-//                         );
-//                     })}
-//                 </StyeldDiv3>
-//             </StyeldDiv2>
-//         </Base>
-//     );
-// };
-
-// export default Intro;
-
 import * as React from 'react';
 import styled from 'styled-components';
 import Base from './base';
@@ -192,6 +40,7 @@ interface IIntro {
 const Intro: React.FC<IIntro> = ({ componentNo }): JSX.Element => {
     // state
     const [addSections, setAddSections] = React.useState<number[]>([]);
+    const [addSectionsTimeout, setAddSectionsTimeout] = React.useState<NodeJS.Timeout>();
 
     // ref
     const introContainerRef = React.useRef<HTMLDivElement>();
@@ -212,20 +61,32 @@ const Intro: React.FC<IIntro> = ({ componentNo }): JSX.Element => {
 
     // useEffect
     React.useEffect(() => {
+        window.addEventListener('resize', getAddSections);
         getAddSections();
+
+        return () => {
+            window.removeEventListener('resize', getAddSections);
+        };
     }, []);
 
     // normal
     // contents를 제외한 부가 너비 구하기
     const getAddSections = () => {
-        const totalCount = introContainerRef.current.clientHeight / (contentsSectionRef.current.clientHeight + 30);
+        // transition으로 인해 height가 1초 뒤에 올바른 높이를 바라보므로 timeout 구현
+        clearTimeout(addSectionsTimeout);
 
-        const addSections = [];
-        for (let i = 0; i < totalCount - contentsArray.length; i++) {
-            addSections.push(i);
-        }
+        const timeout = setTimeout(() => {
+            const totalCount = introContainerRef.current.clientHeight / (contentsSectionRef.current.clientHeight + 30);
 
-        setAddSections(addSections);
+            const addSections = [];
+            for (let i = 0; i < totalCount - contentsArray.length; i++) {
+                addSections.push(i);
+            }
+
+            setAddSections(addSections);
+        }, 1000);
+
+        setAddSectionsTimeout(timeout);
     };
 
     return (
