@@ -49,7 +49,7 @@ const SVG = styled.svg`
   width: 70%;
   height: 70%;
 
-  fill: ${({ theme }: { theme: ThemeIState }) => theme.primary};
+  fill: ${({ theme }: { theme: ThemeIState }) => theme.third};
 
   transition: all 0.2s linear;
 
@@ -59,10 +59,9 @@ const SVG = styled.svg`
 `;
 
 const Path = styled.path`
-  stroke: ${({ theme }: { theme: ThemeIState }) => theme.primary};
+  stroke: ${({ theme }: { theme: ThemeIState }) => theme.third};
   stroke-width: 4;
 
-  opacity: 0.8;
   transition: transform 0.1s linear, opacity 0.1s linear;
   transition: stroke-dashoffset 0.2s linear;
 
