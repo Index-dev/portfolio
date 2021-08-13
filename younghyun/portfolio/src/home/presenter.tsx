@@ -113,7 +113,7 @@ const SectionContainer = styled.div`
 `;
 
 const EmptyStuff = styled.section`
-  width: 99vw;
+  width: 100vw;
   height: 100vh;
 
   flex: none;

@@ -19,15 +19,16 @@ interface propsIState {
 
 const appear = keyframes`
     0%{
-        clip-path: polygon(0 50%, 20% 0, 100% 0, 100% 100%, 20% 100%);
-        transform: translate3d(100%, 0, 0);
+      clip-path: polygon(0 50%, 20% 0, 100% 0, 100% 100%, 20% 100%);
+      transform: translate3d(100%, 0, 0);
     }
     10% {
+        clip-path: polygon(0 50%, 20% 0, 100% 0, 100% 100%, 20% 100%);
         transform: translate3d(80%, 0, 0);
     }
     90% {
         clip-path: polygon(0 50%, 20% 0, 100% 0, 100% 100%, 20% 100%);
-        transform: translate3d(40%, 0, 0);
+        transform: translate3d(20%, 0, 0);
     }
     100% {
         clip-path: polygon(0 50%, 0 0, 100% 0, 100% 100%, 0 100%);
@@ -39,9 +40,9 @@ const disappear = keyframes`
     0%{
         clip-path: polygon(0 50%, 0 0, 100% 0, 100% 100%, 0 100%);
         transform: translate3d(0, 0, 0);
-    }
+      }
     10% {
-        clip-path: polygon(50% 50%, 20% 0, 100% 0, 100% 100%, 20% 100%);
+      clip-path: polygon(0 50%, 0 0, 100% 0, 100% 100%, 0 100%);
         transform: translate3d(20%, 0, 0);
     }
     90% {
