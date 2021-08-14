@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import Particle from "components/sections/first/photo/particle";
@@ -6,7 +6,12 @@ import picture from "assets/first/image.jpg";
 
 const NUMBER_OF_PARTICLES = 5000;
 
-function PixelRain() {
+function PixelRain(props: propsIState) {
+  const { theme } = props;
+  const [beforeThemeColor, setBeforeThemeColor] = useState<string>(
+    theme.background
+  );
+
   useEffect(() => {
     const image = new Image();
     image.src = picture;
@@ -27,12 +32,12 @@ function PixelRain() {
       ) as ImageData;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      let particlesArray = [] as Particle[];
       let mappedImage = [] as any;
+      let particlesArray = [] as Particle[];
 
       for (let y = 0; y < canvas.height; y++) {
         let row = [];
-        for (let x = 0; x < canvas.width; x += 4) {
+        for (let x = 0; x < canvas.width; x++) {
           const red = pixels.data[4 * y * pixels.width + x * 4];
           const green = pixels.data[4 * y * pixels.width + x * 4 + 1];
           const blue = pixels.data[4 * y * pixels.width + x * 4 + 2];
@@ -42,14 +47,16 @@ function PixelRain() {
         }
         mappedImage.push(row);
       }
+
       function init() {
         for (let i = 0; i < NUMBER_OF_PARTICLES; i++) {
-          particlesArray.push(new Particle(canvas, ctx, mappedImage));
+          particlesArray.push(new Particle(canvas, ctx, mappedImage, theme));
         }
       }
 
       init();
 
+      let before = theme.background;
       function animate() {
         ctx.globalAlpha = 0.03;
         ctx.fillStyle = "rgb(0, 0, 0)";
@@ -60,11 +67,17 @@ function PixelRain() {
           ctx.globalAlpha = particlesArray[i].speed * 0.3;
           particlesArray[i].draw();
         }
-        requestAnimationFrame(animate);
+
+        let animation = requestAnimationFrame(animate);
+        if (before !== theme.background) {
+          cancelAnimationFrame(animation);
+          before = theme.background;
+          console.log(before, theme.background);
+        }
       }
       animate();
     });
-  });
+  }, [theme.background]);
 
   function calcRelativeBrightness(red: number, green: number, blue: number) {
     return (
@@ -79,6 +92,12 @@ function PixelRain() {
 
 export default PixelRain;
 
+interface propsIState {
+  theme: ThemeIState;
+}
+
 const Canvas = styled.canvas`
   width: 20%;
+
+  border-radius: 50%;
 `;

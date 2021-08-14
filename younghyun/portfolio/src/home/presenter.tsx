@@ -10,6 +10,7 @@ import First from "components/sections/first";
 
 const HomePresenter = (props: propsIState) => {
   const {
+    theme,
     toggleTheme,
     isLoading,
     setLoading,
@@ -32,7 +33,7 @@ const HomePresenter = (props: propsIState) => {
         <SectionContainer ref={secContRef}>
           <Nav toggleMenu={toggleMenu} navRefs={navRefs} />
           <Header toggleTheme={toggleTheme} />
-          <First />
+          <First theme={theme} />
           <EmptyStuff />
           <EmptyStuff />
           <EmptyStuff />
@@ -47,6 +48,7 @@ const HomePresenter = (props: propsIState) => {
 export default HomePresenter;
 
 interface propsIState {
+  theme: ThemeIState;
   toggleTheme: () => void;
   isLoading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;

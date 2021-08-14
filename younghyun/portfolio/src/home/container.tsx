@@ -143,6 +143,7 @@ const HomeContainer = (props: propsIState) => {
     <Presenter
       isLoading={isLoading}
       setLoading={setLoading}
+      theme={theme}
       toggleTheme={toggleTheme}
       showMenu={showMenu}
       disappearMenu={disappearMenu}

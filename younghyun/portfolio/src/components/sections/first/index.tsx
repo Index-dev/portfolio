@@ -3,7 +3,8 @@ import styled from "styled-components";
 
 import PixelRain from "components/sections/first/photo";
 
-function LandingSection() {
+function LandingSection(props: propsIState) {
+  const { theme } = props;
   return (
     <ScrollSnapWrapper>
       <Conatainer>
@@ -29,13 +30,17 @@ function LandingSection() {
             />
           </SVG>
         </AirplaneContainer>
-        <PixelRain />
+        <PixelRain theme={theme} />
       </Conatainer>
     </ScrollSnapWrapper>
   );
 }
 
 export default LandingSection;
+
+interface propsIState {
+  theme: ThemeIState;
+}
 
 const ScrollSnapWrapper = styled.section`
   width: 100%;
@@ -54,7 +59,6 @@ const Conatainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid ${({ theme }: { theme: ThemeIState }) => theme.primary};
 `;
 
 const AirplaneContainer = styled.div`
