@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import PixelRain from "components/sections/first/photo";
+
 function LandingSection() {
   return (
     <ScrollSnapWrapper>
@@ -27,7 +29,7 @@ function LandingSection() {
             />
           </SVG>
         </AirplaneContainer>
-        <canvas className="profile"></canvas>
+        <PixelRain />
       </Conatainer>
     </ScrollSnapWrapper>
   );
