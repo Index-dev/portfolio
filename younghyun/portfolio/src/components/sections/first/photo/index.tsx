@@ -70,7 +70,6 @@ function PixelRain(props: propsIState) {
       }
 
       if (beforeThemeColor.current !== theme.background) {
-        console.log("theme Changed");
         beforeThemeColor.current = theme.background;
         cancelAnimationFrame(animationRef.current as number);
       }
