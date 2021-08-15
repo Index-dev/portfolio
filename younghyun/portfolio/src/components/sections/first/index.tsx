@@ -4,7 +4,7 @@ import styled from "styled-components";
 import PixelRain from "components/sections/first/photo";
 
 function LandingSection(props: propsIState) {
-  const { theme } = props;
+  const { isPC, isTablet, theme } = props;
   return (
     <ScrollSnapWrapper>
       <Conatainer>
@@ -30,7 +30,7 @@ function LandingSection(props: propsIState) {
             />
           </SVG>
         </AirplaneContainer>
-        <PixelRain theme={theme} />
+        <PixelRain isPC={isPC} isTablet={isTablet} theme={theme} />
       </Conatainer>
     </ScrollSnapWrapper>
   );
@@ -39,6 +39,8 @@ function LandingSection(props: propsIState) {
 export default LandingSection;
 
 interface propsIState {
+  isPC: boolean;
+  isTablet: boolean;
   theme: ThemeIState;
 }
 

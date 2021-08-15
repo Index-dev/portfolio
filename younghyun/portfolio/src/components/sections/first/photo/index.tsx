@@ -7,7 +7,7 @@ import picture from "assets/first/image.jpg";
 const NUMBER_OF_PARTICLES = 5000;
 
 function PixelRain(props: propsIState) {
-  const { theme } = props;
+  const { isPC, isTablet, theme } = props;
   const beforeThemeColor = useRef(theme.background);
   const animationRef = useRef<number>();
 
@@ -87,7 +87,7 @@ function PixelRain(props: propsIState) {
   }
 
   return (
-    <CanvasContainer>
+    <CanvasContainer isPC={isPC} isTablet={isTablet}>
       <CanvasOuterCover>
         <CanvasInnerCover>
           <Canvas className="profile"></Canvas>
@@ -100,13 +100,13 @@ function PixelRain(props: propsIState) {
 export default PixelRain;
 
 interface propsIState {
+  isPC: boolean;
+  isTablet: boolean;
   theme: ThemeIState;
 }
 
-const Canvas = styled.canvas`
-  width: 100%;
-
-  border-radius: 50%;
+const CanvasContainer = styled.div<{ isPC: boolean; isTablet: boolean }>`
+  width: ${(props) => (props.isPC ? "25" : props.isTablet ? "50" : "70")}%;
 `;
 
 const CanvasOuterCover = styled.div`
@@ -125,6 +125,8 @@ const CanvasInnerCover = styled.div`
   border: 3px solid ${({ theme }: { theme: ThemeIState }) => theme.primary};
 `;
 
-const CanvasContainer = styled.div`
-  width: 25%;
+const Canvas = styled.canvas`
+  width: 100%;
+
+  border-radius: 50%;
 `;
