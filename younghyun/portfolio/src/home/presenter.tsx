@@ -10,6 +10,9 @@ import First from "components/sections/first";
 
 const HomePresenter = (props: propsIState) => {
   const {
+    isPC,
+    isTablet,
+    theme,
     toggleTheme,
     isLoading,
     setLoading,
@@ -27,12 +30,12 @@ const HomePresenter = (props: propsIState) => {
         <Menu disappearMenu={disappearMenu} toggleMenu={toggleMenu} />
       )}
       {isLoading ? (
-        <Loading setLoading={setLoading} />
+        <Loading isPC={isPC} isTablet={isTablet} setLoading={setLoading} />
       ) : (
         <SectionContainer ref={secContRef}>
           <Nav toggleMenu={toggleMenu} navRefs={navRefs} />
           <Header toggleTheme={toggleTheme} />
-          <First />
+          <First isPC={isPC} isTablet={isTablet} theme={theme} />
           <EmptyStuff />
           <EmptyStuff />
           <EmptyStuff />
@@ -47,6 +50,9 @@ const HomePresenter = (props: propsIState) => {
 export default HomePresenter;
 
 interface propsIState {
+  isPC: boolean;
+  isTablet: boolean;
+  theme: ThemeIState;
   toggleTheme: () => void;
   isLoading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
@@ -113,7 +119,7 @@ const SectionContainer = styled.div`
 `;
 
 const EmptyStuff = styled.section`
-  width: 99vw;
+  width: 100vw;
   height: 100vh;
 
   flex: none;

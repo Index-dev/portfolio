@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useMediaQuery } from "react-responsive";
+
 import { basicTheme, reversedTheme } from "components/theme";
 import Presenter from "home/presenter";
 
@@ -18,6 +20,13 @@ const HomeContainer = (props: propsIState) => {
     bottomPathRef: useRef<SVGPathElement>(null),
   };
   const { navRef, topPathRef, middlePathRef, bottomPathRef } = navRefs;
+
+  const isPC = useMediaQuery({
+    query: "(min-width : 1025px)",
+  });
+  const isTablet = useMediaQuery({
+    query: "(min-width : 600px) and (max-width :1024px)",
+  });
 
   const toggleTheme = () => {
     if (theme === basicTheme) {
@@ -141,8 +150,11 @@ const HomeContainer = (props: propsIState) => {
 
   return (
     <Presenter
+      isPC={isPC}
+      isTablet={isTablet}
       isLoading={isLoading}
       setLoading={setLoading}
+      theme={theme}
       toggleTheme={toggleTheme}
       showMenu={showMenu}
       disappearMenu={disappearMenu}

@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 
 function Loading(props: propsIState) {
-  const { setLoading } = props;
+  const { isPC, isTablet, setLoading } = props;
   const containerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (containerRef.current !== null) {
@@ -19,6 +19,8 @@ function Loading(props: propsIState) {
   return (
     <Container ref={containerRef}>
       <SVG
+        isPC={isPC}
+        isTablet={isTablet}
         width="1052"
         height="385"
         viewBox="0 0 1052 385"
@@ -159,10 +161,12 @@ function Loading(props: propsIState) {
 export default Loading;
 
 interface propsIState {
+  isPC: boolean;
+  isTablet: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const zoomIn = keyframes`
+const zoomIn = (props: { isPC: boolean; isTablet: boolean }) => keyframes`
       50% {
         transform: translate3d(-50%, -50%, 0) scale(120%);
       }
@@ -173,7 +177,19 @@ const zoomIn = keyframes`
           transform: translate3d(-50%, -50%, 0) scale(110%);
       }
       100% {
-          transform: translate3d(-50%, -50%, 0) scale(3000%);
+        ${
+          props.isPC
+            ? css`
+                transform: translate3d(-50%, -50%, 0) scale(2000%);
+              `
+            : props.isTablet
+            ? css`
+                transform: translate3d(-50%, -50%, 0) scale(2500%);
+              `
+            : css`
+                transform: translate3d(-50%, -50%, 0) scale(3000%);
+              `
+        }
       }
   `;
 
@@ -191,14 +207,15 @@ const Container = styled.div`
   height: 100vh;
 `;
 
-const SVG = styled.svg`
+const SVG = styled.svg<{ isPC: boolean; isTablet: boolean }>`
   width: 85%;
   position: absolute;
   top: 50%;
   left: 50%;
 
   transform: translate3d(-50%, -50%, 0) rotate(-8deg);
-  animation: ${zoomIn} 1.5s 2.6s ease forwards, ${fill} 0.5s 2.4s ease forwards;
+  animation: ${(props) => zoomIn(props)} 1.5s 2.6s ease forwards,
+    ${fill} 0.5s 2.4s ease forwards;
 `;
 
 const LineAnimation = keyframes`
