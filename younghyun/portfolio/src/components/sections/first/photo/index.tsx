@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 
 import Particle from "components/sections/first/photo/particle";
@@ -8,9 +8,8 @@ const NUMBER_OF_PARTICLES = 5000;
 
 function PixelRain(props: propsIState) {
   const { theme } = props;
-  const [beforeThemeColor, setBeforeThemeColor] = useState<string>(
-    theme.background
-  );
+  const beforeThemeColor = useRef(theme.background);
+  const animationRef = useRef<number>();
 
   useEffect(() => {
     const image = new Image();
@@ -32,8 +31,8 @@ function PixelRain(props: propsIState) {
       ) as ImageData;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      let mappedImage = [] as any;
       let particlesArray = [] as Particle[];
+      let mappedImage = [] as any;
 
       for (let y = 0; y < canvas.height; y++) {
         let row = [];
@@ -56,7 +55,6 @@ function PixelRain(props: propsIState) {
 
       init();
 
-      let before = theme.background;
       function animate() {
         ctx.globalAlpha = 0.03;
         ctx.fillStyle = "rgb(0, 0, 0)";
@@ -68,16 +66,18 @@ function PixelRain(props: propsIState) {
           particlesArray[i].draw();
         }
 
-        let animation = requestAnimationFrame(animate);
-        if (before !== theme.background) {
-          cancelAnimationFrame(animation);
-          before = theme.background;
-          console.log(before, theme.background);
-        }
+        animationRef.current = requestAnimationFrame(animate);
       }
-      animate();
+
+      if (beforeThemeColor.current !== theme.background) {
+        console.log("theme Changed");
+        beforeThemeColor.current = theme.background;
+        cancelAnimationFrame(animationRef.current as number);
+      }
+      animationRef.current = requestAnimationFrame(animate);
+      return () => cancelAnimationFrame(animationRef.current as number);
     });
-  }, [theme.background]);
+  }, [theme]);
 
   function calcRelativeBrightness(red: number, green: number, blue: number) {
     return (
