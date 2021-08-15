@@ -30,7 +30,7 @@ const HomePresenter = (props: propsIState) => {
         <Menu disappearMenu={disappearMenu} toggleMenu={toggleMenu} />
       )}
       {isLoading ? (
-        <Loading setLoading={setLoading} isTablet={isTablet} />
+        <Loading isPC={isPC} isTablet={isTablet} setLoading={setLoading} />
       ) : (
         <SectionContainer ref={secContRef}>
           <Nav toggleMenu={toggleMenu} navRefs={navRefs} />
