@@ -19,7 +19,7 @@ function PixelRain(props: propsIState) {
       const canvas = document.querySelector(".profile") as HTMLCanvasElement;
       const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 
-      canvas.width = 341;
+      canvas.width = 512;
       canvas.height = 512;
 
       ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
@@ -86,7 +86,15 @@ function PixelRain(props: propsIState) {
     );
   }
 
-  return <Canvas className="profile"></Canvas>;
+  return (
+    <CanvasContainer>
+      <CanvasOuterCover>
+        <CanvasInnerCover>
+          <Canvas className="profile"></Canvas>
+        </CanvasInnerCover>
+      </CanvasOuterCover>
+    </CanvasContainer>
+  );
 }
 
 export default PixelRain;
@@ -96,7 +104,27 @@ interface propsIState {
 }
 
 const Canvas = styled.canvas`
-  width: 20%;
+  width: 100%;
 
   border-radius: 50%;
+`;
+
+const CanvasOuterCover = styled.div`
+  width: 100%;
+
+  padding: 3px;
+  border-radius: 50%;
+  border: 3px solid ${({ theme }: { theme: ThemeIState }) => theme.primary};
+`;
+
+const CanvasInnerCover = styled.div`
+  width: 100%;
+
+  padding: 5px;
+  border-radius: 50%;
+  border: 3px solid ${({ theme }: { theme: ThemeIState }) => theme.primary};
+`;
+
+const CanvasContainer = styled.div`
+  width: 25%;
 `;
