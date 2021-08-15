@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import styled, { keyframes } from "styled-components";
 
 function Loading(props: propsIState) {
-  const { setLoading } = props;
+  const { isTablet, setLoading } = props;
   const containerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (containerRef.current !== null) {
@@ -159,6 +159,7 @@ function Loading(props: propsIState) {
 export default Loading;
 
 interface propsIState {
+  isTablet: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 

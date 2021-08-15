@@ -10,6 +10,8 @@ import First from "components/sections/first";
 
 const HomePresenter = (props: propsIState) => {
   const {
+    isPC,
+    isTablet,
     theme,
     toggleTheme,
     isLoading,
@@ -28,7 +30,7 @@ const HomePresenter = (props: propsIState) => {
         <Menu disappearMenu={disappearMenu} toggleMenu={toggleMenu} />
       )}
       {isLoading ? (
-        <Loading setLoading={setLoading} />
+        <Loading setLoading={setLoading} isTablet={isTablet} />
       ) : (
         <SectionContainer ref={secContRef}>
           <Nav toggleMenu={toggleMenu} navRefs={navRefs} />
@@ -48,6 +50,8 @@ const HomePresenter = (props: propsIState) => {
 export default HomePresenter;
 
 interface propsIState {
+  isPC: boolean;
+  isTablet: boolean;
   theme: ThemeIState;
   toggleTheme: () => void;
   isLoading: boolean;
