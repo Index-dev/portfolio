@@ -7,7 +7,7 @@ export interface IinitState {
 }
 
 const initState: IinitState = {
-    isEnd: false,
+    isEnd: true,
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types

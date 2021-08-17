@@ -64,8 +64,8 @@ const PuzzleDiv = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100px;
-    height: 40px;
+    width: 120px;
+    height: 50px;
     background-color: #fff;
     margin: 40px 0 100px 0;
     transform: rotate(-16deg);
@@ -82,10 +82,11 @@ const PuzzleLeft = styled.div`
     position: absolute;
     background-color: #fff;
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    top: 10px;
-    left: -10px;
+    width: 24px;
+    height: 24px;
+    top: 13px;
+    left: -13px;
+    box-shadow: -2px 1px 2px rgba(0, 0, 0, 0.5);
 
     @media screen and (min-width: 700px) {
         width: 30px;
@@ -103,11 +104,11 @@ const PuzzleRight = styled.div`
     position: absolute;
     background-color: ${(props: IPuzzleRight) => props.backgroundColor};
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    top: 10px;
-    right: -10px;
-    box-shadow: inset 2px 1px 0px rgba(0, 0, 0, 0.5);
+    width: 24px;
+    height: 24px;
+    top: 13px;
+    right: -13px;
+    box-shadow: inset 3px 0 1px rgba(0, 0, 0, 0.5);
 
     @media screen and (min-width: 700px) {
         width: 30px;
@@ -121,10 +122,10 @@ const PuzzleTop = styled.div`
     position: absolute;
     background-color: #fff;
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    top: -10px;
-    left: 40px;
+    width: 24px;
+    height: 24px;
+    top: -13px;
+    left: 43px;
 
     @media screen and (min-width: 700px) {
         width: 30px;
@@ -211,9 +212,11 @@ const TextDescription = styled.span`
 const PuzzleTitle = styled.span`
     font-weight: 600;
     font-size: 1.2em;
+    transform: translateX(-6px);
 
     @media screen and (min-width: 700px) {
         font-size: 1.5em;
+        transform: translateX(-7.5px);
     }
 `;
 

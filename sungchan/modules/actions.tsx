@@ -1,5 +1,17 @@
-import { setCurrentComponentNo, setIsEnd, setIsPageChanging } from './actionType';
-import { IsetCurrentComponentNoAction, IsetIsEndAction, IsetIsPageChangingAction } from './actionInterface';
+import {
+    setCurrentComponentNo,
+    setIndexSubContainerTranslateX,
+    setInnerWidth,
+    setIsEnd,
+    setIsPageChanging,
+} from './actionType';
+import {
+    IsetCurrentComponentNoAction,
+    IsetIndexSubContainerTranslateXAction,
+    IsetInnerWidthAction,
+    IsetIsEndAction,
+    IsetIsPageChangingAction,
+} from './actionInterface';
 
 // init
 export const setIsEndAction = (res: boolean): IsetIsEndAction => {
@@ -24,4 +36,23 @@ export const setIsPageChangingAction = (res: boolean): IsetIsPageChangingAction 
     };
 };
 
-export type actions = IsetIsEndAction | IsetCurrentComponentNoAction | IsetIsPageChangingAction;
+export const setInnerWidthAction = (res: number): IsetInnerWidthAction => {
+    return {
+        type: setInnerWidth,
+        payload: res,
+    };
+};
+
+export const setIndexSubContainerTranslateXAction = (res: number): IsetIndexSubContainerTranslateXAction => {
+    return {
+        type: setIndexSubContainerTranslateX,
+        payload: res,
+    };
+};
+
+export type actions =
+    | IsetIsEndAction
+    | IsetCurrentComponentNoAction
+    | IsetIsPageChangingAction
+    | IsetInnerWidthAction
+    | IsetIndexSubContainerTranslateXAction;

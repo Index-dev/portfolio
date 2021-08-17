@@ -1,7 +1,11 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { setCurrentComponentNoAction, setIsPageChangingAction } from '../modules/actions';
+import {
+    setCurrentComponentNoAction,
+    setIndexSubContainerTranslateXAction,
+    setIsPageChangingAction,
+} from '../modules/actions';
 import { indexState } from '../modules/indexReducer';
 
 const transitionDuration = 1;
@@ -133,6 +137,7 @@ const Base: React.FC<IBase> = ({ children, componentNo }): JSX.Element => {
     const [isTop, setIsTop] = React.useState<boolean>(false);
     const [isBottom, setIsBottom] = React.useState<boolean>(false);
     const [chainArray, setChainArray] = React.useState<number[]>([]);
+    const [touchY, setTouchY] = React.useState<number>(0);
 
     // ref
     const baseContainerRef = React.useRef<HTMLDivElement>();
@@ -211,7 +216,11 @@ const Base: React.FC<IBase> = ({ children, componentNo }): JSX.Element => {
             return;
         }
 
+        // 현재 컴포넌트 번호 변경
         dispatch(setCurrentComponentNoAction(componentNo));
+
+        // 메뉴바가 열려있는 경우 닫기
+        dispatch(setIndexSubContainerTranslateXAction(0));
     };
 
     // onScroll
@@ -279,10 +288,56 @@ const Base: React.FC<IBase> = ({ children, componentNo }): JSX.Element => {
         setChainArray(chainArray);
     };
 
+    // onTouch
+    const onTouchStartMainContainer = (e: React.TouchEvent<HTMLDivElement>) => {
+        // 페이지의 끝에 도달했을 경우만 정상적인 데이터 입력
+        if (isTop || isBottom) {
+            setTouchY(e.changedTouches[0].clientY);
+        } else {
+            setTouchY(-1);
+        }
+    };
+
+    const onTouchEndMainContainer = (e: React.TouchEvent<HTMLDivElement>) => {
+        // 페이지 이동이 이루어지고 있는 경우
+        if (isPageChanging) {
+            return;
+        }
+
+        // 현재 페이지가 아닌 경우 휠기능 중단
+        if (currentComponentNo !== componentNo) {
+            return;
+        }
+
+        // 페이지의 끝에 도달한 뒤 스크롤한게 아닌 경우
+        if (touchY === -1) {
+            return;
+        }
+
+        // 페이지의 끝에 도달하고 위로 스크롤 했을 경우
+        if (isTop && touchY - e.changedTouches[0].clientY < 0) {
+            onClickPostIt(componentNo - 1);
+        }
+
+        // 페이지의 끝에 도달하고 아래로 스크롤 했을 경우
+        if (isBottom && touchY - e.changedTouches[0].clientY > 0) {
+            // 현재 컴포넌트 번호가 마지막이 아닐 경우에만 페이지 넘기기
+            if (currentComponentNo < titleArray.length - 1) {
+                onClickPostIt(componentNo + 1);
+            }
+        }
+    };
+
     return (
         <>
             <BaseContainer ref={baseContainerRef} backgroundColor={backgroundColorArray[componentNo]}>
-                <MainContainer ref={mainContainerRef} onScroll={onScrollMainContainer} onWheel={onWheelMainContainer}>
+                <MainContainer
+                    ref={mainContainerRef}
+                    onScroll={onScrollMainContainer}
+                    onWheel={onWheelMainContainer}
+                    onTouchStart={onTouchStartMainContainer}
+                    onTouchEnd={onTouchEndMainContainer}
+                >
                     {children}
                 </MainContainer>
 
