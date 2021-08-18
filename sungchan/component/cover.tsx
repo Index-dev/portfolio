@@ -60,6 +60,7 @@ const ArrowDiv = styled.div`
     animation-name: ${ArrowDivFrame};
     animation-duration: 1s;
     animation-timing-function: ease-in;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 `;
 
 interface IArrowLeftDiv {
@@ -90,6 +91,7 @@ interface IArrowRightDiv {
 const ArrowRightDiv = styled.div`
     position: absolute;
     transform: rotate(-45deg);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
 
     ${(props: IArrowRightDiv) => {
         return `
@@ -136,6 +138,7 @@ const MainTitle = styled.span`
     animation-name: ${MainTitleFrame};
     animation-duration: 1s;
     animation-timing-function: ease-in;
+    text-shadow: 3px 3px 3px rgba(255, 255, 255, 0.8);
 `;
 
 const LogoImageFrame = keyframes`

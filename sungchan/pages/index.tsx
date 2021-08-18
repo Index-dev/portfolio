@@ -12,13 +12,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { indexState } from '../modules/indexReducer';
 import { maxWidth } from '../style/style';
 import { setIndexSubContainerTranslateXAction, setInnerWidthAction } from '../modules/actions';
-import { setIndexSubContainerTranslateX } from '../modules/actionType';
 
 const IndexMainContainer = styled.div`
     width: calc(100vw - (100vw - 100%));
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.1);
-    // background-image: url(/image/desk_original.jpg);
+    background-image: url(/image/test1.jpg);
     position: relative;
 `;
 
@@ -63,7 +61,7 @@ const CoffeeInner = styled.div`
     background-color: #a17c32;
     border: 13px solid #fff;
     overflow: hidden;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.4);
 `;
 
 const CoffeeMaterial = styled.div`
@@ -81,7 +79,7 @@ const CoffeeOuter = styled.div`
     background-color: #fff;
     border-radius: 0 8px 8px 0;
     transform: translate(-18px, 60px) rotate(30deg);
-    box-shadow: 2px 0 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 4px 1px 4px rgba(0, 0, 0, 0.4);
 `;
 
 const PencilContainer = styled.div`
@@ -115,7 +113,7 @@ const PencilRightTop = styled.div`
     background-color: #52adc7;
     border-radius: 0 8px 0 0;
     position: relative;
-    box-shadow: 2px 0 2px rgba(82, 173, 199, 0.4);
+    box-shadow: 3px 0 4px rgba(0, 0, 0, 0.4);
 `;
 
 const PencilLeftBottom = styled.div`
@@ -144,6 +142,7 @@ const PencilBottom = styled.div`
     background-color: #e0c7af;
     transform: translate(${(40 - 40 / Math.sqrt(2)) / 2}px, -${40 / Math.sqrt(2) / 2}px) rotate(-45deg);
     z-index: 1;
+    box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.4);
 `;
 
 const PencilLead = styled.div`
@@ -169,10 +168,10 @@ const CellPhoneBody = styled.div`
     position: relative;
     width: 220px;
     height: 420px;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: #2e2727;
     border-radius: 16px 16px 16px 16px;
     border: 6px solid #cd5c5c;
-    box-shadow: 2px 2px 6px 2px rgba(205, 92, 92, 0.6);
+    box-shadow: 2px 2px 6px 2px rgba(0, 0, 0, 0.4);
 `;
 
 const CellPhoneTop = styled.div`
