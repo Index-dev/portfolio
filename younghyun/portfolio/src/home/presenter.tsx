@@ -6,6 +6,9 @@ import Loading from "components/loading";
 import Nav from "components/nav";
 import Header from "components/header";
 
+import Airplane from "components/icons/airplane";
+import Car from "components/icons/car";
+
 import First from "components/sections/first";
 
 const HomePresenter = (props: propsIState) => {
@@ -35,6 +38,8 @@ const HomePresenter = (props: propsIState) => {
         <SectionContainer ref={secContRef}>
           <Nav toggleMenu={toggleMenu} navRefs={navRefs} />
           <Header toggleTheme={toggleTheme} />
+          <Airplane />
+          <Car />
           <First isPC={isPC} isTablet={isTablet} theme={theme} />
           <EmptyStuff />
           <EmptyStuff />
