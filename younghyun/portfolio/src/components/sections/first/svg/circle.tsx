@@ -3,6 +3,7 @@ import styled, { keyframes } from "styled-components";
 
 function CircleText(props: propsIState) {
   const { scale, rotate } = props;
+
   return (
     <Container scale={scale} rotate={rotate}>
       <SVG viewBox="0 0 376 376" xmlns="http://www.w3.org/2000/svg">
@@ -61,9 +62,17 @@ interface propsIState {
 }
 
 CircleText.defaultProps = {
-  scale: 100,
   rotate: 0,
 };
+
+const spin = (rotate: number) => keyframes`
+    0%{
+        ${`transform: translate3d(-50%, -50%, 0) rotate(${rotate + 0}deg)`}
+    }
+    100%{
+        ${`transform: translate3d(-50%, -50%, 0) rotate(${rotate + 360}deg)`}
+    }
+`;
 
 const Container = styled.div<{ scale: number; rotate: number }>`
   width: ${(props) => props.scale}%;
@@ -73,8 +82,11 @@ const Container = styled.div<{ scale: number; rotate: number }>`
   top: 50%;
   left: 50%;
 
-  transform: translate3d(-50%, -50%, 0);
-  ${(props) => `transform: rotate(${props.rotate}deg)`}
+  ${(props) =>
+    `transform: translate3d(-50%, -50%, 0) rotate(${props.rotate}deg)`}
+  transition: all 0.3s linear;
+
+  animation: ${(props) => spin(props.rotate)} 30s linear infinite;
 `;
 
 const SVG = styled.svg`
