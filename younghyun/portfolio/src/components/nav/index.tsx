@@ -59,7 +59,7 @@ const SVG = styled.svg`
 `;
 
 const Path = styled.path`
-  stroke: ${({ theme }: { theme: ThemeIState }) => theme.third};
+  stroke: ${({ theme }: { theme: ThemeIState }) => theme.primary};
   stroke-width: 4;
 
   transition: all 0.1s linear, stroke-dashoffset 0.2s linear,
