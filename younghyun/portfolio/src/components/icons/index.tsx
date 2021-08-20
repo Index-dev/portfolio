@@ -7,7 +7,7 @@ import Tower from "components/icons/tower";
 
 const AIRPLANE_SPEED = 10;
 const CAR_SPEED = -3;
-const TOWER_SPEED = -0.1;
+const TOWER_SPEED = -0.7;
 
 function Icons(props: propsIState) {
   const { isPC, isTablet, secContRef } = props;
@@ -23,6 +23,12 @@ function Icons(props: propsIState) {
             secContRef.current.addEventListener("mousemove", parallax);
           } else {
             secContRef.current?.removeEventListener("mousemove", parallax);
+
+            if (airplaneRef.current && carRef.current && towerRef.current) {
+              airplaneRef.current.style.transform = `translate(0, 0)`;
+              carRef.current.style.transform = `translate(0, 0)`;
+              towerRef.current.style.transform = `translate(0, 0)`;
+            }
           }
         }
       });
@@ -30,7 +36,6 @@ function Icons(props: propsIState) {
   }, [secContRef]);
 
   function parallax(event: MouseEvent) {
-    console.log("parallax");
     if (airplaneRef.current && carRef.current && towerRef.current) {
       const airplaneX =
         (window.innerWidth - event.pageX * AIRPLANE_SPEED) / 100;
