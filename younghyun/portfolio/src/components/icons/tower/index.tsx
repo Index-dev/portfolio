@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 
 function Tower(props: propsIState) {
-  const { towerRef } = props;
+  const { isPC, isTablet, towerRef } = props;
   return (
-    <Container ref={towerRef}>
+    <Container isPC={isPC} isTablet={isTablet} ref={towerRef}>
       <SVG viewBox="0 0 8 24" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M2.5 15L2.5 20L5.5 20L5.5 15C5.41845 9.65012 4.5 1 4 1C3.5 1 2.65523 8.72346 2.5 15Z"
@@ -30,18 +30,20 @@ function Tower(props: propsIState) {
 export default Tower;
 
 interface propsIState {
+  isPC: boolean;
+  isTablet: boolean;
   towerRef: React.RefObject<HTMLDivElement>;
 }
 
-const Container = styled.div`
-  width: 10vw;
-  height: 10vw;
+const Container = styled.div<{ isPC: boolean; isTablet: boolean }>`
+  width: ${(props) => (props.isPC ? "10" : props.isTablet ? "20" : "30")}vw;
+  height: ${(props) => (props.isPC ? "10" : props.isTablet ? "20" : "30")}vw;
 
   position: absolute;
   top: 30%;
   left: 50%;
 
-  transform: translate3d(-30%, -50%);
+  transition: all 0.3s linear;
 `;
 
 const SVG = styled.svg`

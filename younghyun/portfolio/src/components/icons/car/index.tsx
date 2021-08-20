@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 
 function Car(props: propsIState) {
-  const { carRef } = props;
+  const { isPC, isTablet, carRef } = props;
   return (
-    <Container ref={carRef}>
+    <Container isPC={isPC} isTablet={isTablet} ref={carRef}>
       <SVG viewBox="0 0 10 20" xmlns="http://www.w3.org/2000/svg">
         <rect x="1.5" y="0.5" width="7" height="19" rx="1.5" />
         <path
@@ -33,16 +33,20 @@ function Car(props: propsIState) {
 export default Car;
 
 interface propsIState {
+  isPC: boolean;
+  isTablet: boolean;
   carRef: React.RefObject<HTMLDivElement>;
 }
 
-const Container = styled.div`
-  width: 10vw;
-  height: 10vw;
+const Container = styled.div<{ isPC: boolean; isTablet: boolean }>`
+  width: ${(props) => (props.isPC ? "10" : props.isTablet ? "20" : "30")}vw;
+  height: ${(props) => (props.isPC ? "10" : props.isTablet ? "20" : "30")}vw;
 
   position: absolute;
-  top: 30%;
-  left: 70%;
+  top: 60%;
+  left: 55%;
+
+  transition: all 0.3s linear;
 `;
 
 const SVG = styled.svg`

@@ -36,7 +36,7 @@ function HomePresenter(props: propsIState) {
         <SectionContainer ref={secContRef}>
           <Nav toggleMenu={toggleMenu} navRefs={navRefs} />
           <Header toggleTheme={toggleTheme} />
-          <Icons secContRef={secContRef} />
+          <Icons isPC={isPC} isTablet={isTablet} secContRef={secContRef} />
           <First isPC={isPC} isTablet={isTablet} theme={theme} />
           <EmptyStuff />
           <EmptyStuff />

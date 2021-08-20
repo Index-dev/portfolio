@@ -5,12 +5,12 @@ import Airplane from "components/icons/airplane";
 import Car from "components/icons/car";
 import Tower from "components/icons/tower";
 
-const AIRPLANE_SPEED = 5;
+const AIRPLANE_SPEED = 10;
 const CAR_SPEED = -3;
-const TOWER_SPEED = -1;
+const TOWER_SPEED = -0.1;
 
 function Icons(props: propsIState) {
-  const { secContRef } = props;
+  const { isPC, isTablet, secContRef } = props;
   const airplaneRef = useRef<HTMLDivElement>(null);
   const carRef = useRef<HTMLDivElement>(null);
   const towerRef = useRef<HTMLDivElement>(null);
@@ -49,9 +49,9 @@ function Icons(props: propsIState) {
 
   return (
     <Container>
-      <Airplane airplaneRef={airplaneRef} />
-      <Car carRef={carRef} />
-      <Tower towerRef={towerRef} />
+      <Airplane isPC={isPC} isTablet={isTablet} airplaneRef={airplaneRef} />
+      <Car isPC={isPC} isTablet={isTablet} carRef={carRef} />
+      <Tower isPC={isPC} isTablet={isTablet} towerRef={towerRef} />
     </Container>
   );
 }
@@ -59,6 +59,8 @@ function Icons(props: propsIState) {
 export default Icons;
 
 interface propsIState {
+  isPC: boolean;
+  isTablet: boolean;
   secContRef: React.RefObject<HTMLDivElement>;
 }
 
