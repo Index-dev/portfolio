@@ -2,8 +2,9 @@ import React from "react";
 import styled from "styled-components";
 
 function Airplane(props: propsIState) {
+  const { airplaneRef } = props;
   return (
-    <Container>
+    <Container ref={airplaneRef}>
       <SVG viewBox="0 0 20 21" xmlns="http://www.w3.org/2000/svg">
         <rect x="8.5" y="2.5" width="3" height="18" rx="1.5" />
         <path d="M10 20V17.5V14V12V10.5V8.5V7V5V4V3" strokeWidth="3" />
@@ -31,7 +32,6 @@ function Airplane(props: propsIState) {
 export default Airplane;
 
 interface propsIState {
-  speed: number;
   airplaneRef: React.RefObject<HTMLDivElement>;
 }
 
@@ -50,6 +50,9 @@ const SVG = styled.svg`
 
   fill: none;
   stroke: ${({ theme }: { theme: ThemeIState }) => theme.primary};
+
+  transition: all 0.3s linear;
+
   &:hover {
     stroke: ${({ theme }: { theme: ThemeIState }) => theme.third};
   }

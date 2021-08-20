@@ -2,8 +2,9 @@ import React from "react";
 import styled from "styled-components";
 
 function Car(props: propsIState) {
+  const { carRef } = props;
   return (
-    <Container>
+    <Container ref={carRef}>
       <SVG viewBox="0 0 10 20" xmlns="http://www.w3.org/2000/svg">
         <rect x="1.5" y="0.5" width="7" height="19" rx="1.5" />
         <path
@@ -32,7 +33,6 @@ function Car(props: propsIState) {
 export default Car;
 
 interface propsIState {
-  speed: number;
   carRef: React.RefObject<HTMLDivElement>;
 }
 
@@ -51,6 +51,9 @@ const SVG = styled.svg`
 
   fill: none;
   stroke: ${({ theme }: { theme: ThemeIState }) => theme.primary};
+
+  transition: all 0.3s linear;
+
   &:hover {
     stroke: ${({ theme }: { theme: ThemeIState }) => theme.third};
   }

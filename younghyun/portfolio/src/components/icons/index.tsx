@@ -5,6 +5,10 @@ import Airplane from "components/icons/airplane";
 import Car from "components/icons/car";
 import Tower from "components/icons/tower";
 
+const AIRPLANE_SPEED = 5;
+const CAR_SPEED = -3;
+const TOWER_SPEED = -1;
+
 function Icons(props: propsIState) {
   const { secContRef } = props;
   const airplaneRef = useRef<HTMLDivElement>(null);
@@ -16,20 +20,38 @@ function Icons(props: propsIState) {
       secContRef.current.addEventListener("scroll", () => {
         if (secContRef.current !== null) {
           if (secContRef.current.scrollTop < window.innerHeight * 0.11) {
-            console.log(true);
+            secContRef.current.addEventListener("mousemove", parallax);
           } else {
-            console.log(false);
+            secContRef.current?.removeEventListener("mousemove", parallax);
           }
         }
       });
     }
   }, [secContRef]);
 
+  function parallax(event: MouseEvent) {
+    console.log("parallax");
+    if (airplaneRef.current && carRef.current && towerRef.current) {
+      const airplaneX =
+        (window.innerWidth - event.pageX * AIRPLANE_SPEED) / 100;
+      const airplaneY =
+        (window.innerHeight - event.pageY * AIRPLANE_SPEED) / 100;
+      const carX = (window.innerWidth - event.pageX * CAR_SPEED) / 100;
+      const carY = (window.innerHeight - event.pageX * CAR_SPEED) / 100;
+      const towerX = (window.innerWidth - event.pageX * TOWER_SPEED) / 100;
+      const towerY = (window.innerHeight - event.pageX * TOWER_SPEED) / 100;
+
+      airplaneRef.current.style.transform = `translate(${airplaneX}px, ${airplaneY}px)`;
+      carRef.current.style.transform = `translate(${carX}px, ${carY}px)`;
+      towerRef.current.style.transform = `translate(${towerX}px, ${towerY}px)`;
+    }
+  }
+
   return (
     <Container>
-      <Airplane speed={5} airplaneRef={airplaneRef} />
-      <Car speed={-3} carRef={carRef} />
-      <Tower speed={1} towerRef={towerRef} />
+      <Airplane airplaneRef={airplaneRef} />
+      <Car carRef={carRef} />
+      <Tower towerRef={towerRef} />
     </Container>
   );
 }

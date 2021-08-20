@@ -2,8 +2,9 @@ import React from "react";
 import styled from "styled-components";
 
 function Tower(props: propsIState) {
+  const { towerRef } = props;
   return (
-    <Container>
+    <Container ref={towerRef}>
       <SVG viewBox="0 0 8 24" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M2.5 15L2.5 20L5.5 20L5.5 15C5.41845 9.65012 4.5 1 4 1C3.5 1 2.65523 8.72346 2.5 15Z"
@@ -29,7 +30,6 @@ function Tower(props: propsIState) {
 export default Tower;
 
 interface propsIState {
-  speed: number;
   towerRef: React.RefObject<HTMLDivElement>;
 }
 
@@ -50,6 +50,9 @@ const SVG = styled.svg`
 
   fill: none;
   stroke: ${({ theme }: { theme: ThemeIState }) => theme.primary};
+
+  transition: all 0.3s linear;
+
   &:hover {
     stroke: ${({ theme }: { theme: ThemeIState }) => theme.third};
   }
