@@ -43,7 +43,7 @@ const Container = styled.div<{ isPC: boolean; isTablet: boolean }>`
 
   position: absolute;
   top: 60%;
-  left: 38%;
+  left: ${(props) => (props.isPC ? "38" : props.isTablet ? "20" : "13")}%;
 
   transition: all 0.3s linear;
 `;
