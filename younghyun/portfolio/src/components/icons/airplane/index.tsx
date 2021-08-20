@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-function Airplane() {
+function Airplane(props: propsIState) {
   return (
     <Container>
       <SVG viewBox="0 0 20 21" xmlns="http://www.w3.org/2000/svg">
@@ -29,6 +29,11 @@ function Airplane() {
 }
 
 export default Airplane;
+
+interface propsIState {
+  speed: number;
+  airplaneRef: React.RefObject<HTMLDivElement>;
+}
 
 const Container = styled.div`
   width: 10vw;

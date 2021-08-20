@@ -9,7 +9,7 @@ import Header from "components/header";
 import Icons from "components/icons";
 import First from "components/sections/first";
 
-const HomePresenter = (props: propsIState) => {
+function HomePresenter(props: propsIState) {
   const {
     isPC,
     isTablet,
@@ -36,7 +36,7 @@ const HomePresenter = (props: propsIState) => {
         <SectionContainer ref={secContRef}>
           <Nav toggleMenu={toggleMenu} navRefs={navRefs} />
           <Header toggleTheme={toggleTheme} />
-          <Icons />
+          <Icons secContRef={secContRef} />
           <First isPC={isPC} isTablet={isTablet} theme={theme} />
           <EmptyStuff />
           <EmptyStuff />
@@ -47,7 +47,7 @@ const HomePresenter = (props: propsIState) => {
       )}
     </Container>
   );
-};
+}
 
 export default HomePresenter;
 
