@@ -42,7 +42,7 @@ function RectangleText(props: propsIState) {
     if (secContRef.current) {
       secContRef.current.addEventListener("scroll", onScroll);
     }
-  }, []);
+  }, [secContRef]);
 
   const fontSize = window.innerWidth * 0.03;
 
