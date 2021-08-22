@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { keyframes } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 import Menu from "components/nav/menu";
 import Loading from "components/loading";
@@ -33,7 +33,7 @@ function HomePresenter(props: propsIState) {
       {isLoading && (
         <Loading isPC={isPC} isTablet={isTablet} setLoading={setLoading} />
       )}
-      <SectionContainer ref={secContRef}>
+      <SectionContainer isLoading={isLoading} ref={secContRef}>
         <Nav toggleMenu={toggleMenu} navRefs={navRefs} />
         <Header toggleTheme={toggleTheme} />
         <Icons isPC={isPC} isTablet={isTablet} secContRef={secContRef} />
@@ -86,7 +86,7 @@ const appear = keyframes`
   }
 `;
 
-const SectionContainer = styled.div`
+const SectionContainer = styled.div<{ isLoading: boolean }>`
   width: 100%;
   height: 100vh;
 
@@ -104,8 +104,11 @@ const SectionContainer = styled.div`
   overflow-y: scroll;
 
   opacity: 0;
-
-  animation: ${appear} 0.2s 0.1s linear forwards;
+  ${(props) =>
+    !props.isLoading &&
+    css`
+      animation: ${appear} 0.2s 0.1s linear forwards;
+    `};
 
   &::-webkit-scrollbar {
     width: 5px;
