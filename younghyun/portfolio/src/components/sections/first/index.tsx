@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+import RectangleText from "components/sections/first/svg/rectangle";
 import PixelRain from "components/sections/first/photo";
 
 function LandingSection(props: propsIState) {
@@ -8,6 +9,7 @@ function LandingSection(props: propsIState) {
   return (
     <ScrollSnapWrapper>
       <Conatainer>
+        <RectangleText />
         <PixelRain isPC={isPC} isTablet={isTablet} theme={theme} />
       </Conatainer>
     </ScrollSnapWrapper>
@@ -35,6 +37,8 @@ const ScrollSnapWrapper = styled.section`
 const Conatainer = styled.div`
   width: 100%;
   height: 100%;
+
+  position: relative;
 
   display: flex;
   justify-content: center;
