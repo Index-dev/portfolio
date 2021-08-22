@@ -15,8 +15,12 @@ function RectangleText() {
     setScreenHeight(window.innerHeight);
   }
 
-  const text = "Eumericano's Portfolio";
+  const text =
+    "HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD ";
   const textPath = `<textPath xlink:href="#first-rect">${text}</textPath>`;
+
+  const fontSize = window.innerWidth * 0.03;
+
   return (
     <Container>
       <SVG
@@ -26,7 +30,9 @@ function RectangleText() {
       >
         <Path
           id="first-rect"
-          d={`M1 ${screenHeight}V1H${screenWidth}V${screenHeight}H1Z`}
+          d={`M${fontSize} ${screenHeight - fontSize}V${fontSize}H${
+            screenWidth - fontSize
+          }V${screenHeight - fontSize}H${fontSize}Z`}
         />
         <Text dangerouslySetInnerHTML={{ __html: textPath }}></Text>
       </SVG>
@@ -49,10 +55,10 @@ const SVG = styled.svg`
 `;
 
 const Path = styled.path`
-  stroke: red;
-  stroke-width: 3;
+  /* stroke: red; */
 `;
 
 const Text = styled.text`
-  stroke: red;
+  stroke: ${({ theme }: { theme: ThemeIState }) => theme.primary};
+  font-size: 3vw;
 `;
