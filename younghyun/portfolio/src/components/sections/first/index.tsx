@@ -5,11 +5,11 @@ import RectangleText from "components/sections/first/svg/rectangle";
 import PixelRain from "components/sections/first/photo";
 
 function LandingSection(props: propsIState) {
-  const { isPC, isTablet, theme } = props;
+  const { isPC, isTablet, theme, secContRef } = props;
   return (
     <ScrollSnapWrapper>
       <Conatainer>
-        <RectangleText />
+        <RectangleText secContRef={secContRef} />
         <PixelRain isPC={isPC} isTablet={isTablet} theme={theme} />
       </Conatainer>
     </ScrollSnapWrapper>
@@ -22,6 +22,7 @@ interface propsIState {
   isPC: boolean;
   isTablet: boolean;
   theme: ThemeIState;
+  secContRef: React.RefObject<HTMLDivElement>;
 }
 
 const ScrollSnapWrapper = styled.section`

@@ -30,21 +30,25 @@ function HomePresenter(props: propsIState) {
       {showMenu && (
         <Menu disappearMenu={disappearMenu} toggleMenu={toggleMenu} />
       )}
-      {isLoading ? (
+      {isLoading && (
         <Loading isPC={isPC} isTablet={isTablet} setLoading={setLoading} />
-      ) : (
-        <SectionContainer ref={secContRef}>
-          <Nav toggleMenu={toggleMenu} navRefs={navRefs} />
-          <Header toggleTheme={toggleTheme} />
-          <Icons isPC={isPC} isTablet={isTablet} secContRef={secContRef} />
-          <First isPC={isPC} isTablet={isTablet} theme={theme} />
-          <EmptyStuff />
-          <EmptyStuff />
-          <EmptyStuff />
-          <EmptyStuff />
-          <EmptyStuff />
-        </SectionContainer>
       )}
+      <SectionContainer ref={secContRef}>
+        <Nav toggleMenu={toggleMenu} navRefs={navRefs} />
+        <Header toggleTheme={toggleTheme} />
+        <Icons isPC={isPC} isTablet={isTablet} secContRef={secContRef} />
+        <First
+          isPC={isPC}
+          isTablet={isTablet}
+          theme={theme}
+          secContRef={secContRef}
+        />
+        <EmptyStuff />
+        <EmptyStuff />
+        <EmptyStuff />
+        <EmptyStuff />
+        <EmptyStuff />
+      </SectionContainer>
     </Container>
   );
 }
