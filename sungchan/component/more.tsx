@@ -99,7 +99,7 @@ const More: React.FC<IMore> = ({ componentNo }): JSX.Element => {
                 <HeaderSection>
                     <HeaderText>김성찬의 Portfolio</HeaderText>
                     <HeaderText>Version 1.0.0</HeaderText>
-                    <HeaderText>2021.08.11</HeaderText>
+                    <HeaderText>2021.08.23</HeaderText>
                 </HeaderSection>
 
                 <UrlSection>
