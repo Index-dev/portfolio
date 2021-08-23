@@ -332,7 +332,10 @@ const Projects: React.FC<IProjects> = ({ componentNo }): JSX.Element => {
                                 공책을 주요 디자인으로 삼아 오프라인에서 포트폴리오를 보는 듯한 느낌의 UI/UX를 개발
                             </TextDescription>
                             <TextDescription backgroundColor={backgroundColorArray[componentNo]} type="link">
-                                Domain → <a href="https://kscportfolio.com">https://kscportfolio.com</a>
+                                Domain →{' '}
+                                <a href="https://portfolio-gamma-wheat.vercel.app">
+                                    https://portfolio-gamma-wheat.vercel.app
+                                </a>
                             </TextDescription>
                             <TextDescription backgroundColor={backgroundColorArray[componentNo]} type="link">
                                 Git →{' '}
