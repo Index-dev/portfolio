@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { keyframes } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 import Menu from "components/nav/menu";
 import Loading from "components/loading";
@@ -9,7 +9,7 @@ import Header from "components/header";
 import Icons from "components/icons";
 import First from "components/sections/first";
 
-const HomePresenter = (props: propsIState) => {
+function HomePresenter(props: propsIState) {
   const {
     isPC,
     isTablet,
@@ -30,24 +30,28 @@ const HomePresenter = (props: propsIState) => {
       {showMenu && (
         <Menu disappearMenu={disappearMenu} toggleMenu={toggleMenu} />
       )}
-      {isLoading ? (
+      {isLoading && (
         <Loading isPC={isPC} isTablet={isTablet} setLoading={setLoading} />
-      ) : (
-        <SectionContainer ref={secContRef}>
-          <Nav toggleMenu={toggleMenu} navRefs={navRefs} />
-          <Header toggleTheme={toggleTheme} />
-          <Icons />
-          <First isPC={isPC} isTablet={isTablet} theme={theme} />
-          <EmptyStuff />
-          <EmptyStuff />
-          <EmptyStuff />
-          <EmptyStuff />
-          <EmptyStuff />
-        </SectionContainer>
       )}
+      <SectionContainer isLoading={isLoading} ref={secContRef}>
+        <Nav toggleMenu={toggleMenu} navRefs={navRefs} />
+        <Header toggleTheme={toggleTheme} />
+        <Icons isPC={isPC} isTablet={isTablet} secContRef={secContRef} />
+        <First
+          isPC={isPC}
+          isTablet={isTablet}
+          theme={theme}
+          secContRef={secContRef}
+        />
+        <EmptyStuff />
+        <EmptyStuff />
+        <EmptyStuff />
+        <EmptyStuff />
+        <EmptyStuff />
+      </SectionContainer>
     </Container>
   );
-};
+}
 
 export default HomePresenter;
 
@@ -82,7 +86,7 @@ const appear = keyframes`
   }
 `;
 
-const SectionContainer = styled.div`
+const SectionContainer = styled.div<{ isLoading: boolean }>`
   width: 100%;
   height: 100vh;
 
@@ -100,8 +104,11 @@ const SectionContainer = styled.div`
   overflow-y: scroll;
 
   opacity: 0;
-
-  animation: ${appear} 0.2s 0.1s linear forwards;
+  ${(props) =>
+    !props.isLoading &&
+    css`
+      animation: ${appear} 0.2s 0.1s linear forwards;
+    `};
 
   &::-webkit-scrollbar {
     width: 5px;

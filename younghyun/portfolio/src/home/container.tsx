@@ -125,13 +125,13 @@ const HomeContainer = (props: propsIState) => {
     if (navRef.current) {
       navRef.current.addEventListener("mouseover", () => {
         if (topPathRef.current) {
-          topPathRef.current.style.strokeWidth = "6";
+          topPathRef.current.style.strokeWidth = "8";
         }
         if (middlePathRef.current) {
-          middlePathRef.current.style.strokeWidth = "6";
+          middlePathRef.current.style.strokeWidth = "8";
         }
         if (bottomPathRef.current) {
-          bottomPathRef.current.style.strokeWidth = "6";
+          bottomPathRef.current.style.strokeWidth = "8";
         }
       });
       navRef.current.addEventListener("mouseout", () => {

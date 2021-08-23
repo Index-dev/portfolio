@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 
 import Particle from "components/sections/first/photo/particle";
+import CircleText from "components/sections/first/svg/circle";
 import picture from "assets/first/image.jpg";
 
 const NUMBER_OF_PARTICLES = 5000;
@@ -88,6 +89,8 @@ function PixelRain(props: propsIState) {
 
   return (
     <CanvasContainer isPC={isPC} isTablet={isTablet}>
+      <CircleText scale={140} rotate={90} fillColor={theme.third} />
+      <CircleText scale={120} fillColor={theme.secondary} />
       <CanvasOuterCover>
         <CanvasInnerCover>
           <Canvas className="profile"></Canvas>
@@ -106,7 +109,11 @@ interface propsIState {
 }
 
 const CanvasContainer = styled.div<{ isPC: boolean; isTablet: boolean }>`
-  width: ${(props) => (props.isPC ? "25" : props.isTablet ? "50" : "70")}%;
+  width: ${(props) => (props.isPC ? "25" : props.isTablet ? "50" : "60")}%;
+
+  position: relative;
+
+  z-index: -1;
 `;
 
 const CanvasOuterCover = styled.div`

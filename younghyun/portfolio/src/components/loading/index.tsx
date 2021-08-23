@@ -203,8 +203,15 @@ const fill = ({ theme }: { theme: ThemeIState }) => keyframes`
   `;
 
 const Container = styled.div`
-  max-width: 100vw;
+  width: 100vw;
   height: 100vh;
+
+  position: fixed;
+  top: 0;
+
+  background: ${({ theme }: { theme: ThemeIState }) => theme.background};
+
+  z-index: 999;
 `;
 
 const SVG = styled.svg<{ isPC: boolean; isTablet: boolean }>`

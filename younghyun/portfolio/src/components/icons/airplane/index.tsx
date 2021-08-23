@@ -1,9 +1,10 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
-function Airplane() {
+function Airplane(props: propsIState) {
+  const { isPC, isTablet, airplaneRef } = props;
   return (
-    <Container>
+    <Container isPC={isPC} isTablet={isTablet} ref={airplaneRef}>
       <SVG viewBox="0 0 20 21" xmlns="http://www.w3.org/2000/svg">
         <rect x="8.5" y="2.5" width="3" height="18" rx="1.5" />
         <path d="M10 20V17.5V14V12V10.5V8.5V7V5V4V3" strokeWidth="3" />
@@ -30,13 +31,21 @@ function Airplane() {
 
 export default Airplane;
 
-const Container = styled.div`
-  width: 10vw;
-  height: 10vw;
+interface propsIState {
+  isPC: boolean;
+  isTablet: boolean;
+  airplaneRef: React.RefObject<HTMLDivElement>;
+}
+
+const Container = styled.div<{ isPC: boolean; isTablet: boolean }>`
+  width: ${(props) => (props.isPC ? "10" : props.isTablet ? "20" : "30")}vw;
+  height: ${(props) => (props.isPC ? "10" : props.isTablet ? "20" : "30")}vw;
 
   position: absolute;
-  top: 30%;
-  left: 30%;
+  top: 60%;
+  left: ${(props) => (props.isPC ? "38" : props.isTablet ? "20" : "13")}%;
+
+  transition: all 0.3s linear;
 `;
 
 const SVG = styled.svg`
@@ -45,6 +54,9 @@ const SVG = styled.svg`
 
   fill: none;
   stroke: ${({ theme }: { theme: ThemeIState }) => theme.primary};
+
+  transition: all 0.3s linear;
+
   &:hover {
     stroke: ${({ theme }: { theme: ThemeIState }) => theme.third};
   }
