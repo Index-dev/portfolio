@@ -282,7 +282,9 @@ const Projects: React.FC<IProjects> = ({ componentNo }): JSX.Element => {
     ];
 
     // onClick
-    const onClickImageDiv = (index) => {
+    const onClickImageDiv = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, index) => {
+        e.stopPropagation();
+
         const tempCurrentImageIndex = currentImageIndex.slice();
         tempCurrentImageIndex[index] = (tempCurrentImageIndex[index] + 1) % images[index].length;
 
@@ -314,7 +316,7 @@ const Projects: React.FC<IProjects> = ({ componentNo }): JSX.Element => {
                     </TitleSection>
 
                     <ContentsSection>
-                        <ImageDiv onClick={() => onClickImageDiv(0)}>
+                        <ImageDiv onClick={(e) => onClickImageDiv(e, 0)}>
                             <CareerImage src={images[0][currentImageIndex[0]]} />
                         </ImageDiv>
 
@@ -351,7 +353,7 @@ const Projects: React.FC<IProjects> = ({ componentNo }): JSX.Element => {
                     </TitleSection>
 
                     <ContentsSection>
-                        <ImageDiv onClick={() => onClickImageDiv(1)}>
+                        <ImageDiv onClick={(e) => onClickImageDiv(e, 1)}>
                             <CareerImage src={images[1][currentImageIndex[1]]} />
                         </ImageDiv>
 
@@ -394,7 +396,7 @@ const Projects: React.FC<IProjects> = ({ componentNo }): JSX.Element => {
                     </TitleSection>
 
                     <ContentsSection>
-                        <ImageDiv onClick={() => onClickImageDiv(2)}>
+                        <ImageDiv onClick={(e) => onClickImageDiv(e, 2)}>
                             <CareerImage src={images[2][currentImageIndex[2]]} />
                         </ImageDiv>
 
@@ -436,7 +438,7 @@ const Projects: React.FC<IProjects> = ({ componentNo }): JSX.Element => {
                     </TitleSection>
 
                     <ContentsSection>
-                        <ImageDiv onClick={() => onClickImageDiv(3)}>
+                        <ImageDiv onClick={(e) => onClickImageDiv(e, 3)}>
                             <CareerImage src={images[3][currentImageIndex[3]]} />
                         </ImageDiv>
 
