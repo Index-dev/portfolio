@@ -192,9 +192,10 @@ const WhyIt: React.FC<IWhyIt> = ({ componentNo }): JSX.Element => {
     const questionColor = ['#8FC15B', '#F19023', '#63C1A9'];
 
     // onClick
-    const onClickQuestion = (index: number) => {
+    const onClickQuestion = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) => {
         setQuestionIndex(index); // 질문 index
         const time = 35; // 글자 나오는 속도
+        e.stopPropagation();
 
         if (answerTitleRef.current && answerDivRef.current) {
             let charIndex = 0;
@@ -245,7 +246,7 @@ const WhyIt: React.FC<IWhyIt> = ({ componentNo }): JSX.Element => {
                             <QuestionSection>
                                 {qnaArray.map((qna, index) => {
                                     return (
-                                        <QuestionDiv key={qna.answer} onClick={(e) => onClickQuestion(index)}>
+                                        <QuestionDiv key={qna.answer} onClick={(e) => onClickQuestion(e, index)}>
                                             <QuestionSubDiv>
                                                 <QuestionNumber isClick={questionIndex === index}>
                                                     Q{index + 1}.{' '}
