@@ -6,11 +6,7 @@ interface IError {
 }
 
 const Error: React.FC<IError> = ({ statusCode }): JSX.Element => {
-    return (
-        <div>
-            에러 발생 시 나오는 페이지 <br /> {statusCode}
-        </div>
-    );
+    return <div>에러 발생 시 나오는 페이지, 에러 코드: {statusCode}</div>;
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ res, req }) => {

@@ -138,6 +138,9 @@ const Base: React.FC<IBase> = ({ children, componentNo }): JSX.Element => {
     const [isBottom, setIsBottom] = React.useState<boolean>(false);
     const [chainArray, setChainArray] = React.useState<number[]>([]);
     const [touchY, setTouchY] = React.useState<number>(0);
+    const [isClickContainer, setIsClickContainer] = React.useState<boolean>(false);
+    const [containerClientY, setContainerClientY] = React.useState<number>(0);
+    const [containerScrollTop, setContainerScrollTop] = React.useState<number>(0);
 
     // ref
     const baseContainerRef = React.useRef<HTMLDivElement>();
@@ -171,8 +174,8 @@ const Base: React.FC<IBase> = ({ children, componentNo }): JSX.Element => {
             titleRef.current.style.opacity = '';
 
             setIsTop(true); // 스크롤은 최상단
-            if (mainContainerRef.current.clientHeight === mainContainerRef.current.scrollHeight) {
-                // 페이지의 전체크기가 화면 크기와 동일할 경우 스크롤은 최하단도 포함
+            if (mainContainerRef.current.clientHeight >= mainContainerRef.current.scrollHeight) {
+                // 페이지의 전체크기가 화면 크기와 동일하거나 클 경우 스크롤은 최하단도 포함
                 setIsBottom(true);
             } else {
                 setIsBottom(false);
@@ -224,6 +227,7 @@ const Base: React.FC<IBase> = ({ children, componentNo }): JSX.Element => {
     };
 
     // onScroll
+    // 스크롤이 최상단, 최하단에 도달할 경우에만 페이지 넘기게 하기 위해 체크해주기
     const onScrollMainContainer = (e: React.UIEvent<HTMLDivElement>) => {
         // 페이지 이동이 이루어지고 있는 경우
         if (isPageChanging) {
@@ -251,6 +255,7 @@ const Base: React.FC<IBase> = ({ children, componentNo }): JSX.Element => {
     };
 
     // onWheel
+    // 웹에서 마우스 휠을 이용하여 페이지 넘기게 하기
     const onWheelMainContainer = (e: React.WheelEvent<HTMLDivElement>) => {
         // 페이지 이동이 이루어지고 있는 경우
         if (isPageChanging) {
@@ -289,6 +294,7 @@ const Base: React.FC<IBase> = ({ children, componentNo }): JSX.Element => {
     };
 
     // onTouch
+    // 모바일에서 터치로 페이지 넘기게 하기
     const onTouchStartMainContainer = (e: React.TouchEvent<HTMLDivElement>) => {
         // 페이지의 끝에 도달했을 경우만 정상적인 데이터 입력
         if (isTop || isBottom) {
@@ -328,6 +334,23 @@ const Base: React.FC<IBase> = ({ children, componentNo }): JSX.Element => {
         }
     };
 
+    // onMouse
+    // 웹에서 마우스 클릭으로 상하 움직이게 하기
+    const onMouseDownMainContainer = (e: React.MouseEvent<HTMLDivElement>) => {
+        setContainerClientY(e.clientY);
+        setIsClickContainer(true);
+        setContainerScrollTop(mainContainerRef.current.scrollTop);
+    };
+
+    const onMouseMoveMainContainer = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (isClickContainer) {
+            mainContainerRef.current.scrollTop = containerScrollTop + (containerClientY - e.clientY);
+        }
+    };
+    const onMouseUpMainContainer = () => {
+        setIsClickContainer(false);
+    };
+
     return (
         <>
             <BaseContainer ref={baseContainerRef} backgroundColor={backgroundColorArray[componentNo]}>
@@ -337,6 +360,9 @@ const Base: React.FC<IBase> = ({ children, componentNo }): JSX.Element => {
                     onWheel={onWheelMainContainer}
                     onTouchStart={onTouchStartMainContainer}
                     onTouchEnd={onTouchEndMainContainer}
+                    onMouseDown={onMouseDownMainContainer}
+                    onMouseMove={onMouseMoveMainContainer}
+                    onMouseUp={onMouseUpMainContainer}
                 >
                     {children}
                 </MainContainer>

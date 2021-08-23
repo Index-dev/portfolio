@@ -4,7 +4,7 @@ import Intro from '../component/intro';
 import WhyIt from '../component/whyIt';
 import Skills from '../component/skills';
 import Career from '../component/career';
-import Init from '../component/init';
+import Init from './init';
 import Projects from '../component/projects';
 import More from '../component/more';
 import styled from 'styled-components';
@@ -16,7 +16,7 @@ import { setIndexSubContainerTranslateXAction, setInnerWidthAction } from '../mo
 const IndexMainContainer = styled.div`
     width: calc(100vw - (100vw - 100%));
     height: 100vh;
-    background-image: url(/image/test1.jpg);
+    background-image: url(/image/background.jpg);
     position: relative;
 `;
 
@@ -231,6 +231,9 @@ const Index = (): JSX.Element => {
     // onResize
     const onResize = () => {
         dispatch(setInnerWidthAction(window.innerWidth));
+
+        // 모바일에서 화면을 움직였을 경우 원래대로 돌려놓기
+        dispatch(setIndexSubContainerTranslateXAction(0));
     };
 
     // onClick
@@ -301,7 +304,7 @@ const Index = (): JSX.Element => {
                                 </CellPhoneContainer>
                             </IndexSubContainer>
 
-                            {innerWidth < maxWidth + 220 ? (
+                            {innerWidth < maxWidth + 220 && indexSubContainerTranslateX === 0 ? (
                                 <MenuContainer onClick={onClickMenuContainer}>
                                     <MenuSection>
                                         <HamburgerImage src="/image/hamburgerBar.svg" />
@@ -323,6 +326,11 @@ const Index = (): JSX.Element => {
                         margin: 0;
                         padding: 0;
                         overflow: hidden;
+                        -ms-user-select: none;
+                        -moz-user-select: -moz-none;
+                        -webkit-user-select: none;
+                        -khtml-user-select: none;
+                        user-select: none;
                     }
 
                     h1,

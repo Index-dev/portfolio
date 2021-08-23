@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Base from './base';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { indexState } from '../modules/indexReducer';
 
@@ -13,6 +13,8 @@ const ProjectsContainer = styled.div`
 `;
 
 const ImageDiv = styled.div`
+    display: flex;
+    align-items: center;
     margin: 18px 25px;
     position: relative;
     cursor: pointer;
@@ -273,9 +275,9 @@ const Projects: React.FC<IProjects> = ({ componentNo }): JSX.Element => {
 
     // variable
     const images = [
-        ['/image/ssafy1.PNG'],
+        ['/image/portfolio_0.PNG', '/image/portfolio_1.PNG', '/image/portfolio_2.PNG', '/image/portfolio_3.PNG'],
         ['/image/grouby_0.PNG', '/image/grouby_1.PNG', '/image/grouby_2.PNG', '/image/grouby_3.PNG'],
-        ['/image/ssafy1.PNG'],
+        ['/image/scvc_0.png', '/image/scvc_1.png', '/image/scvc_2.png'],
         ['/image/moyo_0.PNG', '/image/moyo_1.PNG', '/image/moyo_2.PNG', '/image/moyo_3.PNG'],
     ];
 
@@ -285,15 +287,6 @@ const Projects: React.FC<IProjects> = ({ componentNo }): JSX.Element => {
         tempCurrentImageIndex[index] = (tempCurrentImageIndex[index] + 1) % images[index].length;
 
         setCurrentImageIndex(tempCurrentImageIndex);
-    };
-
-    const onClickCamera = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, img: string) => {
-        if (pictureContainerRef.current) {
-            e.stopPropagation();
-
-            setPictureImage(img);
-            pictureContainerRef.current.style.display = 'flex';
-        }
     };
 
     const onClickPictureContainer = () => {
@@ -317,7 +310,7 @@ const Projects: React.FC<IProjects> = ({ componentNo }): JSX.Element => {
 
                 <ProjectsContainer>
                     <TitleSection>
-                        <CareerTitle>Portfolio</CareerTitle>
+                        <CareerTitle color="#E3D0B9">Portfolio</CareerTitle>
                     </TitleSection>
 
                     <ContentsSection>
@@ -336,10 +329,10 @@ const Projects: React.FC<IProjects> = ({ componentNo }): JSX.Element => {
                                 웹 사이트에서 나만의 포트폴리오를 누구나 볼 수 있도록 하기 위해 개발
                             </TextDescription>
                             <TextDescription backgroundColor={backgroundColorArray[componentNo]}>
-                                공책을 주요 디자인으로 삼아 오프라인에서 포트폴리오를 보는 듯한 UI/UX를 개발
+                                공책을 주요 디자인으로 삼아 오프라인에서 포트폴리오를 보는 듯한 느낌의 UI/UX를 개발
                             </TextDescription>
                             <TextDescription backgroundColor={backgroundColorArray[componentNo]} type="link">
-                                Domain → <a href="localhost:8088">localhost:8088</a>
+                                Domain → <a href="https://kscportfolio.com">https://kscportfolio.com</a>
                             </TextDescription>
                             <TextDescription backgroundColor={backgroundColorArray[componentNo]} type="link">
                                 Git →{' '}

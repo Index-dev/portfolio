@@ -169,17 +169,23 @@ const WhyIt: React.FC<IWhyIt> = ({ componentNo }): JSX.Element => {
     const qnaArray = [
         {
             question: 'IT에 관심가진 시기',
-            answer: 'IT에 관심가진 시기',
+            answer: `IT에 처음 관심을 가지게 된 시기는 대학교 1학년때입니다.`,
         },
 
         {
             question: 'IT에 관심을 가지게 된 계기',
-            answer: `IT에 관심을 가지게 된 계기\n\nㅎㅎㅎㅎ`,
+            answer: `대학교 1학년때 수강했던 C프로그래밍이라는 수업을 듣고 관심가지기 시작했습니다.\n\n
+                     컴퓨터를 이용하여 코드를 짜고 원하는 동작을 컴퓨터가 그대로 실행시켜주는 것에 흥미를 느끼며 관심가지기 시작했습니다.`,
         },
 
         {
             question: '개발자를 선택한 이유',
-            answer: '개발자를 선택한 이유',
+            answer: `제 생각을 코드로 표현해낼 수 있는 사람이 되고 싶었기 때문입니다.\n\n
+                     C프로그래밍 수업을 들은 이후로 관련 공부를 더 해보고 싶어서 혼자서 개발 언어에 대해 독학을 했었습니다.\n\n
+                     공부를 해보고 느낀점은 프로그래밍을 하는 것이 신기하고 재밌다! 였습니다.\n\n
+                     왜냐하면 컴퓨터가 제가 생각한 동작을 할 수 있도록 논리적으로 생각하며 소스 코드라는 문제를 해결하는 것이 즐거웠기 때문입니다.\n\n
+                     미래에 이런 일들을 하는 직업을 선택하게 된다면 즐겁게 업무를 수행해낼 수 있을 것이라고 생각했고, 개발자가 되겠다는 마음을 가지게 되었습니다.
+                     `,
         },
     ];
 
@@ -188,7 +194,7 @@ const WhyIt: React.FC<IWhyIt> = ({ componentNo }): JSX.Element => {
     // onClick
     const onClickQuestion = (index: number) => {
         setQuestionIndex(index); // 질문 index
-        const time = 50; // 글자 나오는 속도
+        const time = 35; // 글자 나오는 속도
 
         if (answerTitleRef.current && answerDivRef.current) {
             let charIndex = 0;

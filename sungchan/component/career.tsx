@@ -163,13 +163,13 @@ const TextDescription = styled.span`
         if (props.type === 'camera') {
             return `
                 color: rgba(0, 0, 0, 0.7);
+                cursor: url(${props.src}), pointer;
                 &:before {
                     display: inline-block;
                     width: 26px;
                     content: '\f030';
                     font-family: FontAwesome;
                     color: ${props.backgroundColor};
-                    cursor: url(${props.src}), pointer;
                 }
             `;
         } else if (props.type === 'calendar') {
@@ -280,7 +280,7 @@ const Career: React.FC<ICareer> = ({ componentNo }): JSX.Element => {
 
                     <ContentsSection>
                         <ImageDiv>
-                            <CareerImage src="/image/ssafy1.PNG" />
+                            <CareerImage src="/image/ssafy.PNG" />
                         </ImageDiv>
 
                         <TextDescriptionDiv>
@@ -325,7 +325,7 @@ const Career: React.FC<ICareer> = ({ componentNo }): JSX.Element => {
 
                     <ContentsSection>
                         <ImageDiv>
-                            <CareerImage src="/image/autoever1.PNG" />
+                            <CareerImage src="/image/autoever.PNG" />
                         </ImageDiv>
 
                         <TextDescriptionDiv>

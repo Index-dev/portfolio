@@ -1,33 +1,40 @@
 {
   "polyfillFiles": [
-    "static/chunks/polyfills.js"
+    "static/chunks/polyfills-a54b4f32bdc1ef890ddd.js"
   ],
-  "devFiles": [
-    "static/chunks/react-refresh.js"
-  ],
-  "ampDevFiles": [
-    "static/chunks/webpack.js",
-    "static/chunks/amp.js"
-  ],
+  "devFiles": [],
+  "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/development/_buildManifest.js",
-    "static/development/_ssgManifest.js"
+    "static/b4Y4rbs39HkY1_8emV3sj/_buildManifest.js",
+    "static/b4Y4rbs39HkY1_8emV3sj/_ssgManifest.js"
   ],
   "pages": {
     "/": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/index.js"
+      "static/chunks/webpack-61095c13c5984b221292.js",
+      "static/chunks/framework-2191d16384373197bc0a.js",
+      "static/chunks/main-a3a79aff3ff232b41814.js",
+      "static/chunks/163-ce82880448474040696b.js",
+      "static/chunks/177-375328a9764504b45526.js",
+      "static/chunks/pages/index-579f96e1eea2cf3ead09.js"
     ],
     "/_app": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/_app.js"
+      "static/chunks/webpack-61095c13c5984b221292.js",
+      "static/chunks/framework-2191d16384373197bc0a.js",
+      "static/chunks/main-a3a79aff3ff232b41814.js",
+      "static/chunks/pages/_app-b93ef4b7a70bb8ca70c4.js"
     ],
     "/_error": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/_error.js"
+      "static/chunks/webpack-61095c13c5984b221292.js",
+      "static/chunks/framework-2191d16384373197bc0a.js",
+      "static/chunks/main-a3a79aff3ff232b41814.js",
+      "static/chunks/pages/_error-006a92099dfe21eb65cd.js"
+    ],
+    "/init": [
+      "static/chunks/webpack-61095c13c5984b221292.js",
+      "static/chunks/framework-2191d16384373197bc0a.js",
+      "static/chunks/main-a3a79aff3ff232b41814.js",
+      "static/chunks/163-ce82880448474040696b.js",
+      "static/chunks/pages/init-eea6b6e71de207690979.js"
     ]
   },
   "ampFirstPages": []
