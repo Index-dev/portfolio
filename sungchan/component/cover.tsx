@@ -58,7 +58,7 @@ const ArrowDiv = styled.div`
     align-items: center;
     margin: 40px 0;
     animation-name: ${ArrowDivFrame};
-    animation-duration: 1s;
+    animation-duration: 1.5s;
     animation-timing-function: ease-in;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 `;
@@ -136,7 +136,7 @@ const MainTitle = styled.span`
     z-index: 1;
     display: flex;
     animation-name: ${MainTitleFrame};
-    animation-duration: 1s;
+    animation-duration: 1.5s;
     animation-timing-function: ease-in;
     text-shadow: 3px 3px 3px rgba(255, 255, 255, 0.8);
 `;
@@ -159,7 +159,7 @@ const LogoImage = styled.img`
     width: min(9.2em, 6.6em + 7.8vw);
     margin: 12px 0;
     animation-name: ${LogoImageFrame};
-    animation-duration: 1s;
+    animation-duration: 1.5s;
     animation-timing-funtion: ease-in;
 `;
 
