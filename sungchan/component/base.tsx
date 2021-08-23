@@ -321,12 +321,12 @@ const Base: React.FC<IBase> = ({ children, componentNo }): JSX.Element => {
         }
 
         // 페이지의 끝에 도달하고 위로 스크롤 했을 경우
-        if (isTop && touchY - e.changedTouches[0].clientY < 0) {
+        if (isTop && touchY - e.changedTouches[0].clientY < -20) {
             onClickPostIt(componentNo - 1);
         }
 
         // 페이지의 끝에 도달하고 아래로 스크롤 했을 경우
-        if (isBottom && touchY - e.changedTouches[0].clientY > 0) {
+        if (isBottom && touchY - e.changedTouches[0].clientY > 20) {
             // 현재 컴포넌트 번호가 마지막이 아닐 경우에만 페이지 넘기기
             if (currentComponentNo < titleArray.length - 1) {
                 onClickPostIt(componentNo + 1);
