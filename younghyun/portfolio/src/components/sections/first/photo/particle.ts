@@ -22,8 +22,8 @@ class Particle {
     this.x = Math.random() * canvas.width;
     this.y = Math.random() * canvas.height;
     this.speed = 0;
-    this.velocity = Math.random() * 0.5;
-    this.size = Math.random() * 1.5 + 1;
+    this.velocity = Math.random() * 0.3;
+    this.size = Math.random() * 2 + 1;
     this.positionX = Math.floor(this.y);
     this.positionY = Math.floor(this.x);
     this.angle = 0;

@@ -3,9 +3,9 @@ import styled from "styled-components";
 
 import Particle from "components/sections/first/photo/particle";
 import CircleText from "components/sections/first/svg/circle";
-import picture from "assets/first/image.jpg";
+import picture from "assets/first/image.png";
 
-const NUMBER_OF_PARTICLES = 5000;
+const NUMBER_OF_PARTICLES = 1300;
 
 function PixelRain(props: propsIState) {
   const { isPC, isTablet, theme } = props;
@@ -58,12 +58,12 @@ function PixelRain(props: propsIState) {
 
       function animate() {
         ctx.globalAlpha = 0.03;
-        ctx.fillStyle = "rgb(0, 0, 0)";
+        ctx.fillStyle = theme.background;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         for (let i = 0; i < NUMBER_OF_PARTICLES; i++) {
           particlesArray[i].update();
-          ctx.globalAlpha = particlesArray[i].speed * 0.3;
+          ctx.globalAlpha = particlesArray[i].speed * 0.15;
           particlesArray[i].draw();
         }
 
