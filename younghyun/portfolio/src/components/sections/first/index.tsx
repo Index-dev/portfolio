@@ -9,7 +9,11 @@ function LandingSection(props: propsIState) {
   return (
     <ScrollSnapWrapper>
       <Conatainer>
-        <RectangleText secContRef={secContRef} />
+        <RectangleText
+          isPC={isPC}
+          isTablet={isTablet}
+          secContRef={secContRef}
+        />
         <PixelRain isPC={isPC} isTablet={isTablet} theme={theme} />
       </Conatainer>
     </ScrollSnapWrapper>

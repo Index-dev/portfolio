@@ -43,6 +43,7 @@ const Container = styled.div`
   transition: right 0.1s linear;
 
   cursor: pointer;
+  z-index: 3;
 `;
 
 const SVG = styled.svg`

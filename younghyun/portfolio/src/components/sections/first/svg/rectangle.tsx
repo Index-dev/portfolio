@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import styled from "styled-components";
 
 function RectangleText(props: propsIState) {
-  const { secContRef } = props;
+  const { isPC, isTablet, secContRef } = props;
 
   const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
   const [screenHeight, setScreenHeight] = useState<number>(window.innerHeight);
@@ -44,7 +44,11 @@ function RectangleText(props: propsIState) {
     }
   }, [secContRef]);
 
-  const fontSize = window.innerWidth * 0.03;
+  const fontSize = isPC
+    ? window.innerWidth * 0.03
+    : isTablet
+    ? window.innerWidth * 0.05
+    : window.innerWidth * 0.06;
 
   return (
     <Container>
@@ -60,6 +64,7 @@ function RectangleText(props: propsIState) {
           }V${screenHeight - fontSize}H${fontSize}Z`}
         />
         <Text
+          fontSize={fontSize}
           dangerouslySetInnerHTML={{ __html: textPath.current as string }}
         ></Text>
       </SVG>
@@ -70,6 +75,8 @@ function RectangleText(props: propsIState) {
 export default RectangleText;
 
 interface propsIState {
+  isPC: boolean;
+  isTablet: boolean;
   secContRef: React.RefObject<HTMLDivElement>;
 }
 
@@ -87,7 +94,7 @@ const SVG = styled.svg`
 
 const Path = styled.path``;
 
-const Text = styled.text`
+const Text = styled.text<{ fontSize: number }>`
   stroke: ${({ theme }: { theme: ThemeIState }) => theme.primary};
-  font-size: 3vw;
+  font-size: ${(props) => props.fontSize};
 `;
