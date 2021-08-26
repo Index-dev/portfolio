@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled, { css, keyframes } from "styled-components";
 
 import Menu from "components/nav/menu";
 import Loading from "components/loading";
 import Nav from "components/nav";
 import Header from "components/header";
+import SecondSection from "components/sections/second";
 
 import Icons from "components/icons";
 import First from "components/sections/first";
@@ -25,6 +26,16 @@ function HomePresenter(props: propsIState) {
     navRefs,
   } = props;
 
+  useEffect(() => {
+    if (secContRef.current) {
+      const scrollTop = secContRef.current.scrollTop;
+
+      const secondSecRef = secContRef.current
+        .childNodes[4] as HTMLTableSectionElement;
+      secContRef.current.addEventListener("scroll", () => {});
+    }
+  });
+
   return (
     <Container ref={contRef}>
       {showMenu && (
@@ -43,7 +54,7 @@ function HomePresenter(props: propsIState) {
           theme={theme}
           secContRef={secContRef}
         />
-        <EmptyStuff />
+        <SecondSection />
         <EmptyStuff />
         <EmptyStuff />
         <EmptyStuff />
