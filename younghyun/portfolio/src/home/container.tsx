@@ -20,6 +20,32 @@ const HomeContainer = (props: propsIState) => {
     query: "(min-width : 600px) and (max-width :1024px)",
   });
 
+  useEffect(() => {
+    if (contRef.current && isLoading) {
+      contRef.current.style.overflow = "hidden";
+    } else if (contRef.current) {
+      contRef.current.style.overflow = "none";
+    }
+  }, [isLoading]);
+
+  useEffect(() => {
+    if (secContRef.current && secContRef.current.children) {
+      secContRef.current.children[2].scrollIntoView({
+        block: "start",
+      });
+    }
+  });
+
+  useEffect(() => {
+    if (secContRef.current) {
+      const secondSecRef = secContRef.current
+        .childNodes[4] as HTMLTableSectionElement;
+      secContRef.current.addEventListener("scroll", () => {
+        console.log(secContRef.current?.scrollTop, window.innerHeight);
+      });
+    }
+  });
+
   const toggleTheme = () => {
     if (theme === basicTheme) {
       if (secContRef.current && secContRef.current.children) {
@@ -55,22 +81,6 @@ const HomeContainer = (props: propsIState) => {
       setShowMenu(!showMenu);
     }
   }
-
-  useEffect(() => {
-    if (contRef.current && isLoading) {
-      contRef.current.style.overflow = "hidden";
-    } else if (contRef.current) {
-      contRef.current.style.overflow = "none";
-    }
-  }, [isLoading]);
-
-  useEffect(() => {
-    if (secContRef.current && secContRef.current.children) {
-      secContRef.current.children[2].scrollIntoView({
-        block: "start",
-      });
-    }
-  });
 
   return (
     <Presenter

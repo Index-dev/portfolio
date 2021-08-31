@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled, { css, keyframes } from "styled-components";
 
 import Menu from "components/nav/menu";
@@ -24,16 +24,6 @@ function HomePresenter(props: propsIState) {
     contRef,
     secContRef,
   } = props;
-
-  useEffect(() => {
-    if (secContRef.current) {
-      const scrollTop = secContRef.current.scrollTop;
-
-      const secondSecRef = secContRef.current
-        .childNodes[4] as HTMLTableSectionElement;
-      secContRef.current.addEventListener("scroll", () => {});
-    }
-  });
 
   return (
     <Container ref={contRef}>
