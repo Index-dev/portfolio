@@ -38,8 +38,6 @@ const HomeContainer = (props: propsIState) => {
 
   useEffect(() => {
     if (secContRef.current) {
-      const secondSecRef = secContRef.current
-        .childNodes[4] as HTMLTableSectionElement;
       secContRef.current.addEventListener("scroll", () => {
         console.log(secContRef.current?.scrollTop, window.innerHeight);
       });
