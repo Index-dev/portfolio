@@ -22,7 +22,6 @@ function HomePresenter(props: propsIState) {
     toggleMenu,
     contRef,
     secContRef,
-    navRefs,
   } = props;
 
   return (
@@ -34,7 +33,7 @@ function HomePresenter(props: propsIState) {
         <Loading isPC={isPC} isTablet={isTablet} setLoading={setLoading} />
       )}
       <SectionContainer isLoading={isLoading} ref={secContRef}>
-        <Nav toggleMenu={toggleMenu} navRefs={navRefs} />
+        <Nav secContRef={secContRef} toggleMenu={toggleMenu} />
         <Header toggleTheme={toggleTheme} />
         <Icons isPC={isPC} isTablet={isTablet} secContRef={secContRef} />
         <First
@@ -67,7 +66,6 @@ interface propsIState {
   toggleMenu: () => void;
   contRef: React.RefObject<HTMLDivElement>;
   secContRef: React.RefObject<HTMLDivElement>;
-  navRefs: navRefsIState;
 }
 
 const Container = styled.div`
