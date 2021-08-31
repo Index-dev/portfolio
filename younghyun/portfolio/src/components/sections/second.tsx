@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-function Section() {
+function SecondSection() {
   return (
     <ScrollSnapWrapper>
       <Conatainer></Conatainer>
@@ -9,7 +9,7 @@ function Section() {
   );
 }
 
-export default Section;
+export default SecondSection;
 
 const ScrollSnapWrapper = styled.section`
   width: 100%;
