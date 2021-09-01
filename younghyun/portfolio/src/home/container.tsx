@@ -13,9 +13,6 @@ const HomeContainer = (props: propsIState) => {
   const contRef = useRef<HTMLDivElement>(null);
   const secContRef = useRef<HTMLDivElement>(null);
 
-  const animationRefs = useRef<
-    Array<{ start: Number; end: Number; scrollHeight: number }>
-  >([]);
   const currentSecRef = useRef<number>();
   const currentSecScrollRef = useRef<number>();
 
@@ -58,7 +55,7 @@ const HomeContainer = (props: propsIState) => {
           const secondSecEnd = firstSecEnd + secondSec.offsetHeight;
           const thirdSecEnd = secondSecEnd + thirdSec.offsetHeight;
 
-          animationRefs.current = [
+          const animationRefs = [
             {
               start: headerCont.offsetHeight,
               end: firstSecEnd,
@@ -76,7 +73,7 @@ const HomeContainer = (props: propsIState) => {
             },
           ];
 
-          animationRefs.current.forEach((timing, index) => {
+          animationRefs.forEach((timing, index) => {
             if (
               secContRef.current &&
               timing.start <= secContRef.current?.scrollTop &&
