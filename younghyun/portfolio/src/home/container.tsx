@@ -75,6 +75,20 @@ const HomeContainer = (props: propsIState) => {
               scrollHeight: thirdSec.offsetHeight,
             },
           ];
+
+          animationRefs.current.forEach((timing, index) => {
+            if (
+              secContRef.current &&
+              timing.start <= secContRef.current?.scrollTop &&
+              timing.end > secContRef.current?.scrollTop
+            ) {
+              currentSecRef.current = index;
+              currentSecScrollRef.current =
+                (secContRef.current.scrollTop - +timing.start) /
+                +timing.scrollHeight;
+            }
+          });
+          console.log(currentSecRef.current, currentSecScrollRef.current);
         }
       });
     }
