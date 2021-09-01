@@ -13,6 +13,12 @@ const HomeContainer = (props: propsIState) => {
   const contRef = useRef<HTMLDivElement>(null);
   const secContRef = useRef<HTMLDivElement>(null);
 
+  const animationRefs = useRef<
+    Array<{ start: Number; end: Number; scrollHeight: number }>
+  >([]);
+  const currentSecRef = useRef<number>();
+  const currentSecScrollRef = useRef<number>();
+
   const isPC = useMediaQuery({
     query: "(min-width : 1025px)",
   });
@@ -39,7 +45,37 @@ const HomeContainer = (props: propsIState) => {
   useEffect(() => {
     if (secContRef.current) {
       secContRef.current.addEventListener("scroll", () => {
-        console.log(secContRef.current?.scrollTop, window.innerHeight);
+        if (secContRef.current?.childNodes) {
+          const headerCont = secContRef.current.childNodes[1] as HTMLDivElement;
+          const firstSec = secContRef.current
+            .childNodes[3] as HTMLTableSectionElement;
+          const secondSec = secContRef.current
+            .childNodes[4] as HTMLTableSectionElement;
+          const thirdSec = secContRef.current
+            .childNodes[4] as HTMLTableSectionElement;
+
+          const firstSecEnd = headerCont.offsetHeight + firstSec.offsetHeight;
+          const secondSecEnd = firstSecEnd + secondSec.offsetHeight;
+          const thirdSecEnd = secondSecEnd + thirdSec.offsetHeight;
+
+          animationRefs.current = [
+            {
+              start: headerCont.offsetHeight,
+              end: firstSecEnd,
+              scrollHeight: firstSec.offsetHeight,
+            },
+            {
+              start: firstSecEnd,
+              end: secondSecEnd,
+              scrollHeight: secondSec.offsetHeight,
+            },
+            {
+              start: secondSecEnd,
+              end: thirdSecEnd,
+              scrollHeight: thirdSec.offsetHeight,
+            },
+          ];
+        }
       });
     }
   });
