@@ -109,10 +109,6 @@ const SectionContainer = styled.div<{ isLoading: boolean }>`
     flex-direction: column;
     flex-wrap: nowrap;
 
-    @supports (scroll-snap-type: y proximity) {
-        scroll-snap-type: y proximity;
-    }
-
     overflow-x: hidden;
     overflow-y: scroll;
 
@@ -146,7 +142,4 @@ const EmptyStuff = styled.section`
     height: 100vh;
 
     flex: none;
-    @supports (scroll-snap-align: center) {
-        scroll-snap-align: center;
-    }
 `;

@@ -60,12 +60,14 @@ function Icons(props: propsIState) {
                             carRef.current.style.transform = `translate(0, 0)`;
                             towerRef.current.style.transform = `translate(0, 0)`;
 
-                            // if (
-                            //     currentSecRef.current === 0 &&
-                            //     currentSecScrollRef.current > 0 &&
-                            //     currentSecScrollRef.current < 0.95
-                            // )
-                            //     towerRef.current.style.top = `20+${currentSecScrollRef.current}%`;
+                            if (
+                                currentSecRef.current === 0 &&
+                                currentSecScrollRef.current > 0 &&
+                                currentSecScrollRef.current <= 1
+                            )
+                                towerRef.current.style.bottom = `${
+                                    70 - 70 * currentSecScrollRef.current
+                                }%`;
                         }
                     }
                 }
@@ -119,8 +121,7 @@ const Container = styled.div`
     width: 100%;
     height: 100%;
 
-    position: fixed;
-    top: 0;
+    position: absolute;
+    top: 10vh;
     left: 0;
-    z-index: -1;
 `;

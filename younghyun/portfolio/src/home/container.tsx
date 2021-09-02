@@ -34,6 +34,7 @@ const HomeContainer = (props: propsIState) => {
     useEffect(() => {
         if (secContRef.current && secContRef.current.children) {
             secContRef.current.children[3].scrollIntoView({
+                behavior: "smooth",
                 block: "start",
             });
         }
