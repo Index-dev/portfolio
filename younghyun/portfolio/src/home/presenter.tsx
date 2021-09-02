@@ -11,83 +11,82 @@ import Icons from "components/icons";
 import First from "components/sections/first";
 
 function HomePresenter(props: propsIState) {
-    const {
-        isPC,
-        isTablet,
-        theme,
-        toggleTheme,
-        isLoading,
-        setLoading,
-        showMenu,
-        disappearMenu,
-        toggleMenu,
-        contRef,
-        secContRef,
-        currentSecRef,
-        currentSecScrollRef,
-    } = props;
+  const {
+    isPC,
+    isTablet,
+    theme,
+    toggleTheme,
+    isLoading,
+    setLoading,
+    showMenu,
+    disappearMenu,
+    toggleMenu,
+    contRef,
+    secContRef,
+    currentSecRef,
+    currentSecScrollRef,
+    animationRefs,
+  } = props;
 
-    return (
-        <Container ref={contRef}>
-            {showMenu && (
-                <Menu disappearMenu={disappearMenu} toggleMenu={toggleMenu} />
-            )}
-            {isLoading && (
-                <Loading
-                    isPC={isPC}
-                    isTablet={isTablet}
-                    setLoading={setLoading}
-                />
-            )}
-            <SectionContainer isLoading={isLoading} ref={secContRef}>
-                <Nav secContRef={secContRef} toggleMenu={toggleMenu} />
-                <Header toggleTheme={toggleTheme} />
-                <Icons
-                    isPC={isPC}
-                    isTablet={isTablet}
-                    secContRef={secContRef}
-                    currentSecRef={currentSecRef}
-                    currentSecScrollRef={currentSecScrollRef}
-                />
-                <First
-                    isPC={isPC}
-                    isTablet={isTablet}
-                    theme={theme}
-                    secContRef={secContRef}
-                />
-                <SecondSection />
-                <EmptyStuff />
-                <EmptyStuff />
-                <EmptyStuff />
-                <EmptyStuff />
-            </SectionContainer>
-        </Container>
-    );
+  return (
+    <Container ref={contRef}>
+      {showMenu && (
+        <Menu disappearMenu={disappearMenu} toggleMenu={toggleMenu} />
+      )}
+      {isLoading && (
+        <Loading isPC={isPC} isTablet={isTablet} setLoading={setLoading} />
+      )}
+      <SectionContainer isLoading={isLoading} ref={secContRef}>
+        <Nav secContRef={secContRef} toggleMenu={toggleMenu} />
+        <Header toggleTheme={toggleTheme} />
+        <Icons
+          isPC={isPC}
+          isTablet={isTablet}
+          secContRef={secContRef}
+          currentSecRef={currentSecRef}
+          currentSecScrollRef={currentSecScrollRef}
+          animationRefs={animationRefs}
+        />
+        <First
+          isPC={isPC}
+          isTablet={isTablet}
+          theme={theme}
+          secContRef={secContRef}
+        />
+        <SecondSection />
+        <EmptyStuff />
+        <EmptyStuff />
+        <EmptyStuff />
+        <EmptyStuff />
+      </SectionContainer>
+    </Container>
+  );
 }
 
 export default HomePresenter;
 
 interface propsIState {
-    isPC: boolean;
-    isTablet: boolean;
-    theme: ThemeIState;
-    toggleTheme: () => void;
-    isLoading: boolean;
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-    showMenu: boolean;
-    disappearMenu: boolean;
-    toggleMenu: () => void;
-    contRef: React.RefObject<HTMLDivElement>;
-    secContRef: React.RefObject<HTMLDivElement>;
-    currentSecRef: React.MutableRefObject<number>;
-    currentSecScrollRef: React.MutableRefObject<number>;
+  isPC: boolean;
+  isTablet: boolean;
+  theme: ThemeIState;
+  toggleTheme: () => void;
+  isLoading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  showMenu: boolean;
+  disappearMenu: boolean;
+  toggleMenu: () => void;
+  contRef: React.RefObject<HTMLDivElement>;
+  secContRef: React.RefObject<HTMLDivElement>;
+  currentSecRef: React.MutableRefObject<number>;
+  currentSecScrollRef: React.MutableRefObject<number>;
+  animationRefs: React.MutableRefObject<Array<AnimationRefIState>>;
 }
 
 const Container = styled.div`
-    width: 100vw;
-    min-height: 100vh;
+  width: 100vw;
+  min-height: 100vh;
 
-    position: relative;
+  position: relative;
 `;
 
 const appear = keyframes`
@@ -100,46 +99,45 @@ const appear = keyframes`
 `;
 
 const SectionContainer = styled.div<{ isLoading: boolean }>`
-    width: 100%;
-    height: 100vh;
+  width: 100%;
+  height: 100vh;
 
-    position: relative;
+  position: relative;
 
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
 
-    overflow-x: hidden;
-    overflow-y: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
 
-    opacity: 0;
-    ${(props) =>
-        !props.isLoading &&
-        css`
-            animation: ${appear} 0.2s 0.1s linear forwards;
-        `};
+  opacity: 0;
+  ${(props) =>
+    !props.isLoading &&
+    css`
+      animation: ${appear} 0.2s 0.1s linear forwards;
+    `};
 
-    &::-webkit-scrollbar {
-        width: 5px;
-    }
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
 
-    &::-webkit-scrollbar-thumb {
-        background-color: ${({ theme }: { theme: ThemeIState }) =>
-            theme.primary};
-        background-clip: padding-box;
-        border-top-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-    }
+  &::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }: { theme: ThemeIState }) => theme.primary};
+    background-clip: padding-box;
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
 
-    &::-webkit-scrollbar-track {
-        background-color: ${({ theme }: { theme: ThemeIState }) =>
-            theme.background};
-    }
+  &::-webkit-scrollbar-track {
+    background-color: ${({ theme }: { theme: ThemeIState }) =>
+      theme.background};
+  }
 `;
 
 const EmptyStuff = styled.section`
-    width: 100vw;
-    height: 100vh;
+  width: 100vw;
+  height: 100vh;
 
-    flex: none;
+  flex: none;
 `;
