@@ -33,7 +33,7 @@ const HomeContainer = (props: propsIState) => {
 
     useEffect(() => {
         if (secContRef.current && secContRef.current.children) {
-            secContRef.current.children[2].scrollIntoView({
+            secContRef.current.children[3].scrollIntoView({
                 block: "start",
             });
         }
@@ -99,7 +99,7 @@ const HomeContainer = (props: propsIState) => {
     const toggleTheme = () => {
         if (theme === basicTheme) {
             if (secContRef.current && secContRef.current.children) {
-                secContRef.current.children[2].scrollIntoView({
+                secContRef.current.children[3].scrollIntoView({
                     behavior: "smooth",
                     block: "start",
                 });
@@ -109,7 +109,7 @@ const HomeContainer = (props: propsIState) => {
             }, 200);
         } else {
             if (secContRef.current && secContRef.current.children) {
-                secContRef.current.children[2].scrollIntoView({
+                secContRef.current.children[3].scrollIntoView({
                     behavior: "smooth",
                     block: "start",
                 });

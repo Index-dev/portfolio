@@ -21,8 +21,25 @@ function Icons(props: propsIState) {
             secContRef.current.addEventListener("scroll", () => {
                 if (secContRef.current !== null) {
                     if (
+                        secContRef.current.scrollTop <
+                        window.innerHeight * 0.09
+                    ) {
+                        secContRef.current?.removeEventListener(
+                            "mousemove",
+                            parallax
+                        );
+                        if (
+                            airplaneRef.current &&
+                            carRef.current &&
+                            towerRef.current
+                        ) {
+                            airplaneRef.current.style.transform = `translate(0, 20%) scale(0.9, 0.9)`;
+                            carRef.current.style.transform = `translate(0, 20%) scale(0.9, 0.9)`;
+                            towerRef.current.style.transform = `translate(0, 20%) scale(0.9, 0.9)`;
+                        }
+                    } else if (
                         currentSecRef.current === 0 &&
-                        currentSecScrollRef.current === 0
+                        currentSecScrollRef.current < 0.05
                     ) {
                         secContRef.current.addEventListener(
                             "mousemove",
@@ -105,4 +122,5 @@ const Container = styled.div`
     position: fixed;
     top: 0;
     left: 0;
+    z-index: -1;
 `;
