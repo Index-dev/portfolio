@@ -39,7 +39,6 @@ function Landscape(props: propsIState) {
           pathRefs.forEach((pathRef) => {
             if (pathRef.current) {
               const strokeLength = pathRef.current.getTotalLength();
-              console.log(strokeLength);
               pathRef.current.style.strokeDashoffset = `${strokeLength}`;
             }
           });
