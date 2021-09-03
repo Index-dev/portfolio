@@ -53,13 +53,7 @@ function HomePresenter(props: propsIState) {
           currentSecRef={currentSecRef}
           currentSecScrollRef={currentSecScrollRef}
         />
-        <ThirdSec
-          isPC={isPC}
-          isTablet={isTablet}
-          secContRef={secContRef}
-          currentSecRef={currentSecRef}
-          currentSecScrollRef={currentSecScrollRef}
-        />
+        <ThirdSec isPC={isPC} isTablet={isTablet} />
         <EmptyStuff />
         <EmptyStuff />
         <EmptyStuff />

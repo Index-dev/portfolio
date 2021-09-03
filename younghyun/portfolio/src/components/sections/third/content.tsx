@@ -1,14 +1,14 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 function Content(props: propsIState) {
-  const { isPC, isTablet, content, duration, animationDuration, reverse } =
+  const { isPC, isTablet, content, duration, animationDuration, reversed } =
     props;
 
   return (
     <Container isPC={isPC} isTablet={isTablet}>
-      <FrontContent>
-        {Array(3)
+      <FrontContent animationDuration={animationDuration} reversed={reversed}>
+        {Array(5)
           .fill(content)
           .map((content) => {
             return (
@@ -18,8 +18,8 @@ function Content(props: propsIState) {
             );
           })}
       </FrontContent>
-      <BehindContent>
-        {Array(3)
+      <BehindContent animationDuration={animationDuration} reversed={reversed}>
+        {Array(5)
           .fill(content)
           .map((content) => {
             return (
@@ -41,20 +41,91 @@ interface propsIState {
   content: string;
   duration: string;
   animationDuration: number;
-  reverse: boolean;
+  reversed: boolean;
 }
 
 const Container = styled.div<{ isPC: boolean; isTablet: boolean }>`
   width: 100%;
 
+  display: flex;
+
   font-size: ${(props) =>
     props.isPC ? "12vw" : props.isTablet ? "16vw" : "20vw"};
 
   overflow: hidden;
+
+  margin: ${(props) =>
+    props.isPC ? "0.2em 0" : props.isTablet ? "0.7em 0" : "1em 0"}em;
 `;
 
-const FrontContent = styled.div``;
-const BehindContent = styled.div``;
+const frontForward = keyframes`
+   0% {
+        transform: translate3d(100%, 0, 0);
+    }
+    100% {
+        transform: translate3d(-100%, 0, 0);
+    }
+`;
+const behindForward = keyframes`
+  0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(-200%, 0, 0);
+    }
+`;
+const frontBackward = keyframes`
+   0% {
+        transform: translate3d(-100%, 0, 0);
+    }
+    100% {
+        transform: translate3d(100%, 0, 0);
+    }
+`;
+const behindBackward = keyframes`
+   0% {
+       transform: translate3d(-200%, 0, 0);
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+`;
+
+const FrontContent = styled.div<{
+  animationDuration: number;
+  reversed: boolean;
+}>`
+  text-transform: uppercase;
+  ${(props) =>
+    props.reversed
+      ? css`
+          animation: ${frontBackward} ${props.animationDuration}s linear
+            infinite;
+          animation-delay: -${props.animationDuration}s;
+        `
+      : css`
+          animation: ${frontForward} ${props.animationDuration}s linear infinite;
+          animation-delay: -${props.animationDuration}s;
+        `}
+`;
+const BehindContent = styled.div<{
+  animationDuration: number;
+  reversed: boolean;
+}>`
+  text-transform: uppercase;
+  ${(props) =>
+    props.reversed
+      ? css`
+          animation: ${behindBackward} ${props.animationDuration}s linear
+            infinite;
+          animation-delay: -${props.animationDuration / 2}s;
+        `
+      : css`
+          animation: ${behindForward} ${props.animationDuration}s linear
+            infinite;
+          animation-delay: -${props.animationDuration / 2}s;
+        `}
+`;
 
 const Span = styled.span<{ isPC: boolean; isTablet: boolean }>`
   color: transparent;
@@ -65,6 +136,8 @@ const Span = styled.span<{ isPC: boolean; isTablet: boolean }>`
     theme.primary};
 
   transition: all 0.2s;
+
+  cursor: pointer;
   &:hover {
     color: ${({ theme }: { theme: ThemeIState }) => theme.primary};
   }
