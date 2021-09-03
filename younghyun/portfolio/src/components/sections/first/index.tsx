@@ -34,6 +34,9 @@ const ScrollSnapWrapper = styled.section`
     min-height: 100vh;
 
     flex: none;
+    @supports (scroll-snap-align: center) {
+        scroll-snap-align: center;
+    }
 `;
 
 const Conatainer = styled.div`
