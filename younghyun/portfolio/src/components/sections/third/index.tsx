@@ -17,16 +17,16 @@ function ThirdSection(props: propsIState) {
         isPC={isPC}
         isTablet={isTablet}
         content="BLAKC_HATS"
-        duration="2021-07 ~"
-        animationDuration={100}
+        // duration="2021-07 ~"
+        duration={100}
         reversed={false}
       />
       <Content
         isPC={isPC}
         isTablet={isTablet}
         content="SSAFY"
-        duration="2020-07 ~ 2021-07"
-        animationDuration={60}
+        // duration="2020-07 ~ 2021-07"
+        duration={60}
         reversed={true}
       />
     </ScrollSnapWrapper>

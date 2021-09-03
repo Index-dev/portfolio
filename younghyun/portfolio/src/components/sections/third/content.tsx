@@ -2,28 +2,27 @@ import React from "react";
 import styled, { css, keyframes } from "styled-components";
 
 function Content(props: propsIState) {
-  const { isPC, isTablet, content, duration, animationDuration, reversed } =
-    props;
+  const { isPC, isTablet, content, duration, reversed } = props;
 
   return (
     <Container isPC={isPC} isTablet={isTablet}>
-      <FrontContent animationDuration={animationDuration} reversed={reversed}>
+      <FrontContent duration={duration} reversed={reversed}>
         {Array(5)
           .fill(content)
-          .map((content) => {
+          .map((content, index) => {
             return (
-              <Span isPC={isPC} isTablet={isTablet}>
+              <Span key={`forward-${index}`} isPC={isPC} isTablet={isTablet}>
                 &nbsp;{content}&nbsp;
               </Span>
             );
           })}
       </FrontContent>
-      <BehindContent animationDuration={animationDuration} reversed={reversed}>
+      <BehindContent duration={duration} reversed={reversed}>
         {Array(5)
           .fill(content)
-          .map((content) => {
+          .map((content, index) => {
             return (
-              <Span isPC={isPC} isTablet={isTablet}>
+              <Span key={`behind-${index}`} isPC={isPC} isTablet={isTablet}>
                 &nbsp;{content}&nbsp;
               </Span>
             );
@@ -39,8 +38,7 @@ interface propsIState {
   isPC: boolean;
   isTablet: boolean;
   content: string;
-  duration: string;
-  animationDuration: number;
+  duration: number;
   reversed: boolean;
 }
 
@@ -56,6 +54,8 @@ const Container = styled.div<{ isPC: boolean; isTablet: boolean }>`
 
   margin: ${(props) =>
     props.isPC ? "0.2em 0" : props.isTablet ? "0.7em 0" : "1em 0"}em;
+
+  -webkit-tap-highlight-color: transparent;
 `;
 
 const frontForward = keyframes`
@@ -92,38 +92,35 @@ const behindBackward = keyframes`
 `;
 
 const FrontContent = styled.div<{
-  animationDuration: number;
+  duration: number;
   reversed: boolean;
 }>`
   text-transform: uppercase;
   ${(props) =>
     props.reversed
       ? css`
-          animation: ${frontBackward} ${props.animationDuration}s linear
-            infinite;
-          animation-delay: -${props.animationDuration}s;
+          animation: ${frontBackward} ${props.duration}s linear infinite;
+          animation-delay: -${props.duration}s;
         `
       : css`
-          animation: ${frontForward} ${props.animationDuration}s linear infinite;
-          animation-delay: -${props.animationDuration}s;
+          animation: ${frontForward} ${props.duration}s linear infinite;
+          animation-delay: -${props.duration}s;
         `}
 `;
 const BehindContent = styled.div<{
-  animationDuration: number;
+  duration: number;
   reversed: boolean;
 }>`
   text-transform: uppercase;
   ${(props) =>
     props.reversed
       ? css`
-          animation: ${behindBackward} ${props.animationDuration}s linear
-            infinite;
-          animation-delay: -${props.animationDuration / 2}s;
+          animation: ${behindBackward} ${props.duration}s linear infinite;
+          animation-delay: -${props.duration / 2}s;
         `
       : css`
-          animation: ${behindForward} ${props.animationDuration}s linear
-            infinite;
-          animation-delay: -${props.animationDuration / 2}s;
+          animation: ${behindForward} ${props.duration}s linear infinite;
+          animation-delay: -${props.duration / 2}s;
         `}
 `;
 
