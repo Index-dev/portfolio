@@ -58,10 +58,13 @@ const HomeContainer = (props: propsIState) => {
             .childNodes[3] as HTMLTableSectionElement;
           const thirdSec = secContRef.current
             .childNodes[4] as HTMLTableSectionElement;
+          const fourthSec = secContRef.current
+            .childNodes[5] as HTMLTableSectionElement;
 
           const firstSecEnd = headerCont.offsetHeight + firstSec.offsetHeight;
           const secondSecEnd = firstSecEnd + secondSec.offsetHeight;
           const thirdSecEnd = secondSecEnd + thirdSec.offsetHeight;
+          const fourthSecEnd = thirdSecEnd + fourthSec.offsetHeight;
 
           animationRefs.current = [
             {
@@ -78,6 +81,11 @@ const HomeContainer = (props: propsIState) => {
               start: secondSecEnd,
               end: thirdSecEnd,
               scrollHeight: thirdSec.offsetHeight,
+            },
+            {
+              start: thirdSecEnd,
+              end: fourthSecEnd,
+              scrollHeight: fourthSec.offsetHeight,
             },
           ];
 
