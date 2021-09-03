@@ -164,11 +164,9 @@ const Container = styled.div<{ isPC: boolean; isTablet: boolean }>`
     props.isPC
       ? css`
           transform: translate3d(-80%, 3%, 0);
-          opacity: 1;
         `
       : css`
           transform: translate3d(-50%, 3%, 0);
-          opacity: 1;
         `}
 `;
 const SVG = styled.svg`
