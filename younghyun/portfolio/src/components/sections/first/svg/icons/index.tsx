@@ -76,6 +76,6 @@ const Container = styled.div`
   height: 100%;
 
   position: absolute;
-  top: 10vh;
+  top: 0;
   left: 0;
 `;
