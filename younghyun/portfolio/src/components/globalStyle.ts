@@ -15,11 +15,13 @@ const GlobalStyle = createGlobalStyle`
         background-color: ${({ theme }: { theme: ThemeIState }) =>
           theme.background};
           
+        font-family: 'Black Han Sans', sans-serif;
         color: ${({ theme }: { theme: ThemeIState }) => theme.primary};
 
         transition: background-color 0.2s , color 0.2s;    
 
         scroll-behavior: smooth;
+
 
         &::-webkit-scrollbar {
             width: 10px;
