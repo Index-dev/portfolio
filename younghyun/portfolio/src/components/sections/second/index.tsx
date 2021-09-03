@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+
+import Content from "components/sections/second/content";
 import Tower from "components/sections/second/svg/tower";
 import Landscape from "components/sections/second/svg/landscape";
 
@@ -9,7 +11,15 @@ function SecondSection(props: propsIState) {
 
   return (
     <ScrollSnapWrapper>
-      <ContentConatainer></ContentConatainer>
+      <ContentConatainer>
+        <Content
+          isPC={isPC}
+          isTablet={isTablet}
+          secContRef={secContRef}
+          currentSecRef={currentSecRef}
+          currentSecScrollRef={currentSecScrollRef}
+        />
+      </ContentConatainer>
       <IconContainer>
         <Tower
           isPC={isPC}
@@ -52,7 +62,12 @@ const ScrollSnapWrapper = styled.section`
   }
 `;
 
-const ContentConatainer = styled.div``;
+const ContentConatainer = styled.div`
+  width: 100%;
+  height: 100%;
+
+  position: relative;
+`;
 
 const IconContainer = styled.div`
   width: 100%;
@@ -61,4 +76,6 @@ const IconContainer = styled.div`
   position: absolute;
   top: 0;
   left: 0;
+
+  z-index: -1;
 `;
