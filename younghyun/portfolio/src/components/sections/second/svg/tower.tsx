@@ -88,7 +88,7 @@ const Container = styled.div<{ isPC: boolean; isTablet: boolean }>`
         `
       : css`
           transform: translate3d(-50%, 3%, 0);
-          opacity: 0.5;
+          opacity: 1;
         `}
 `;
 
@@ -98,7 +98,7 @@ const SVG = styled.svg`
 `;
 
 const Path = styled.path`
-  stroke: ${({ theme }: { theme: ThemeIState }) => theme.primary};
+  stroke: ${({ theme }: { theme: ThemeIState }) => theme.third};
 
   transition: all 4.2s ease-in-out;
 
