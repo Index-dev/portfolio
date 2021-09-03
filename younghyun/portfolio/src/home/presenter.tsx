@@ -6,7 +6,6 @@ import Loading from "components/loading";
 import Nav from "components/nav";
 import Header from "components/header";
 
-import Icons from "components/icons";
 import FirstSec from "components/sections/first";
 import SecondSec from "components/sections/second";
 
@@ -38,18 +37,13 @@ function HomePresenter(props: propsIState) {
       <SectionContainer isLoading={isLoading} ref={secContRef}>
         <Nav secContRef={secContRef} toggleMenu={toggleMenu} />
         <Header toggleTheme={toggleTheme} />
-        <Icons
-          isPC={isPC}
-          isTablet={isTablet}
-          secContRef={secContRef}
-          currentSecRef={currentSecRef}
-          currentSecScrollRef={currentSecScrollRef}
-        />
         <FirstSec
           isPC={isPC}
           isTablet={isTablet}
           theme={theme}
           secContRef={secContRef}
+          currentSecRef={currentSecRef}
+          currentSecScrollRef={currentSecScrollRef}
         />
         <SecondSec
           isPC={isPC}

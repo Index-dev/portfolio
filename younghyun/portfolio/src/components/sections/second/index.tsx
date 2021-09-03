@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Tower from "components/icons/tower/drawing";
-import Landscape from "components/icons/tower/drawing/landscape";
+import Tower from "components/sections/second/svg/tower";
+import Landscape from "components/sections/second/svg/landscape";
 
 function SecondSection(props: propsIState) {
   const { isPC, isTablet, secContRef, currentSecRef, currentSecScrollRef } =

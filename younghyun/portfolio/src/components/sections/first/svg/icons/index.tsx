@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 
-import Airplane from "components/icons/airplane";
-import Car from "components/icons/car";
-import Tower from "components/icons/tower";
+import Airplane from "components/sections/first/svg/icons/airplane";
+import Car from "components/sections/first/svg/icons/car";
+import Tower from "components/sections/first/svg/icons/tower";
 
 const AIRPLANE_SPEED = 10;
 const CAR_SPEED = -3;

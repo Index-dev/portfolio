@@ -40,7 +40,7 @@ const HomeContainer = (props: propsIState) => {
 
   useEffect(() => {
     if (secContRef.current && secContRef.current.children) {
-      secContRef.current.children[3].scrollIntoView({
+      secContRef.current.children[2].scrollIntoView({
         behavior: "smooth",
         block: "start",
       });
@@ -53,9 +53,9 @@ const HomeContainer = (props: propsIState) => {
         if (secContRef.current?.childNodes) {
           const headerCont = secContRef.current.childNodes[1] as HTMLDivElement;
           const firstSec = secContRef.current
-            .childNodes[3] as HTMLTableSectionElement;
+            .childNodes[2] as HTMLTableSectionElement;
           const secondSec = secContRef.current
-            .childNodes[4] as HTMLTableSectionElement;
+            .childNodes[3] as HTMLTableSectionElement;
           const thirdSec = secContRef.current
             .childNodes[4] as HTMLTableSectionElement;
 
@@ -102,7 +102,7 @@ const HomeContainer = (props: propsIState) => {
   const toggleTheme = () => {
     if (theme === basicTheme) {
       if (secContRef.current && secContRef.current.children) {
-        secContRef.current.children[3].scrollIntoView({
+        secContRef.current.children[2].scrollIntoView({
           behavior: "smooth",
           block: "start",
         });
@@ -112,7 +112,7 @@ const HomeContainer = (props: propsIState) => {
       }, 200);
     } else {
       if (secContRef.current && secContRef.current.children) {
-        secContRef.current.children[3].scrollIntoView({
+        secContRef.current.children[2].scrollIntoView({
           behavior: "smooth",
           block: "start",
         });
