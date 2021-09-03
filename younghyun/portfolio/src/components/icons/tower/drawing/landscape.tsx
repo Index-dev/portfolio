@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 function Landscape(props: propsIState) {
-  const { secContRef, currentSecRef, currentSecScrollRef } = props;
+  const { isPC, isTablet, secContRef, currentSecRef, currentSecScrollRef } =
+    props;
 
   const pathRefs = [
     useRef<SVGPathElement>(null),
@@ -48,7 +49,7 @@ function Landscape(props: propsIState) {
   });
 
   return (
-    <Container>
+    <Container isPC={isPC} isTablet={isTablet}>
       <SVG viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <Path
           d="M2.50001 20.5L2.00001 21.5L3 22L3.5 21.5L3.5 21L2.50001 20.5Z"
@@ -145,19 +146,30 @@ function Landscape(props: propsIState) {
 export default Landscape;
 
 interface propsIState {
+  isPC: boolean;
+  isTablet: boolean;
   secContRef: React.RefObject<HTMLDivElement>;
   currentSecRef: React.MutableRefObject<number>;
   currentSecScrollRef: React.MutableRefObject<number>;
 }
-const Container = styled.div`
+const Container = styled.div<{ isPC: boolean; isTablet: boolean }>`
   width: 100%;
-  height: 50%;
+  height: ${(props) => (props.isPC ? "90" : props.isTablet ? "75" : "50")}%;
 
   position: absolute;
   bottom: 0;
-  left: 50%;
+  left: ${(props) => (props.isPC ? "100" : "50")}%;
 
-  transform: translate3d(-50%, 3%, 0);
+  ${(props) =>
+    props.isPC
+      ? css`
+          transform: translate3d(-80%, 3%, 0);
+          opacity: 1;
+        `
+      : css`
+          transform: translate3d(-50%, 3%, 0);
+          opacity: 0.5;
+        `}
 `;
 const SVG = styled.svg`
   width: 100%;
@@ -165,7 +177,7 @@ const SVG = styled.svg`
 `;
 
 const Path = styled.path`
-  stroke: ${({ theme }: { theme: ThemeIState }) => theme.primary};
+  stroke: ${({ theme }: { theme: ThemeIState }) => theme.third};
 
   transition: all 4.2s ease-in-out;
 

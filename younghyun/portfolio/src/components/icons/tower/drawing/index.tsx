@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 function Tower(props: propsIState) {
-  const { secContRef, currentSecRef, currentSecScrollRef } = props;
+  const { isPC, isTablet, secContRef, currentSecRef, currentSecScrollRef } =
+    props;
   const pathRefs = [
     useRef<SVGPathElement>(null),
     useRef<SVGPathElement>(null),
@@ -34,7 +35,7 @@ function Tower(props: propsIState) {
     }
   });
   return (
-    <Container>
+    <Container isPC={isPC} isTablet={isTablet}>
       <SVG viewBox="0 0 6 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <Path
           d="M1.57088 15.1026L1.52638 20.1024L4.52626 20.1291L4.57076 15.1293C4.53684 9.77891 3.69542 1.12095 3.19544 1.1165C2.69546 1.11205 1.78197 8.82768 1.57088 15.1026Z"
@@ -64,20 +65,31 @@ function Tower(props: propsIState) {
 export default Tower;
 
 interface propsIState {
+  isPC: boolean;
+  isTablet: boolean;
   secContRef: React.RefObject<HTMLDivElement>;
   currentSecRef: React.MutableRefObject<number>;
   currentSecScrollRef: React.MutableRefObject<number>;
 }
 
-const Container = styled.div`
+const Container = styled.div<{ isPC: boolean; isTablet: boolean }>`
   width: 100%;
-  height: 50%;
+  height: ${(props) => (props.isPC ? "90" : props.isTablet ? "75" : "50")}%;
 
   position: absolute;
   bottom: 0;
-  left: 50%;
+  left: ${(props) => (props.isPC ? "100" : "50")}%;
 
-  transform: translate3d(-50%, 3%, 0);
+  ${(props) =>
+    props.isPC
+      ? css`
+          transform: translate3d(-80%, 3%, 0);
+          opacity: 1;
+        `
+      : css`
+          transform: translate3d(-50%, 3%, 0);
+          opacity: 0.5;
+        `}
 `;
 
 const SVG = styled.svg`

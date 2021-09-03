@@ -93,7 +93,7 @@ const HomeContainer = (props: propsIState) => {
                 +timing.scrollHeight;
             }
           });
-          // console.log(currentSecRef.current, currentSecScrollRef.current);
+          console.log(currentSecRef.current, currentSecScrollRef.current);
         }
       });
     }

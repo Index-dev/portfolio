@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import Tower from "components/icons/tower/drawing";
 import Landscape from "components/icons/tower/drawing/landscape";
@@ -12,11 +12,15 @@ function SecondSection(props: propsIState) {
       <ContentConatainer></ContentConatainer>
       <IconContainer>
         <Tower
+          isPC={isPC}
+          isTablet={isTablet}
           secContRef={secContRef}
           currentSecRef={currentSecRef}
           currentSecScrollRef={currentSecScrollRef}
         />
         <Landscape
+          isPC={isPC}
+          isTablet={isTablet}
           secContRef={secContRef}
           currentSecRef={currentSecRef}
           currentSecScrollRef={currentSecScrollRef}
