@@ -1,9 +1,82 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 
 function Navigation(props: propsIState) {
-  const { toggleMenu, navRefs } = props;
-  const { navRef, topPathRef, middlePathRef, bottomPathRef } = navRefs;
+  const { secContRef, toggleMenu } = props;
+
+  const navRef = useRef<HTMLDivElement>(null);
+  const topPathRef = useRef<SVGPathElement>(null);
+  const middlePathRef = useRef<SVGPathElement>(null);
+  const bottomPathRef = useRef<SVGPathElement>(null);
+
+  useEffect(() => {
+    if (navRef.current) {
+      navRef.current.addEventListener("mouseover", () => {
+        if (topPathRef.current) {
+          topPathRef.current.style.strokeWidth = "8";
+        }
+        if (middlePathRef.current) {
+          middlePathRef.current.style.strokeWidth = "8";
+        }
+        if (bottomPathRef.current) {
+          bottomPathRef.current.style.strokeWidth = "8";
+        }
+      });
+      navRef.current.addEventListener("mouseout", () => {
+        if (topPathRef.current) {
+          topPathRef.current.style.strokeWidth = "4";
+        }
+        if (middlePathRef.current) {
+          middlePathRef.current.style.strokeWidth = "4";
+        }
+        if (bottomPathRef.current) {
+          bottomPathRef.current.style.strokeWidth = "4";
+        }
+      });
+    }
+  }, [navRef, topPathRef, middlePathRef, bottomPathRef]);
+
+  useEffect(() => {
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (secContRef.current) {
+          if (navRef.current) {
+            const absolutePoint = window.innerHeight * 0.1285;
+            const fixedPoint = window.innerHeight * 0.035;
+            if (absolutePoint > secContRef.current.scrollTop + fixedPoint) {
+              navRef.current.style.position = "absolute";
+              navRef.current.style.top = "13vh";
+              navRef.current.style.right = "5vw";
+              if (topPathRef.current) {
+                topPathRef.current.style.strokeDashoffset = "44.5";
+              }
+              if (middlePathRef.current) {
+                middlePathRef.current.style.strokeDashoffset = "44.5";
+              }
+              if (bottomPathRef.current) {
+                bottomPathRef.current.style.strokeDashoffset = "44.5";
+              }
+            } else {
+              navRef.current.style.position = "fixed";
+              navRef.current.style.top = "3vh";
+              navRef.current.style.right = "5vw";
+              if (topPathRef.current) {
+                topPathRef.current.style.strokeDashoffset = "0";
+              }
+              if (middlePathRef.current) {
+                middlePathRef.current.style.strokeDashoffset = "0";
+              }
+              if (bottomPathRef.current) {
+                bottomPathRef.current.style.strokeDashoffset = "0";
+              }
+            }
+          }
+        }
+      },
+      true
+    );
+  });
 
   return (
     <Container ref={navRef} onClick={toggleMenu}>
@@ -20,7 +93,7 @@ export default Navigation;
 
 interface propsIState {
   toggleMenu: () => void;
-  navRefs: navRefsIState;
+  secContRef: React.RefObject<HTMLDivElement>;
 }
 
 const Container = styled.div`

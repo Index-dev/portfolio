@@ -40,10 +40,11 @@ const Container = styled.div<{ isPC: boolean; isTablet: boolean }>`
   height: ${(props) => (props.isPC ? "10" : props.isTablet ? "20" : "30")}vw;
 
   position: absolute;
-  top: 30%;
-  left: 50%;
+  bottom: 70%;
+  left: 55%;
 
-  transition: all 0.3s linear;
+  transform: translate3d(-50%, 0, 0);
+  transition: all 0.15s linear;
 `;
 
 const SVG = styled.svg`
