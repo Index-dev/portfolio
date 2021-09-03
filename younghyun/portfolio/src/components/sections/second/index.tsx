@@ -1,54 +1,81 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 
+import Content from "components/sections/second/content";
+import Tower from "components/sections/second/svg/tower";
+import Landscape from "components/sections/second/svg/landscape";
+
 function SecondSection(props: propsIState) {
-    const { isPC, isTablet, secContRef, currentSecRef, currentSecScrollRef } =
-        props;
+  const { isPC, isTablet, secContRef, currentSecRef, currentSecScrollRef } =
+    props;
 
-    useEffect(() => {
-        if (secContRef.current) {
-            secContRef.current.addEventListener("scroll", () => {
-                if (
-                    (currentSecRef.current === 0 &&
-                        currentSecScrollRef.current > 0.5) ||
-                    (currentSecRef.current === 1 &&
-                        currentSecScrollRef.current < 0.5)
-                ) {
-                    console.log("drawing icon");
-                } else {
-                    console.log("remove icon");
-                }
-            });
-        }
-    });
-
-    return (
-        <ScrollSnapWrapper>
-            <Conatainer></Conatainer>
-        </ScrollSnapWrapper>
-    );
+  return (
+    <ScrollSnapWrapper>
+      <ContentConatainer>
+        <Content
+          isPC={isPC}
+          isTablet={isTablet}
+          secContRef={secContRef}
+          currentSecRef={currentSecRef}
+          currentSecScrollRef={currentSecScrollRef}
+        />
+      </ContentConatainer>
+      <IconContainer>
+        <Tower
+          isPC={isPC}
+          isTablet={isTablet}
+          secContRef={secContRef}
+          currentSecRef={currentSecRef}
+          currentSecScrollRef={currentSecScrollRef}
+        />
+        <Landscape
+          isPC={isPC}
+          isTablet={isTablet}
+          secContRef={secContRef}
+          currentSecRef={currentSecRef}
+          currentSecScrollRef={currentSecScrollRef}
+        />
+      </IconContainer>
+    </ScrollSnapWrapper>
+  );
 }
 
 export default SecondSection;
 
 interface propsIState {
-    isPC: boolean;
-    isTablet: boolean;
-    secContRef: React.RefObject<HTMLDivElement>;
-    currentSecRef: React.MutableRefObject<number>;
-    currentSecScrollRef: React.MutableRefObject<number>;
+  isPC: boolean;
+  isTablet: boolean;
+  secContRef: React.RefObject<HTMLDivElement>;
+  currentSecRef: React.MutableRefObject<number>;
+  currentSecScrollRef: React.MutableRefObject<number>;
 }
 
 const ScrollSnapWrapper = styled.section`
-    width: 100%;
-    height: 100vh;
+  width: 100%;
+  height: 100vh;
 
-    flex: none;
-    @supports (scroll-snap-align: center) {
-        scroll-snap-align: center;
-    }
+  position: relative;
 
-    border: 1px solid ${({ theme }: { theme: ThemeIState }) => theme.secondary};
+  flex: none;
+  @supports (scroll-snap-align: center) {
+    scroll-snap-align: center;
+  }
 `;
 
-const Conatainer = styled.div``;
+const ContentConatainer = styled.div`
+  width: 100%;
+  height: 100%;
+
+  position: relative;
+`;
+
+const IconContainer = styled.div`
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  z-index: -1;
+`;
