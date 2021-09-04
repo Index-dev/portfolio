@@ -19,7 +19,17 @@ function PopUp(props: propsIState) {
 
   return (
     <Container onClick={handlePopUpClose}>
-      <Content display={display}></Content>
+      <Content display={display}>
+        <ImageContainer>
+          {images.map((image, index) => {
+            return (
+              <div key={index}>
+                <Image src={image} alt="ssafy" />
+              </div>
+            );
+          })}
+        </ImageContainer>
+      </Content>
     </Container>
   );
 }
@@ -99,4 +109,15 @@ const Content = styled.div<{ display: boolean }>`
       : css`
           animation: ${disappear} 0.3s linear forwards;
         `}
+`;
+
+const ImageContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  overflow-x: scroll;
+`;
+
+const Image = styled.img`
+  max-width: 30%;
+  max-height: 30%;
 `;
