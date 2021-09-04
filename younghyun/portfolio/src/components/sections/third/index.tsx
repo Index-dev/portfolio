@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import Content from "components/sections/third/content";
+import PopUp from "components/sections/third/popup";
 
 function ThirdSection(props: propsIState) {
   const { isPC, isTablet } = props;
+  const [displayList, setDisplayList] = useState(Array(2).fill(false));
 
   return (
     <ScrollSnapWrapper isPC={isPC} isTablet={isTablet}>
@@ -16,8 +18,7 @@ function ThirdSection(props: propsIState) {
       <Content
         isPC={isPC}
         isTablet={isTablet}
-        content="BLAKC_HATS"
-        // duration="2021-07 ~"
+        content="BLACK_HATS"
         duration={100}
         reversed={false}
       />
@@ -25,10 +26,15 @@ function ThirdSection(props: propsIState) {
         isPC={isPC}
         isTablet={isTablet}
         content="SSAFY"
-        // duration="2020-07 ~ 2021-07"
         duration={60}
         reversed={true}
       />
+      {displayList[0] && (
+        <PopUp title="BLACK HATS" duration="2021-07 ~" images={[]} />
+      )}
+      {displayList[1] && (
+        <PopUp title="SSAFY" duration="2020-07 ~ 2021-07" images={[]} />
+      )}
     </ScrollSnapWrapper>
   );
 }
@@ -59,7 +65,8 @@ const ScrollSnapWrapper = styled.section<{ isPC: boolean; isTablet: boolean }>`
 
   margin-top: ${(props) =>
     props.isPC ? "1" : props.isTablet ? "0.7" : "0.5"}em;
-  border: 1px solid red;
+  margin-bottom: ${(props) =>
+    props.isPC ? "3" : props.isTablet ? "2" : "3"}em;
 `;
 
 const TitleContainer = styled.div<{ isPC: boolean; isTablet: boolean }>`
