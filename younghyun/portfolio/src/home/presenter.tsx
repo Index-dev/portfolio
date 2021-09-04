@@ -8,6 +8,7 @@ import Header from "components/header";
 
 import FirstSec from "components/sections/first";
 import SecondSec from "components/sections/second";
+import ThirdSec from "components/sections/third";
 
 function HomePresenter(props: propsIState) {
   const {
@@ -52,7 +53,7 @@ function HomePresenter(props: propsIState) {
           currentSecRef={currentSecRef}
           currentSecScrollRef={currentSecScrollRef}
         />
-        <EmptyStuff />
+        <ThirdSec isPC={isPC} isTablet={isTablet} />
         <EmptyStuff />
         <EmptyStuff />
         <EmptyStuff />
