@@ -2,7 +2,8 @@ import React from "react";
 import styled, { css, keyframes } from "styled-components";
 
 function Content(props: propsIState) {
-  const { isPC, isTablet, content, duration, reversed } = props;
+  const { isPC, isTablet, content, duration, reversed, setDisplayPopUp } =
+    props;
 
   return (
     <Container isPC={isPC} isTablet={isTablet}>
@@ -11,7 +12,12 @@ function Content(props: propsIState) {
           .fill(content)
           .map((content, index) => {
             return (
-              <Span key={`forward-${index}`} isPC={isPC} isTablet={isTablet}>
+              <Span
+                key={`forward-${index}`}
+                isPC={isPC}
+                isTablet={isTablet}
+                onClick={() => setDisplayPopUp(true)}
+              >
                 &nbsp;{content}&nbsp;
               </Span>
             );
@@ -22,7 +28,12 @@ function Content(props: propsIState) {
           .fill(content)
           .map((content, index) => {
             return (
-              <Span key={`behind-${index}`} isPC={isPC} isTablet={isTablet}>
+              <Span
+                key={`behind-${index}`}
+                isPC={isPC}
+                isTablet={isTablet}
+                onClick={() => setDisplayPopUp(true)}
+              >
                 &nbsp;{content}&nbsp;
               </Span>
             );
@@ -40,6 +51,7 @@ interface propsIState {
   content: string;
   duration: number;
   reversed: boolean;
+  setDisplayPopUp: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Container = styled.div<{ isPC: boolean; isTablet: boolean }>`

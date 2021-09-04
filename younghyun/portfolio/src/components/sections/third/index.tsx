@@ -6,7 +6,8 @@ import PopUp from "components/sections/third/popup";
 
 function ThirdSection(props: propsIState) {
   const { isPC, isTablet } = props;
-  const [displayList, setDisplayList] = useState(Array(2).fill(false));
+  const [displayBHPopUp, setDisplayBHPopUp] = useState(false);
+  const [displaySSAFYPopUp, setDisplaySSAFYPopUp] = useState(false);
 
   return (
     <ScrollSnapWrapper isPC={isPC} isTablet={isTablet}>
@@ -21,6 +22,7 @@ function ThirdSection(props: propsIState) {
         content="BLACK_HATS"
         duration={100}
         reversed={false}
+        setDisplayPopUp={setDisplayBHPopUp}
       />
       <Content
         isPC={isPC}
@@ -28,12 +30,23 @@ function ThirdSection(props: propsIState) {
         content="SSAFY"
         duration={60}
         reversed={true}
+        setDisplayPopUp={setDisplaySSAFYPopUp}
       />
-      {displayList[0] && (
-        <PopUp title="BLACK HATS" duration="2021-07 ~" images={[]} />
+      {displayBHPopUp && (
+        <PopUp
+          title="BLACK HATS"
+          duration="2021-07 ~"
+          images={[]}
+          setDisplayPopUp={setDisplayBHPopUp}
+        />
       )}
-      {displayList[1] && (
-        <PopUp title="SSAFY" duration="2020-07 ~ 2021-07" images={[]} />
+      {displaySSAFYPopUp && (
+        <PopUp
+          title="SSAFY"
+          duration="2020-07 ~ 2021-07"
+          images={[]}
+          setDisplayPopUp={setDisplaySSAFYPopUp}
+        />
       )}
     </ScrollSnapWrapper>
   );

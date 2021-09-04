@@ -1,20 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled, { css, keyframes } from "styled-components";
 
 function PopUp(props: propsIState) {
+  const { title, duration, images, setDisplayPopUp } = props;
+  const [display, setDisplay] = useState(true);
   useEffect(() => {
     document.getElementsByTagName("body")[0].style.overflow = "hidden";
-
-    setTimeout(() => {
-      return () => {
-        document.getElementsByTagName("body")[0].style.overflow = "auto";
-      };
-    }, 400);
+    setDisplay(true);
   }, []);
 
+  function handlePopUpClose() {
+    setDisplay(false);
+    setTimeout(() => {
+      setDisplayPopUp(false);
+      document.getElementsByTagName("body")[0].style.overflow = "auto";
+    }, 400);
+  }
+
   return (
-    <Container>
-      <Content></Content>
+    <Container onClick={handlePopUpClose}>
+      <Content display={display}></Content>
     </Container>
   );
 }
@@ -25,6 +30,7 @@ interface propsIState {
   title: string;
   duration: string;
   images: Array<string>;
+  setDisplayPopUp: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Container = styled.div`
@@ -88,9 +94,9 @@ const Content = styled.div<{ display: boolean }>`
   ${(props) =>
     props.display
       ? css`
-          animation: ${disappear} 0.3s linear forwards;
+          animation: ${appear} 0.3s linear forwards;
         `
       : css`
-          animation: ${appear} 0.3s linear forwards;
+          animation: ${disappear} 0.3s linear forwards;
         `}
 `;
