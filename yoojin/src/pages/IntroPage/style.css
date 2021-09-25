@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'jalnan';
+    src: url("../../asset/font/yg-jalnan.ttf");
+}
+
+#profile {
+    font-family: 'jalnan';
+}

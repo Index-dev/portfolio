@@ -33,10 +33,14 @@ module.exports = {
       },
       {
         test: /\.jfif$/,
-        loader: 'file-loader',
+        loader: "file-loader",
         options: {
-          name: '[name].[ext]'
+          name: "[name].[ext]"
         }
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: ["file-loader"]
       }
     ]
   },

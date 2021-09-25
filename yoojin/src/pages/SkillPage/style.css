@@ -1,0 +1,60 @@
+.container {
+    color: white;
+}
+
+.skill_background {
+    width: 100%;
+    height: 90%;
+    border-top: 0.25rem solid #9ce769;
+    border-bottom: 0.25rem solid #9ce769;
+    margin: 1rem 0rem;
+    padding: 1rem 0rem;
+
+    box-shadow: inset 0 0 0.5em 0 #ebee3e,
+        0 0 0.5em 0 #ebee3e;
+    position: relative;
+}
+
+.skill_background::before {
+    transform: perspective(1em) rotateX(40deg) scale(1, 0.35);
+    filter: blur(1em);
+    opacity: 0.7;
+
+}
+
+.skill_background>* {
+    height: 33%;
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+}
+
+.skill_tab {
+    color: #9ce769;
+}
+
+:root {
+    --clr-neon: hsl(291deg 100% 54%);
+    --clr-bg: hsl(323 21% 16%);
+}
+
+.skill_content {
+    width: 80%;
+    height: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background-color: #3e413c9a;
+    border-radius: 1rem;
+    padding: 1rem;
+
+    box-shadow: inset 0 0 0.5em 0 var(--clr-neon),
+        0 0 0.5em 0 var(--clr-neon);
+    position: relative;
+}
+
+.skill_content::before {
+    transform: perspective(1em) rotateX(40deg) scale(1, 0.35);
+    filter: blur(1em);
+    opacity: 0.7;
+
+}

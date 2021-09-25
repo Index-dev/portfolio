@@ -1,0 +1,163 @@
+@font-face {
+    font-family: neon;
+    src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/707108/neon.ttf);
+}
+
+@font-face {
+    font-family: budmo_sh;
+    src: url("../../asset/font/budmo\ jigglish.ttf");
+}
+
+.container {
+    width: 100%;
+    /* height: 100%; */
+    /* width: 100vh; */
+    height: 100vh;
+    /* display: table-cell; */
+    text-align: center;
+    vertical-align: middle;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* overflow-y: scroll; */
+    scroll-behavior: smooth;
+    /* scroll-snap-type: y mandatory; */
+
+
+}
+
+.txt_jobtitle {
+    /* font-family: neon; */
+    font-family: budmo_sh;
+    color: #FB4264;
+    font-size: 15vw;
+    line-height: 15vw;
+    text-shadow: 0 0 3vw #F40A35;
+    cursor: default;
+}
+
+.txt_nickname {
+    /* font-family: neon; */
+    font-family: budmo_sh;
+    color: #426DFB;
+    font-size: 15vw;
+    line-height: 15vw;
+    text-shadow: 0 0 3vw #2356FF;
+    cursor: default;
+}
+
+.txt_jobtitle {
+    animation: jobtitle 1s ease infinite;
+    -moz-animation: jobtitle 1s ease infinite;
+    -webkit-animation: jobtitle 1s ease infinite;
+}
+
+@keyframes jobtitle {
+
+    0%,
+    100% {
+        text-shadow: 0 0 1vw #FA1C16, 0 0 3vw #FA1C16, 0 0 10vw #FA1C16, 0 0 10vw #FA1C16, 0 0 .4vw #FED128, .5vw .5vw .1vw #806914;
+        color: #FED128;
+    }
+
+    50% {
+        text-shadow: 0 0 .5vw #800E0B, 0 0 1.5vw #800E0B, 0 0 5vw #800E0B, 0 0 5vw #800E0B, 0 0 .2vw #800E0B, .5vw .5vw .1vw #40340A;
+        color: #806914;
+    }
+}
+
+.txt_nickname {
+    animation: nickname 2s linear infinite;
+    -moz-animation: nickname 2s linear infinite;
+    -webkit-animation: nickname 2s linear infinite;
+    -o-animation: nickname 2s linear infinite;
+}
+
+@keyframes nickname {
+
+    0%,
+    100% {
+        text-shadow: 0 0 1vw #1041FF, 0 0 3vw #1041FF, 0 0 10vw #1041FF, 0 0 10vw #1041FF, 0 0 .4vw #8BFDFE, .5vw .5vw .1vw #147280;
+        color: #28D7FE;
+    }
+
+    50% {
+        text-shadow: 0 0 .5vw #082180, 0 0 1.5vw #082180, 0 0 5vw #082180, 0 0 5vw #082180, 0 0 .2vw #082180, .5vw .5vw .1vw #0A3940;
+        color: #146C80;
+    }
+}
+
+:root {
+    --clr-neon: hsl(291deg 100% 54%);
+    --clr-bg: hsl(323 21% 16%);
+}
+
+.btnClick {
+    font-size: 3rem;
+    /*font-family: neon;*/
+    /* display: inline-block; */
+    inline-size: fit-content;
+    text-decoration: none;
+    color: var(--clr-neon);
+    border: var(--clr-neon) 0.125em solid;
+    /*border: var(--clr-neon) 0.15em double;*/
+    cursor: pointer;
+    padding: 0.25em 1em;
+    margin: 1em;
+    border-radius: 0.25em;
+
+
+    text-shadow:
+        0 0 0.125em hsl(0 0% 100% / 0.3),
+        0 0 0.45em currentColor;
+    box-shadow: inset 0 0 0.5em 0 var(--clr-neon),
+        0 0 0.5em 0 var(--clr-neon);
+    position: relative;
+
+}
+
+.btnClick::before {
+    content: '';
+    position: absolute;
+    background: var(--clr-neon);
+    top: 120%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    transform: perspective(1em) rotateX(40deg) scale(1, 0.35);
+    filter: blur(1em);
+    opacity: 0.7;
+
+}
+
+.btnClick::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 2em 1em var(--clr-neon);
+    opacity: 0;
+    background-color: var(--clr-neon);
+    z-index: -1;
+    transition: opacity 100ms linear;
+}
+
+.btnClick:hover,
+.btnClick:focus {
+    color: var(--clr-bg);
+    text-shadow: none;
+}
+
+.btnClick:hover::before,
+.btnClick:focus::before {
+    opacity: 1;
+}
+
+.btnClick:hover::after,
+.btnClick:focus::after {
+    opacity: 1;
+}
