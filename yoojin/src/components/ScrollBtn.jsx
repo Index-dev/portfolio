@@ -3,7 +3,6 @@ import styled, { keyframes } from "styled-components";
 
 const moveTo = () => {
   window.scrollTo({ top: 2780, left: 0, behavior: "smooth" });
-  w;
 };
 
 const ScrollBtn = () => {

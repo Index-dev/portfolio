@@ -7,11 +7,11 @@ const Project = () => {
   return (
     <Wrapper>
       <CardList>
-        <ProjectCard title="project1" />
-        <ProjectCard title="project1" />
-        <ProjectCard title="project1" />
-        <ProjectCard title="project1" />
-        <ProjectCard title="project1" />
+        <ProjectCard title="Prolog;" />
+        <ProjectCard title="서울어디까지가봤니?" />
+        <ProjectCard title="돼지런한생활" />
+        <ProjectCard title="KaKaoClone" />
+        <ProjectCard title="React프로젝트(사내 세미나용)" />
       </CardList>
       <Content>
         <ProjectDetail />

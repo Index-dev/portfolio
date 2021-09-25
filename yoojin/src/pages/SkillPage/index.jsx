@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css";
+import ScrollBtn from "../../components/ScrollBtn";
 
 const Skill = () => {
   return (
@@ -18,11 +19,18 @@ const Skill = () => {
           <div className="skill_content">
             <div>Spring</div>
             <div>Django</div>
+            <div>Express</div>
+            <div>MySql</div>
+            <div>Maria</div>
           </div>
         </div>
         <div className="skill_DevOps">
           <div className="skill_tab">DevOps</div>
-          <div className="skill_content">DevOps</div>
+          <div className="skill_content">
+            <div>Git</div>
+            <div>GitLab</div>
+            <div>Jira</div>
+          </div>
         </div>
       </div>
     </div>

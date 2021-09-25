@@ -8,7 +8,7 @@ const Profile = () => {
         <Profileimage></Profileimage>
         <div className="personal_info">
           <div>Dev. Daisy (박유진)</div>
-          <div>Java / Web Dev.</div>
+          <div>FullStack / Web Dev.</div>
           <div>010. 6477. 5919</div>
         </div>
       </Proflie>
@@ -19,7 +19,7 @@ const Profile = () => {
         </div>
         <div className="edu_item">
           <div>2013.03 ~ 2018.02</div>
-          <div>동탄고등학교 졸업</div>
+          <div>한신대학교 정보통신학부 졸업</div>
         </div>
         <div className="edu_item">
           <div>2017.05 ~ 2018.01</div>
