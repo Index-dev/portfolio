@@ -55,7 +55,7 @@ const Intro: React.FC<IIntro> = ({ componentNo }): JSX.Element => {
         { title: '학교', description: '한양대 ERICA' },
         { title: '주전공', description: '응용수학' },
         { title: '부전공', description: '컴퓨터공학' },
-        { title: '경력', description: '1년 4개월' },
+        { title: '경력', description: '1년' },
         { title: '기술분야', description: 'FE/BE 웹 개발' },
     ];
 

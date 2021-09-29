@@ -98,8 +98,8 @@ const More: React.FC<IMore> = ({ componentNo }): JSX.Element => {
             <MoreContainer>
                 <HeaderSection>
                     <HeaderText>김성찬의 Portfolio</HeaderText>
-                    <HeaderText>Version 1.0.0</HeaderText>
-                    <HeaderText>2021.08.23</HeaderText>
+                    <HeaderText>Version 1.0.1</HeaderText>
+                    <HeaderText>2021.09.29</HeaderText>
                 </HeaderSection>
 
                 <UrlSection>
