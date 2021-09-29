@@ -252,6 +252,9 @@ const Base: React.FC<IBase> = ({ children, componentNo }): JSX.Element => {
         } else {
             setIsBottom(false);
         }
+
+        // 메뉴바가 열려있는 경우 닫기
+        dispatch(setIndexSubContainerTranslateXAction(0));
     };
 
     // onWheel

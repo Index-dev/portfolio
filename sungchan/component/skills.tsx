@@ -10,7 +10,7 @@ const SkillsContainer = styled.div`
 
 const TitleContainer = styled.div`
     position: relative;
-    margin: 24px 0 52px 0;
+    margin: 24px 0 36px 0;
 `;
 
 const TitleMainDiv = styled.div`
@@ -37,12 +37,12 @@ const ContentsContainer = styled.div`
     align-items: center;
 
     @media screen and (min-width: 570px) {
-        height: 1080px;
+        height: 1180px;
         flex-wrap: wrap;
     }
 
     @media screen and (min-width: 840px) {
-        height: 720px;
+        height: 800px;
         flex-wrap: wrap;
     }
 `;

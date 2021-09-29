@@ -262,23 +262,210 @@ interface IProjects {
     componentNo: number;
 }
 
+/*
+    프로젝트 내용 추가할 때 해야 할 행동
+    1. currentImageIndex에 0 추가
+    2. images에 이미지 추가
+    3. infoArray에 내용 추가
+*/
 const Projects: React.FC<IProjects> = ({ componentNo }): JSX.Element => {
     // redux
     const backgroundColorArray = useSelector((state: indexState) => state.baseReducer.backgroundColorArray);
 
     // state
     const [pictureImage, setPictureImage] = React.useState<string>('');
-    const [currentImageIndex, setCurrentImageIndex] = React.useState<number[]>([0, 0, 0, 0]);
+    const [currentImageIndex, setCurrentImageIndex] = React.useState<number[]>([0, 0, 0, 0, 0]);
 
     // ref
     const pictureContainerRef = React.useRef<HTMLDivElement>();
 
     // variable
     const images = [
+        ['/image/dcollection_0.PNG', '/image/dcollection_1.PNG', '/image/dcollection_2.PNG'],
         ['/image/portfolio_0.PNG', '/image/portfolio_1.PNG', '/image/portfolio_2.PNG', '/image/portfolio_3.PNG'],
         ['/image/grouby_0.PNG', '/image/grouby_1.PNG', '/image/grouby_2.PNG', '/image/grouby_3.PNG'],
         ['/image/scvc_0.png', '/image/scvc_1.png', '/image/scvc_2.png'],
         ['/image/moyo_0.PNG', '/image/moyo_1.PNG', '/image/moyo_2.PNG', '/image/moyo_3.PNG'],
+    ];
+
+    const infoArray = [
+        {
+            color: '#703A56',
+            title: 'D.Collection',
+            contentsList: [
+                {
+                    type: 'calendar',
+                    contents: '21.09 ~ 21.10',
+                },
+                {
+                    type: 'code',
+                    contents: 'FE → Svelte / TypeScript / Scss',
+                },
+                {
+                    contents:
+                        '개발하며 유용하게 사용될 수 있는 사이트들을 메모장에 적어두지 않고 웹 페이지에 모아두기 위해 개발',
+                },
+                {
+                    contents: '카드 게임이라는 주제를 가지고 화면 디자인',
+                },
+                {
+                    contents: '정보 추가 및 수정을 위한 목적으로 EmailJS를 이용하여 이메일로 관련 내용 전달 기능 개발',
+                },
+                {
+                    type: 'link',
+                    contents: 'Domain → ',
+                    link: 'https://ksc-dcollection.netlify.app',
+                },
+                {
+                    type: 'link',
+                    contents: 'Git → ',
+                    link: 'https://github.com/Index-dev/What_I_Need/tree/master/sungchan',
+                },
+            ],
+        },
+        {
+            color: '#E3D0B9',
+            title: 'Portfolio',
+            contentsList: [
+                {
+                    type: 'calendar',
+                    contents: '21.07 ~ 21.08',
+                },
+                {
+                    type: 'code',
+                    contents: 'FE → Next / TypeScript / Redux / Hooks / StyledComponent',
+                },
+                {
+                    contents: '웹 사이트에서 나만의 포트폴리오를 누구나 볼 수 있도록 하기 위해 개발',
+                },
+                {
+                    contents: '공책을 주요 디자인으로 삼아 오프라인에서 포트폴리오를 보는 듯한 느낌의 UI/UX를 개발',
+                },
+                {
+                    type: 'link',
+                    contents: 'Domain → ',
+                    link: 'https://portfolio-gamma-wheat.vercel.app',
+                },
+                {
+                    type: 'link',
+                    contents: 'Git → ',
+                    link: 'https://github.com/Index-dev/portfolio/tree/master/sungchan',
+                },
+            ],
+        },
+        {
+            color: '#E6951A',
+            title: 'Grouby',
+            contentsList: [
+                {
+                    type: 'calendar',
+                    contents: '20.10 ~ 21.01',
+                },
+                {
+                    type: 'code',
+                    contents: 'FE → Next / TypeScript / Redux / Hooks / StyledComponent',
+                },
+                {
+                    type: 'code',
+                    contents: 'BE → Spring / Mybatis / MySQL',
+                },
+                {
+                    contents: 'Next사용 경험과 CSS역량을 높이기 위해 진행한 개인 프로젝트',
+                },
+                {
+                    contents: '방문했었던 장소에 대한 우리만의 평가를 하여 재방문을 위한 의견에 도움이 되고자 개발',
+                },
+                {
+                    contents: '그룹, 스팟을 선택한 뒤 인스타그램처럼 사진 공유 및 댓글 기능 개발',
+                },
+                {
+                    contents:
+                        '방문했던 장소의 평가요소에 따라 점수를 부여하여 평가할 수 있고 전체 평점도 확인할 수 있도록 개발',
+                },
+                {
+                    contents: '설계 단계에서 느껴졌던 복잡함이 사용할 때 그대로 느껴진 아쉬움이 남는 프로젝트',
+                },
+                {
+                    type: 'link',
+                    contents: 'Git → ',
+                    link: 'https://github.com/ksccmp/Grouby',
+                },
+            ],
+        },
+        {
+            color: '#c79c76',
+            title: 'SCVC',
+            contentsList: [
+                {
+                    type: 'calendar',
+                    contents: '20.08 ~ 20.09',
+                },
+                {
+                    type: 'code',
+                    contents: 'FE → React / TypeScript / Redux / Redux-Saga / Hooks / StyledComponent',
+                },
+                {
+                    type: 'code',
+                    contents: 'BE → Spring / Mybatis / MySQL / Node',
+                },
+                {
+                    contents: 'TypeScript와 Redux-Saga의 사용 경험을 높이기 위해 진행한 개인 프로젝트',
+                },
+                {
+                    contents: '최근 비대면의 중요성이 증가됨에 따라 역량 확보를 위해 관련 기능 개발',
+                },
+                {
+                    contents: '입장하고자 하는 방을 검색할 수 있고 정해진 인원만큼의 인원만 참여 가능하도록 개발',
+                },
+                {
+                    contents: 'RTCPeerConnection + SocketIO를 사용하여 실시간 화상 회의 및 채팅 개발',
+                },
+                {
+                    type: 'link',
+                    contents: 'Git → ',
+                    link: 'https://github.com/ksccmp/video_chat_typescript',
+                },
+            ],
+        },
+        {
+            color: '#4ac8d9',
+            title: 'Moyo',
+            contentsList: [
+                {
+                    type: 'calendar',
+                    contents: '20.01 ~ 20.02',
+                },
+                {
+                    type: 'code',
+                    contents: 'FE → React / Redux / Hooks / StyledComponent',
+                },
+                {
+                    type: 'code',
+                    contents: 'BE → SpringBoot / Mybatis / MySQL / FireBase',
+                },
+                {
+                    contents: 'SSAFY에서 진행한 팀 프로젝트 (5인)',
+                },
+                {
+                    contents: '여행 동행자를 간편하게 매칭하는 것에 도움이 되고자 개발',
+                },
+                {
+                    contents: 'React + FireBase를 이용하여 DM기능 개발',
+                },
+                {
+                    contents: '자신의 위치에 간편하게 낙서(?)할 수 있는 포스트맵 기능 개발',
+                },
+                {
+                    contents:
+                        '사용되는 Tool의 숙련도 부족으로 목표한 기능들을 모두 개발하지 못한것에 대해 아쉬움이 남는 프로젝트',
+                },
+                {
+                    type: 'link',
+                    contents: 'Git → ',
+                    link: 'https://github.com/ksccmp/moyo',
+                },
+            ],
+        },
     ];
 
     // onClick
@@ -308,170 +495,36 @@ const Projects: React.FC<IProjects> = ({ componentNo }): JSX.Element => {
                     </PuzzleDiv>
                 </PuzzleSection>
 
-                <ProjectsContainer>
-                    <TitleSection>
-                        <CareerTitle color="#E3D0B9">Portfolio</CareerTitle>
-                    </TitleSection>
+                {infoArray.map((info, index) => {
+                    return (
+                        <ProjectsContainer key={info.title}>
+                            <TitleSection>
+                                <CareerTitle color={info.color}>{info.title}</CareerTitle>
+                            </TitleSection>
 
-                    <ContentsSection>
-                        <ImageDiv onClick={() => onClickImageDiv(0)}>
-                            <CareerImage src={images[0][currentImageIndex[0]]} />
-                        </ImageDiv>
+                            <ContentsSection>
+                                <ImageDiv onClick={() => onClickImageDiv(index)}>
+                                    <CareerImage src={images[index][currentImageIndex[index]]} />
+                                </ImageDiv>
 
-                        <TextDescriptionDiv>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]} type="calendar">
-                                21.07 ~ 21.08
-                            </TextDescription>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]} type="code">
-                                FE → Next / TypeScript / Redux / Hooks / StyledComponent
-                            </TextDescription>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]}>
-                                웹 사이트에서 나만의 포트폴리오를 누구나 볼 수 있도록 하기 위해 개발
-                            </TextDescription>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]}>
-                                공책을 주요 디자인으로 삼아 오프라인에서 포트폴리오를 보는 듯한 느낌의 UI/UX를 개발
-                            </TextDescription>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]} type="link">
-                                Domain →{' '}
-                                <a href="https://portfolio-gamma-wheat.vercel.app">
-                                    https://portfolio-gamma-wheat.vercel.app
-                                </a>
-                            </TextDescription>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]} type="link">
-                                Git →{' '}
-                                <a href="https://github.com/ksccmp/portfolio">https://github.com/ksccmp/portfolio</a>
-                            </TextDescription>
-                        </TextDescriptionDiv>
-                    </ContentsSection>
-                </ProjectsContainer>
-
-                <ProjectsContainer>
-                    <TitleSection>
-                        <CareerTitle color="#E6951A">Grouby</CareerTitle>
-                    </TitleSection>
-
-                    <ContentsSection>
-                        <ImageDiv onClick={() => onClickImageDiv(1)}>
-                            <CareerImage src={images[1][currentImageIndex[1]]} />
-                        </ImageDiv>
-
-                        <TextDescriptionDiv>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]} type="calendar">
-                                20.10 ~ 21.01
-                            </TextDescription>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]} type="code">
-                                FE → Next / TypeScript / Redux / Hooks / StyledComponent
-                            </TextDescription>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]} type="code">
-                                BE → Spring / Mybatis / MySQL
-                            </TextDescription>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]}>
-                                Next사용 경험과 CSS역량을 높이기 위해 진행한 개인 프로젝트
-                            </TextDescription>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]}>
-                                방문했었던 장소에 대한 우리만의 평가를 하여 재방문을 위한 의견에 도움이 되고자 개발
-                            </TextDescription>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]}>
-                                그룹, 스팟을 선택한 뒤 인스타그램처럼 사진 공유 및 댓글 기능 개발
-                            </TextDescription>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]}>
-                                방문했던 장소의 평가요소에 따라 점수를 부여하여 평가할 수 있고 전체 평점도 확인할 수
-                                있도록 개발
-                            </TextDescription>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]}>
-                                설계 단계에서 느껴졌던 복잡함이 사용할 때 그대로 느껴진 아쉬움이 남는 프로젝트
-                            </TextDescription>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]} type="link">
-                                Git → <a href="https://github.com/ksccmp/Grouby">https://github.com/ksccmp/Grouby</a>
-                            </TextDescription>
-                        </TextDescriptionDiv>
-                    </ContentsSection>
-                </ProjectsContainer>
-
-                <ProjectsContainer>
-                    <TitleSection>
-                        <CareerTitle color="#c79c76">SCVC</CareerTitle>
-                    </TitleSection>
-
-                    <ContentsSection>
-                        <ImageDiv onClick={() => onClickImageDiv(2)}>
-                            <CareerImage src={images[2][currentImageIndex[2]]} />
-                        </ImageDiv>
-
-                        <TextDescriptionDiv>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]} type="calendar">
-                                20.08 ~ 20.09
-                            </TextDescription>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]} type="code">
-                                FE → React / TypeScript / Redux / Redux-Saga / Hooks / StyledComponent
-                            </TextDescription>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]} type="code">
-                                BE → Spring / Mybatis / MySQL / Node
-                            </TextDescription>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]}>
-                                TypeScript와 Redux-Saga의 사용 경험을 높이기 위해 진행한 개인 프로젝트
-                            </TextDescription>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]}>
-                                최근 비대면의 중요성이 증가됨에 따라 역량 확보를 위해 관련 기능 개발
-                            </TextDescription>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]}>
-                                입장하고자 하는 방을 검색할 수 있고 정해진 인원만큼의 인원만 참여 가능하도록 개발
-                            </TextDescription>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]}>
-                                RTCPeerConnection + SocketIO를 사용하여 실시간 화상 회의 및 채팅 개발
-                            </TextDescription>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]} type="link">
-                                Git →{' '}
-                                <a href="https://github.com/ksccmp/video_chat_typescript">
-                                    https://github.com/ksccmp/video_chat_typescript
-                                </a>
-                            </TextDescription>
-                        </TextDescriptionDiv>
-                    </ContentsSection>
-                </ProjectsContainer>
-
-                <ProjectsContainer>
-                    <TitleSection>
-                        <CareerTitle color="#4ac8d9">Moyo</CareerTitle>
-                    </TitleSection>
-
-                    <ContentsSection>
-                        <ImageDiv onClick={() => onClickImageDiv(3)}>
-                            <CareerImage src={images[3][currentImageIndex[3]]} />
-                        </ImageDiv>
-
-                        <TextDescriptionDiv>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]} type="calendar">
-                                20.01 ~ 20.02
-                            </TextDescription>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]} type="code">
-                                FE → React / Redux / Hooks / StyledComponent
-                            </TextDescription>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]} type="code">
-                                BE → SpringBoot / Mybatis / MySQL / FireBase
-                            </TextDescription>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]}>
-                                SSAFY에서 진행한 팀 프로젝트 (5인)
-                            </TextDescription>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]}>
-                                여행 동행자를 간편하게 매칭하는 것에 도움이 되고자 개발
-                            </TextDescription>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]}>
-                                React + FireBase를 이용하여 DM기능 개발
-                            </TextDescription>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]}>
-                                자신의 위치에 간편하게 낙서(?)할 수 있는 포스트맵 기능 개발
-                            </TextDescription>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]}>
-                                사용되는 Tool의 숙련도 부족으로 목표한 기능들을 모두 개발하지 못한것에 대해 아쉬움이
-                                남는 프로젝트
-                            </TextDescription>
-                            <TextDescription backgroundColor={backgroundColorArray[componentNo]} type="link">
-                                Git → <a href="https://github.com/ksccmp/moyo">https://github.com/ksccmp/moyo</a>
-                            </TextDescription>
-                        </TextDescriptionDiv>
-                    </ContentsSection>
-                </ProjectsContainer>
+                                <TextDescriptionDiv>
+                                    {info.contentsList.map((contents, index) => {
+                                        return (
+                                            <TextDescription
+                                                key={index}
+                                                backgroundColor={backgroundColorArray[componentNo]}
+                                                type={contents.type ? contents.type : ''}
+                                            >
+                                                {contents.contents}{' '}
+                                                {contents.link ? <a href={contents.link}>{contents.link}</a> : ''}
+                                            </TextDescription>
+                                        );
+                                    })}
+                                </TextDescriptionDiv>
+                            </ContentsSection>
+                        </ProjectsContainer>
+                    );
+                })}
             </Base>
 
             <PictureContainer ref={pictureContainerRef} onClick={onClickPictureContainer}>

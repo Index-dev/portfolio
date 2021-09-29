@@ -10,7 +10,7 @@ const WhyItContainer = styled.div`
 
 const TitleContainer = styled.div`
     position: relative;
-    margin: 24px 0 52px 0;
+    margin: 24px 0 36px 0;
 `;
 
 const TitleMainDiv = styled.div`
