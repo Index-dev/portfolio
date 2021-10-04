@@ -281,11 +281,16 @@ const Projects: React.FC<IProjects> = ({ componentNo }): JSX.Element => {
 
     // variable
     const images = [
-        ['/image/dcollection_0.PNG', '/image/dcollection_1.PNG', '/image/dcollection_2.PNG'],
-        ['/image/portfolio_0.PNG', '/image/portfolio_1.PNG', '/image/portfolio_2.PNG', '/image/portfolio_3.PNG'],
-        ['/image/grouby_0.PNG', '/image/grouby_1.PNG', '/image/grouby_2.PNG', '/image/grouby_3.PNG'],
+        [
+            '/image/dcollection_0.png',
+            '/image/dcollection_1.png',
+            '/image/dcollection_2.png',
+            '/image/dcollection_3.png',
+        ],
+        ['/image/portfolio_0.png', '/image/portfolio_1.png', '/image/portfolio_2.png', '/image/portfolio_3.png'],
+        ['/image/grouby_0.png', '/image/grouby_1.png', '/image/grouby_2.png', '/image/grouby_3.png'],
         ['/image/scvc_0.png', '/image/scvc_1.png', '/image/scvc_2.png'],
-        ['/image/moyo_0.PNG', '/image/moyo_1.PNG', '/image/moyo_2.PNG', '/image/moyo_3.PNG'],
+        ['/image/moyo_0.png', '/image/moyo_1.png', '/image/moyo_2.png', '/image/moyo_3.png'],
     ];
 
     const infoArray = [
@@ -344,7 +349,7 @@ const Projects: React.FC<IProjects> = ({ componentNo }): JSX.Element => {
                 {
                     type: 'link',
                     contents: 'Domain → ',
-                    link: 'https://portfolio-gamma-wheat.vercel.app',
+                    link: 'https://ksc-portfolio.vercel.app',
                 },
                 {
                     type: 'link',
